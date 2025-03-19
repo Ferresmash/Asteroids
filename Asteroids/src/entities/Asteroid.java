@@ -1,8 +1,13 @@
 package entities;
 
-public class Asteroid {
+import asteroidState.AsteroidState;
+
+public class Asteroid extends Enemy{
 	
-	private double size;
 	
+	
+	public Asteroid(AsteroidState asteroidState) {
+		
+	}
 
 }
