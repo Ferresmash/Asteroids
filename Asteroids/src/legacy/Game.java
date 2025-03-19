@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import entities.Asteroid;
 import entities.Player;
+import entities.UFO;
 import pos.Position;
 
 import java.awt.*;
@@ -13,8 +14,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Game extends JPanel implements ActionListener, KeyListener {
+	
 	Asteroid a = new Asteroid();
 	Player player = new Player();
+	UFO ufo = new UFO();
     private Timer timer;
     boolean WKeyPressed = false;
     boolean AKeyPressed = false;
@@ -40,6 +43,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         g2d.setColor(Color.WHITE);
         a.draw(g);
         player.draw(g);
+        ufo.draw(g);
     }
 
     @Override
@@ -120,17 +124,3 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 	    }
 	}
 }
-    /*
-    public void render() {
-
-        Graphics g = getGraphics();
-        g.clearRect(0, 0, WIDTH*SCALE, HEIGHT*SCALE);
-        g.setColor(Color.black);
-        g.drawRect(50, 50, 50, 50);
-        Position pos = a.getPosition();
-        pos.setX(pos.getX()+1);
-        a.setPosition(pos);
-        a.draw(g);
-    }*/
-
-
