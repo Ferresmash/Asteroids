@@ -6,7 +6,7 @@ import pos.Position;
 public class Player {
 	
 	private double speed = 1.0d;
-	private Position position = new Position();
+	private Position position = new Position(0,0);
 	private double angle = 0d;
 	private Force force = new Force();
 	
