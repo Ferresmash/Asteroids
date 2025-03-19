@@ -42,8 +42,9 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         // Draw example moving object
         g2d.setColor(Color.WHITE);
         a.draw(g);
-        player.draw(g);
         ufo.draw(g);
+        player.draw(g);
+        
     }
 
     @Override
@@ -57,10 +58,10 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     	
     	if(AKeyPressed) {
     		System.out.println(AKeyPressed);
-    		player.angle-=0.05;
+    		player.angle+=0.1;
     	}
     	if(DKeyPressed) {
-    		player.angle+=0.05;
+    		player.angle-=0.1;
     	}
     	if(SpaceKeyPressed) {
     		System.out.println(SpaceKeyPressed);
@@ -70,6 +71,18 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         pos.setX(pos.getX()+1);
         a.setPosition(pos);
         
+        if(player.getX() < -20) {
+        	player.setX(820);
+        }
+        if(player.getX() > 820) {
+        	player.setX(-20);
+        }
+        if(player.getY() < -20) {
+        	player.setY(620);
+        }
+        if(player.getY() > 620) {
+        	player.setY(-20);
+        }
         
 
         repaint(); // Triggers paintComponent
