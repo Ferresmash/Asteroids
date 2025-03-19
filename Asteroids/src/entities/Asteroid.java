@@ -3,9 +3,9 @@ package entities;
 import java.awt.Graphics;
 import java.awt.Polygon;
 import java.util.Random;
-
 import asteroidState.AsteroidState;
 import asteroidState.LargeState;
+import pos.Force;
 import pos.Position;
 
 public class Asteroid extends Enemy {
@@ -21,16 +21,20 @@ public class Asteroid extends Enemy {
 		this.nbrOfCorners = (int) (6 + (Math.random() * 4));
 		xPoints = new int[nbrOfCorners];
 		yPoints = new int[nbrOfCorners];
-		
 	}
 	
 	public Asteroid() {
 		this(new LargeState());
 		setSize(100);
 		setPosition(new Position(100, 100));
-		setDirection(0);
+		setForce(new Force());
+	}
+	
+	public Asteroid(Position startPos, Force startForce) {
+		this(new LargeState());
+		setForce(startForce);
+		setPosition(startPos);
 		setPoints();
-		
 	}
 	
 	public void setPoints() {

@@ -1,12 +1,13 @@
 package entities;
 
+import pos.Force;
 import pos.Position;
 
 public abstract class Enemy implements Entity{
 
 	private double size;
 	private Position position;
-	private double direction;
+	private Force force;
 	
 	public double getSize() {
 		return size;
@@ -20,11 +21,11 @@ public abstract class Enemy implements Entity{
 	public void setPosition(Position position) {
 		this.position = position;
 	}
-	public double getDirection() {
-		return direction;
+	public Force getForce() {
+		return force;
 	}
-	public void setDirection(double direction) {
-		this.direction = direction;
+	public void setForce(Force force) {
+		this.force = force;
 	}
 	
 	
