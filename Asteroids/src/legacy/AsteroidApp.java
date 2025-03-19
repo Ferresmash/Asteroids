@@ -18,16 +18,16 @@ import state.MoveState;
 import state.ResizeState;
 import state.UnmarkState;
 
-public class ShapeApp extends JFrame
+public class AsteroidApp extends JFrame
   {
   private static final long serialVersionUID = 1L;
   private ShapeContainer shapeContainer = new ShapeContainer();
-  public ShapeApp()
+  public AsteroidApp()
     {
     createMenue();
     this.add(shapeContainer);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(400,400);
+    this.setSize(700,700);
     this.setVisible(true);
     }
   
@@ -62,6 +62,6 @@ public class ShapeApp extends JFrame
   
   public static void main(String args[])
     {
-    new ShapeApp(); // obs egentligen SwingUtilities ...
+    new AsteroidApp(); // obs egentligen SwingUtilities ...
     }
   }
