@@ -1,6 +1,7 @@
 package legacy;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 import entities.Enemy;
 import entities.EnemyHandler;
@@ -17,6 +18,11 @@ public class GameContainer extends JPanel {
 	private Player player = new Player();
 	private int screenWidth = 1000;
 	private int screenHeight = 700;
+	
+    boolean WKeyPressed = false;
+    boolean AKeyPressed = false;
+    boolean DKeyPressed = false;
+    boolean SpaceKeyPressed = false;
 
 
 	public GameContainer(int width, int height) {
@@ -33,6 +39,22 @@ public class GameContainer extends JPanel {
 		for (Enemy enemy : enemyHandler.getEnemies()) {
 			enemy.move();
 		}
+		
+		if(WKeyPressed) {
+    		player.accelerate();
+    	}
+    	player.move();
+    	
+    	if(AKeyPressed) {
+    		System.out.println(AKeyPressed);
+    		player.angle+=0.05;
+    	}
+    	if(DKeyPressed) {
+    		player.angle-=0.05;
+    	}
+    	if(SpaceKeyPressed) {
+    		System.out.println(SpaceKeyPressed);
+    	}
 	}
 	
 	private void spawnAsteroid() {
@@ -49,6 +71,7 @@ public class GameContainer extends JPanel {
 		for (Enemy enemy : enemyHandler.getEnemies()) {
 			enemy.setScreenSize(width,heigth);
 		}
+		player.setScreenSize(width,heigth);
 		screenHeight = heigth;
 		screenWidth = width;
 	}
@@ -59,6 +82,38 @@ public class GameContainer extends JPanel {
 			enemy.draw(g);
 		}
 		player.draw(g);
+	}
+
+	public void keyPress(KeyEvent e) {
+		int keyCode = e.getKeyCode();
+	    if (keyCode == KeyEvent.VK_W) {
+	        WKeyPressed = true;
+	    }
+	    if (keyCode == KeyEvent.VK_A) {
+	        AKeyPressed = true;
+	    }
+	    if (keyCode == KeyEvent.VK_D) {
+	        DKeyPressed = true;
+	    }
+	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
+			System.out.println("pressed");
+	    }
+	}
+
+	public void keyReleased(KeyEvent e) {
+	    int keyCode = e.getKeyCode();
+	    if (keyCode == KeyEvent.VK_W) {
+	        WKeyPressed = false;
+	    }
+	    if (keyCode == KeyEvent.VK_A) {
+	        AKeyPressed = false;
+	    }
+	    if (keyCode == KeyEvent.VK_D) {
+	        DKeyPressed = false;
+	    }
+	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
+	        SpaceKeyPressed = false;
+	    }		
 	}
 	
 	

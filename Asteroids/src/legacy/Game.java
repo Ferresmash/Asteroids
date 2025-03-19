@@ -2,14 +2,24 @@ package legacy;
 
 import javax.swing.*;
 
+
+import entities.Asteroid;
+import entities.Bullet;
+import entities.Player;
+import entities.UFO;
+import pos.Position;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game extends JPanel implements ActionListener, KeyListener {
 	
+
 	/**
 	 * 
 	 */
@@ -18,10 +28,6 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     public int screenHeight = getHeight();
     private Timer timer;
     private Timer UfoTimer;
-    boolean WKeyPressed = false;
-    boolean AKeyPressed = false;
-    boolean DKeyPressed = false;
-    boolean SpaceKeyPressed = false;
     private GameContainer gameContainer;
 
     public Game() {
@@ -49,13 +55,16 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         
         // Draw example moving object
         g2d.setColor(Color.WHITE);
+
         gameContainer.paintComponent(g);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // Example animation logic
     	
+
 //    	if(WKeyPressed) {
 //    		player.accelerate();
 //    	}
@@ -77,6 +86,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 //        a.setPosition(pos);
         
     	gameContainer.updateContainer();
+
         repaint(); // Triggers paintComponent
     }
 
@@ -92,41 +102,19 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
+		int keyCode = e.getKeyCode();
 		
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-	    int keyCode = e.getKeyCode();
-	    if (keyCode == KeyEvent.VK_W) {
-	        WKeyPressed = true;
-	    }
-	    if (keyCode == KeyEvent.VK_A) {
-	        AKeyPressed = true;
-	    }
-	    if (keyCode == KeyEvent.VK_D) {
-	        DKeyPressed = true;
-	    }
-	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
-	        SpaceKeyPressed = true;
-	    }
+	public void keyPressed(KeyEvent e) {	
+		gameContainer.keyPress(e);
+	    
 	}
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-	    int keyCode = e.getKeyCode();
-	    if (keyCode == KeyEvent.VK_W) {
-	        WKeyPressed = false;
-	    }
-	    if (keyCode == KeyEvent.VK_A) {
-	        AKeyPressed = false;
-	    }
-	    if (keyCode == KeyEvent.VK_D) {
-	        DKeyPressed = false;
-	    }
-	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
-	        SpaceKeyPressed = false;
-	    }
+		gameContainer.keyReleased(e);
+
 	}
 }
