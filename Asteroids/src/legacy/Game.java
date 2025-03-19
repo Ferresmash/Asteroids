@@ -1,107 +1,123 @@
 package legacy;
 
+import javax.swing.*;
 
-import java.awt.BorderLayout;
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import javax.swing.JFrame;
-
-import asteroidState.LargeState;
 import entities.Asteroid;
+import entities.Player;
 import pos.Position;
 
-public class Game extends Canvas implements Runnable {
-    
-    public static final int WIDTH = 160;
-    public static final int HEIGHT = WIDTH / 12 * 9;
-    public static final int SCALE = 3;
-    public static final String NAME = "Game 2D";
-    private static final long serialVersionUID = 1L;
-    private Asteroid a = new Asteroid();
-    
-    private JFrame frame;
-    public boolean running = false;
-    public int tickCount = 0;
-    
-    public Game() { 
-        setMinimumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
-        setMaximumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
-        setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class Game extends JPanel implements ActionListener, KeyListener {
+	Asteroid a = new Asteroid();
+	Player player = new Player();
+    private Timer timer;
+    boolean WKeyPressed = false;
+    boolean AKeyPressed = false;
+    boolean DKeyPressed = false;
+    boolean SpaceKeyPressed = false;
+
+    public Game() {
+        setPreferredSize(new Dimension(800, 600));
+        setBackground(Color.BLACK);
+        this.addKeyListener(this);
+        this.setFocusable(true);
+        timer = new Timer(16, this); // ~60 FPS (1000ms / 60 ≈ 16ms)
+        timer.start();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); // Clears background
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        frame = new JFrame(NAME);
+        // Draw example moving object
+        g2d.setColor(Color.WHITE);
+        a.draw(g);
+        player.draw(g);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Example animation logic
+    	
+    	if(WKeyPressed) {
+    		player.accelerate();
+    	}
+    	if(AKeyPressed) {
+    		System.out.println(AKeyPressed);
+    		player.angle-=0.01;
+    	}
+    	if(DKeyPressed) {
+    		player.angle+=0.01;
+    	}
+    	if(SpaceKeyPressed) {
+    		System.out.println(SpaceKeyPressed);
+    	}
+    	
+    	Position pos = a.getPosition();
+        pos.setX(pos.getX()+1);
+        a.setPosition(pos);
         
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-        
-        frame.add(this, BorderLayout.CENTER);
+
+        repaint(); // Triggers paintComponent
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Asteroids");
+        Game gamePanel = new Game();
+        frame.add(gamePanel);
         frame.pack();
-        
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-    
-    public synchronized void start() {
-        new Thread(this).start();
-        running = true;
-    }
-    
-    public synchronized void stop() {
-        running = false;
-    }
-    
-    
-    @Override
-    public void run() {
-    	
-        long lastTime = System.nanoTime();
-        double nsPerTick = 1000000000D / 64;
-        
-        int ticks = 0;
-        int frames = 0;
-        
-        long lastTimer = System.currentTimeMillis();
-        double delta = 0;
-        
-        while (running) {
-            long now = System.nanoTime();
-            delta += (now - lastTime) / nsPerTick;
-            lastTime = now;
-            boolean shouldRender = true;
-            
-            while (delta >= 1) {
-                ticks++;
-                tick();
-                delta -= 1;
-                shouldRender = true;
-            }
-            
-            try {
-                Thread.sleep(2);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            
-            if (shouldRender) {
-                frames++;
-                render();
-            }
-            
-            if (System.currentTimeMillis() - lastTimer >= 1000) {
-                lastTimer += 1000;
-                System.out.println(ticks + " ticks, " + frames + " frames");
-                frames = 0;
-                ticks = 0;
-            }
-        }
-    }
-    
-    public void tick() {
-        tickCount++;
-    }
-    
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	    int keyCode = e.getKeyCode();
+	    if (keyCode == KeyEvent.VK_W) {
+	        WKeyPressed = true;
+	    }
+	    if (keyCode == KeyEvent.VK_A) {
+	        AKeyPressed = true;
+	    }
+	    if (keyCode == KeyEvent.VK_D) {
+	        DKeyPressed = true;
+	    }
+	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
+	        SpaceKeyPressed = true;
+	    }
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+	    int keyCode = e.getKeyCode();
+	    if (keyCode == KeyEvent.VK_W) {
+	        WKeyPressed = false;
+	    }
+	    if (keyCode == KeyEvent.VK_A) {
+	        AKeyPressed = false;
+	    }
+	    if (keyCode == KeyEvent.VK_D) {
+	        DKeyPressed = false;
+	    }
+	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
+	        SpaceKeyPressed = false;
+	    }
+	}
+}
+    /*
     public void render() {
 
         Graphics g = getGraphics();
@@ -112,6 +128,6 @@ public class Game extends Canvas implements Runnable {
         pos.setX(pos.getX()+1);
         a.setPosition(pos);
         a.draw(g);
-    }
-}
+    }*/
+
 
