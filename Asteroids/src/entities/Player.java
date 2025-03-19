@@ -1,20 +1,31 @@
 package entities;
 
+import pos.Force;
 import pos.Position;
 
 public class Player {
 	
 	private double speed = 1.0d;
 	private Position position = new Position();
-	private double direction = 0d;
+	private double angle = 0d;
+	private Force force = new Force();
 	
 	public Player() {
 		
 	}
 	
+	public void accelerate() {
+		speed *= 1.1;
+		move();
+	}
+	
 	public void move() {
-		setPosX((int) (position.getX()+speed*Math.cos(direction)));
-		setPosY((int) (position.getX()+speed*Math.sin(direction)));
+		double[] direction = {speed*Math.cos(angle), speed*Math.cos(angle)};
+		force.add(direction);
+		
+		setPosX((int) (position.getX() + force.getX()));
+		setPosY((int) (position.getY() + force.getY()));
+		speed *= 0.95;
 	}
 	
 	public void setPos(Position pos) {
