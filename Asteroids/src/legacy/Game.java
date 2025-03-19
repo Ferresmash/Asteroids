@@ -49,12 +49,14 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     	if(WKeyPressed) {
     		player.accelerate();
     	}
+    	player.move();
+    	
     	if(AKeyPressed) {
     		System.out.println(AKeyPressed);
-    		player.angle-=0.01;
+    		player.angle-=0.05;
     	}
     	if(DKeyPressed) {
-    		player.angle+=0.01;
+    		player.angle+=0.05;
     	}
     	if(SpaceKeyPressed) {
     		System.out.println(SpaceKeyPressed);
@@ -63,6 +65,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     	Position pos = a.getPosition();
         pos.setX(pos.getX()+1);
         a.setPosition(pos);
+        
         
 
         repaint(); // Triggers paintComponent
