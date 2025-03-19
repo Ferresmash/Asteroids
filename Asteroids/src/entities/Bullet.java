@@ -1,26 +1,23 @@
 package entities;
 
-import pos.Force;
+import java.awt.Color;
+import java.awt.Graphics;
 import pos.Position;
 
-public class Bullet {
+public class Bullet implements Entity{
 	
-	private double speed = 1.0d;
+	private double speed = 15.0d;
 	private Position position = new Position(0,0);
 	private double angle = 0d;
-	private Force force = new Force();
 	
-	public Bullet() {
-		
+	public Bullet(Position position, double angle) {
+		this.position = position;
+		this.angle = angle;
 	}
 	
 	public void move() {
-		double[] direction = {speed*Math.cos(angle), speed*Math.cos(angle)};
-		force.add(direction);
-		
-		setPosX((int) (position.getX() + force.getX()));
-		setPosY((int) (position.getY() + force.getY()));
-		speed *= 0.95;
+		setPosX((int) (position.getX() + speed*Math.cos(angle)));
+		setPosY((int) (position.getY() + speed*Math.sin(angle)));
 	}
 	
 	public void setPos(Position pos) {
@@ -28,12 +25,26 @@ public class Bullet {
 		position.setY(pos.getY());
 	}
 	
+	public int getX() {
+		return position.getX();
+	}
+	
 	public void setPosX(int x) {
 		position.setX(x);
 	}
 	
+	public int getY() {
+		return position.getY();
+	}
+	
 	public void setPosY(int y) {
 		position.setY(y);
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		g.setColor(Color.white);
+	    g.fillOval(getX(), getY(), 5, 5);
 	}
 
 }

@@ -3,6 +3,7 @@ package legacy;
 import javax.swing.*;
 
 import entities.Asteroid;
+import entities.Bullet;
 import entities.Player;
 import entities.UFO;
 import pos.Position;
@@ -12,12 +13,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game extends JPanel implements ActionListener, KeyListener {
 	
 	Asteroid a = new Asteroid();
 	Player player = new Player();
 	UFO ufo = new UFO();
+	List<Bullet> bullets = new ArrayList<Bullet>();
     private Timer timer;
     boolean WKeyPressed = false;
     boolean AKeyPressed = false;
@@ -43,8 +47,11 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         g2d.setColor(Color.WHITE);
         a.draw(g);
         ufo.draw(g);
-        player.draw(g);
         
+        for(Bullet b : bullets) {
+        	b.draw(g);
+        }
+        player.draw(g);
     }
 
     @Override
@@ -55,34 +62,19 @@ public class Game extends JPanel implements ActionListener, KeyListener {
     		player.accelerate();
     	}
     	player.move();
+    	for(Bullet b : bullets) {
+        	b.move();
+        }
     	
     	if(AKeyPressed) {
-    		System.out.println(AKeyPressed);
+    		
     		player.angle+=0.1;
     	}
     	if(DKeyPressed) {
     		player.angle-=0.1;
     	}
     	if(SpaceKeyPressed) {
-    		System.out.println(SpaceKeyPressed);
     	}
-    	
-    	Position pos = a.getPosition();
-        pos.setX(pos.getX()+1);
-        a.setPosition(pos);
-        
-        if(player.getX() < -20) {
-        	player.setX(820);
-        }
-        if(player.getX() > 820) {
-        	player.setX(-20);
-        }
-        if(player.getY() < -20) {
-        	player.setY(620);
-        }
-        if(player.getY() > 620) {
-        	player.setY(-20);
-        }
         
 
         repaint(); // Triggers paintComponent
@@ -99,7 +91,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
+		int keyCode = e.getKeyCode();
 		
 	}
 
@@ -116,8 +108,12 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 	        DKeyPressed = true;
 	    }
 	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
-	        SpaceKeyPressed = true;
+			System.out.println("pressed");
+			Position pos = new Position(player.getX(), player.getY());
+			
+	        bullets.add(new Bullet(pos, -player.angle));
 	    }
+	    
 	}
 
 	@Override
