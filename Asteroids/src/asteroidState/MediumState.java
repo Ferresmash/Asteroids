@@ -1,7 +1,5 @@
 package asteroidState;
 
-import java.util.Random;
-
 import entities.Asteroid;
 
 public class MediumState implements AsteroidState {
@@ -12,5 +10,4 @@ public class MediumState implements AsteroidState {
 		a.setSize(Math.random() * 50);
 		return a;
 	}
-
 }
