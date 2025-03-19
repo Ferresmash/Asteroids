@@ -9,25 +9,33 @@ import asteroidState.AsteroidState;
 public class Asteroid extends Enemy {
 
 	private AsteroidState asteroidState;
-	private Polygon shape;
+	int nbrOfCorners;
+	int[] xPoints;
+	int[] yPoints;
+	
 
 	public Asteroid(AsteroidState asteroidState) {
 		this.asteroidState = asteroidState;
-		createShape();
+		this.nbrOfCorners = (int) (6 + (Math.random() * 4));
+		xPoints = new int[nbrOfCorners];
+		yPoints = new int[nbrOfCorners];
 	}
 	
-	public void createShape() {
-		int x = getPosition().getX();
-		int y = getPosition().getY();
+	public void setPoints() {
 		Random rand = new Random();
-		int[] xPoints = {x + (50 + rand.nextInt()*20), 70, 90, 85, 60, 40, 30}; 
-		int[] yPoints = {30, 20, 40, 70, 80, 60, 50};
-        int numPoints = xPoints.length;
-		shape = new Polygon(xPoints,yPoints, numPoints);
+		for(int i = 0; i < nbrOfCorners; i++) {
+			xPoints[i] = (int) ((Math.cos((2 * Math.PI) / nbrOfCorners * i) * getSize())+ ((rand.nextInt()*(getSize()/nbrOfCorners/2))-(getSize()/nbrOfCorners)));
+			yPoints[i] = (int) ((Math.sin((2 * Math.PI) / nbrOfCorners * i) * getSize())+ ((rand.nextInt()*(getSize()/nbrOfCorners/2))-(getSize()/nbrOfCorners)));
+		}
 	}
 
 	@Override
 	public void draw(Graphics g) {
+		Polygon shape = new Polygon();
+		for(int i = 0; i < nbrOfCorners; i++) {
+			shape.xpoints[i] = xPoints[i] + getPosition().getX();
+			shape.ypoints[i] = yPoints[i] + getPosition().getY();
+		}
 		g.drawPolygon(shape);		
 	}
 
