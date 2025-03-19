@@ -1,29 +1,33 @@
 package entities;
 
+import pos.Position;
+
 public class Player {
 	
-	private double speed = 0.0d;
-	private Position position;
-	
+	private double speed = 1.0d;
+	private Position position = new Position();
+	private double direction = 0d;
 	
 	public Player() {
 		
 	}
 	
-	public move() {
-		
+	public void move() {
+		setPosX((int) (position.getX()+speed*Math.cos(direction)));
+		setPosY((int) (position.getX()+speed*Math.sin(direction)));
 	}
 	
-	public setPos() {
-		
+	public void setPos(Position pos) {
+		position.setX(pos.getX());
+		position.setY(pos.getY());
 	}
 	
-	public setPosX() {
-			
+	public void setPosX(int x) {
+		position.setX(x);
 	}
 	
-	public setPosY() {
-		
+	public void setPosY(int y) {
+		position.setY(y);
 	}
 	
 	
