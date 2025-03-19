@@ -2,8 +2,6 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import pos.Force;
 import pos.Position;
 
@@ -23,7 +21,7 @@ public class EnemyHandler {
 		enemies.add(new Asteroid(getRandomSpawnPosition(screenWidth, screenHeight),getRandomSpawnForce()));
 	}
 
-	public void spawnUFO() {
+	public void spawnUFO(int screenWidth, int screenHeight) {
 		enemies.add(new UFO(getRandomSpawnPosition(screenWidth, screenHeight),getRandomSpawnForce()));
 	}
 	
@@ -44,9 +42,8 @@ public class EnemyHandler {
 	
 	private Force getRandomSpawnForce() {
 		Force force = new Force();
-		double[] direction = {(Math.random()*2),(Math.random()*2)};
-		force.setDirection(direction);
-		force.setSpeed(Math.random()*5);
+		double[] vector = {(Math.random()*Integer.MAX_VALUE),(Math.random()*Integer.MAX_VALUE)};
+		force.setDirection(vector);
 		return force;
 	}
 

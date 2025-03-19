@@ -3,7 +3,6 @@ package entities;
 import java.awt.Graphics;
 import java.awt.Polygon;
 import java.util.Random;
-
 import asteroidState.AsteroidState;
 import asteroidState.LargeState;
 import pos.Force;
@@ -22,7 +21,6 @@ public class Asteroid extends Enemy {
 		this.nbrOfCorners = (int) (6 + (Math.random() * 4));
 		xPoints = new int[nbrOfCorners];
 		yPoints = new int[nbrOfCorners];
-		
 	}
 	
 	public Asteroid() {
@@ -30,7 +28,6 @@ public class Asteroid extends Enemy {
 		setSize(100);
 		setPosition(new Position(100, 100));
 		setForce(new Force());
-		setPoints();
 	}
 	
 	public Asteroid(Position startPos, Force startForce) {
