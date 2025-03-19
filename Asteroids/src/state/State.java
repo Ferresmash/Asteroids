@@ -1,9 +1,9 @@
 package state;
 
-import legacy.ShapeContainer;
+import legacy.GameContainer;
 
 public interface State {
 	
-	public void handle(ShapeContainer shapeContainer);
+	public void handle(GameContainer shapeContainer);
 	
 }

@@ -1,5 +1,6 @@
 package legacy;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
@@ -21,14 +22,16 @@ import state.UnmarkState;
 public class AsteroidApp extends JFrame
   {
   private static final long serialVersionUID = 1L;
-  private ShapeContainer shapeContainer = new ShapeContainer();
+  private GameContainer shapeContainer = new GameContainer();
   public AsteroidApp()
     {
     createMenue();
     this.add(shapeContainer);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(700,700);
+    this.setBackground(new Color(0,0,0));
     this.setVisible(true);
+    
     }
   
   public void createMenue()

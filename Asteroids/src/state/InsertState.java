@@ -1,11 +1,11 @@
 package state;
 
-import legacy.ShapeContainer;
+import legacy.GameContainer;
 
 public class InsertState implements State {
 
 	@Override
-	public void handle(ShapeContainer shapeContainer) {
+	public void handle(GameContainer shapeContainer) {
 		shapeContainer.getShapes().add(shapeContainer.getShapeState().getShape(shapeContainer.getPoint()));
 		shapeContainer.setSelected(null);
 	}

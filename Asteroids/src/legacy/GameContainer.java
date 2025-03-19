@@ -13,7 +13,7 @@ import state.InsertState;
 import state.State;
 import decoratorState.*;
 
-public class ShapeContainer extends JPanel implements Pointable {
+public class GameContainer extends JPanel implements Pointable {
 	private static final long serialVersionUID = 1L;
 	private List<Shape> shapes = new LinkedList<Shape>();
 	public List<Shape> getShapes() {
@@ -42,12 +42,12 @@ public class ShapeContainer extends JPanel implements Pointable {
 		this.selected = selected;
 	}
 
-	public ShapeContainer() {
+	public GameContainer() {
 		super();
 		MouseHandler mouseHandler = new MouseHandler(this);
 		this.addMouseListener(mouseHandler);
 		this.addMouseMotionListener(mouseHandler);
-		this.setBackground(Color.white);
+		this.setBackground(Color.black);
 	}
 
 	public void paintComponent(Graphics g) {
