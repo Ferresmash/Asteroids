@@ -6,6 +6,7 @@ import java.util.Random;
 
 import asteroidState.AsteroidState;
 import asteroidState.LargeState;
+import pos.Force;
 import pos.Position;
 
 public class Asteroid extends Enemy {
@@ -28,9 +29,15 @@ public class Asteroid extends Enemy {
 		this(new LargeState());
 		setSize(100);
 		setPosition(new Position(100, 100));
-		setDirection(0);
+		setForce(new Force());
 		setPoints();
-		
+	}
+	
+	public Asteroid(Position startPos, Force startForce) {
+		this(new LargeState());
+		setForce(startForce);
+		setPosition(startPos);
+		setPoints();
 	}
 	
 	public void setPoints() {

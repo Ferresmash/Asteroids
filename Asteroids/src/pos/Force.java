@@ -2,7 +2,7 @@ package pos;
 
 public class Force {
 
-	private double speed;
+	private double speed = 1;
 	private double[] direction = {0d,0d};
 	
 	

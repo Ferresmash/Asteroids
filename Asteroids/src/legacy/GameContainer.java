@@ -15,7 +15,7 @@ public class GameContainer extends JPanel {
 		return entities;
 	}
 
-	public void setAsteroids(List<Entity> entities) {
+	public void setEntities(List<Entity> entities) {
 		this.entities = entities;
 	}
 
