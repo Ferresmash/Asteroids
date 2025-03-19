@@ -15,10 +15,14 @@ public class GameContainer extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private EnemyHandler enemyHandler = new EnemyHandler();
 	private Player player = new Player();
+	private int screenWidth = 1000;
+	private int screenHeight = 700;
 
 
-	public GameContainer() {
+	public GameContainer(int width, int height) {
 		super();
+		this.screenWidth = width;
+		this.screenHeight = height;
 	}
 	
 	public void updateContainer() {
@@ -33,18 +37,20 @@ public class GameContainer extends JPanel {
 	
 	private void spawnAsteroid() {
 		System.out.println("Spawned Asteroid");
-		enemyHandler.spawnAsteroid(1920, 1080);
+		enemyHandler.spawnAsteroid(screenWidth, screenHeight);
 	}
 	
 	public void spawnUfo() {
 		System.out.println("Spawned UFO");
-		enemyHandler.spawnUFO(1920, 1080);
+		enemyHandler.spawnUFO(screenWidth, screenHeight);
 	}
 	
 	public void setScreenSize(int width, int heigth) {
 		for (Enemy enemy : enemyHandler.getEnemies()) {
 			enemy.setScreenSize(width,heigth);
 		}
+		screenHeight = heigth;
+		screenWidth = width;
 	}
 
 	public void paintComponent(Graphics g) {
@@ -53,7 +59,6 @@ public class GameContainer extends JPanel {
 			enemy.draw(g);
 		}
 		player.draw(g);
-			
 	}
 	
 	

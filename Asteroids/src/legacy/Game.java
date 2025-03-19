@@ -31,7 +31,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         this.setFocusable(true);
         timer = new Timer(16, this); // ~60 FPS (1000ms / 60 ≈ 16ms)
         timer.start();
-        gameContainer = new GameContainer();
+        gameContainer = new GameContainer(1000,700);
         UfoTimer = new Timer(1000, e -> gameContainer.spawnUfo());
         UfoTimer.start();
     }
