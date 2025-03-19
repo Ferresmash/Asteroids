@@ -2,7 +2,7 @@ package entities;
 
 import pos.Position;
 
-public abstract class Enemy {
+public abstract class Enemy implements Entity{
 
 	private double size;
 	private Position position;

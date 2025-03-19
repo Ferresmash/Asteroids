@@ -1,6 +1,5 @@
 package legacy;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
@@ -22,14 +21,13 @@ import state.UnmarkState;
 public class AsteroidApp extends JFrame
   {
   private static final long serialVersionUID = 1L;
-  private GameContainer shapeContainer = new GameContainer();
+  private GameContainer gameContainer = new GameContainer();
   public AsteroidApp()
     {
     createMenue();
-    this.add(shapeContainer);
+    this.add(gameContainer);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(700,700);
-    this.setBackground(new Color(0,0,0));
     this.setVisible(true);
     
     }
@@ -37,18 +35,18 @@ public class AsteroidApp extends JFrame
   public void createMenue()
     {
     JMenu menu = new JMenu("Modes");
-    createMenuItem(menu, "Insert", e -> shapeContainer.setState(new InsertState()));
-    createMenuItem(menu, "Move", e -> shapeContainer.setState(new MoveState()));
-    createMenuItem(menu, "Delete", e -> shapeContainer.setState(new DeleteState()));
-    createMenuItem(menu, "Mark", e -> shapeContainer.setState(new MarkState()));
-    createMenuItem(menu, "Unmark", e -> shapeContainer.setState(new UnmarkState()));
-    createMenuItem(menu, "Resize", e -> shapeContainer.setState(new ResizeState()));
+    createMenuItem(menu, "Insert", e -> gameContainer.setState(new InsertState()));
+    createMenuItem(menu, "Move", e -> gameContainer.setState(new MoveState()));
+    createMenuItem(menu, "Delete", e -> gameContainer.setState(new DeleteState()));
+    createMenuItem(menu, "Mark", e -> gameContainer.setState(new MarkState()));
+    createMenuItem(menu, "Unmark", e -> gameContainer.setState(new UnmarkState()));
+    createMenuItem(menu, "Resize", e -> gameContainer.setState(new ResizeState()));
     JMenu shapesMenu = new JMenu("Shapes");
-    createMenuItem(shapesMenu, "Circle", e -> shapeContainer.setShapeState(new CircleState()));
-    createMenuItem(shapesMenu, "Rectangle", e -> shapeContainer.setShapeState(new RectState()));
+    createMenuItem(shapesMenu, "Circle", e -> gameContainer.setShapeState(new CircleState()));
+    createMenuItem(shapesMenu, "Rectangle", e -> gameContainer.setShapeState(new RectState()));
     JMenu decoratorMenu = new JMenu("Decorations");
-    createMenuItem(decoratorMenu, "CrossHair", e -> shapeContainer.setDecoratorState(new CrosshairState()));
-    createMenuItem(decoratorMenu, "Fill", e -> shapeContainer.setDecoratorState(new FillState()));
+    createMenuItem(decoratorMenu, "CrossHair", e -> gameContainer.setDecoratorState(new CrosshairState()));
+    createMenuItem(decoratorMenu, "Fill", e -> gameContainer.setDecoratorState(new FillState()));
     JMenuBar menuBar = new JMenuBar();
     menuBar.add(menu);
     menuBar.add(shapesMenu);
