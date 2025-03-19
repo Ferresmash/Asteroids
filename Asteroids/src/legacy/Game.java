@@ -15,14 +15,16 @@ import java.awt.event.KeyListener;
 
 public class Game extends JPanel implements ActionListener, KeyListener {
 	
-	Asteroid a = new Asteroid();
-	Player player = new Player();
-	UFO ufo = new UFO();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
     private Timer timer;
     boolean WKeyPressed = false;
     boolean AKeyPressed = false;
     boolean DKeyPressed = false;
     boolean SpaceKeyPressed = false;
+    private GameContainer gameContainer;
 
     public Game() {
         setPreferredSize(new Dimension(800, 600));
@@ -31,6 +33,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         this.setFocusable(true);
         timer = new Timer(16, this); // ~60 FPS (1000ms / 60 ≈ 16ms)
         timer.start();
+        gameContainer = new GameContainer();
     }
 
     @Override
@@ -41,37 +44,34 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         
         // Draw example moving object
         g2d.setColor(Color.WHITE);
-        a.draw(g);
-        player.draw(g);
-        ufo.draw(g);
+        gameContainer.paintComponent(g);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // Example animation logic
     	
-    	if(WKeyPressed) {
-    		player.accelerate();
-    	}
-    	player.move();
-    	
-    	if(AKeyPressed) {
-    		System.out.println(AKeyPressed);
-    		player.angle-=0.05;
-    	}
-    	if(DKeyPressed) {
-    		player.angle+=0.05;
-    	}
-    	if(SpaceKeyPressed) {
-    		System.out.println(SpaceKeyPressed);
-    	}
-    	
-    	Position pos = a.getPosition();
-        pos.setX(pos.getX()+1);
-        a.setPosition(pos);
+//    	if(WKeyPressed) {
+//    		player.accelerate();
+//    	}
+//    	player.move();
+//    	
+//    	if(AKeyPressed) {
+//    		System.out.println(AKeyPressed);
+//    		player.angle-=0.05;
+//    	}
+//    	if(DKeyPressed) {
+//    		player.angle+=0.05;
+//    	}
+//    	if(SpaceKeyPressed) {
+//    		System.out.println(SpaceKeyPressed);
+//    	}
+//    	
+//    	Position pos = a.getPosition();
+//        pos.setX(pos.getX()+1);
+//        a.setPosition(pos);
         
-        
-
+    	gameContainer.updateContainer();
         repaint(); // Triggers paintComponent
     }
 

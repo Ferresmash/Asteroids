@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 import java.util.Random;
@@ -32,6 +33,7 @@ public class Asteroid extends Enemy {
 	
 	public Asteroid(Position startPos, Force startForce) {
 		this(new LargeState());
+		setSize(50);
 		setForce(startForce);
 		setPosition(startPos);
 		setPoints();
@@ -47,20 +49,24 @@ public class Asteroid extends Enemy {
 		
 		//System.out.print(yPoints[5]);
 	}
-
+	
 	@Override
 	public void draw(Graphics g) {
 		int[] newXPoints = new int[nbrOfCorners];
 		int[] newYPoints = new int[nbrOfCorners];
+		
+		g.setColor(Color.white);
 
 		for(int i = 0; i < nbrOfCorners; i++) {
-			newXPoints[i] = xPoints[i] + getPosition().getX();
-			newYPoints[i] = yPoints[i] + getPosition().getY();
+			newXPoints[i] = xPoints[i] + (int)getPosition().getX();
+			newYPoints[i] = yPoints[i] + (int)getPosition().getY();
 		}
 		
 		Polygon shape = new Polygon(newXPoints, newYPoints, nbrOfCorners);
-		g.drawRect(150, 50, 50, 50);
-		g.drawPolygon(shape);		
+		g.drawPolygon(shape);
+		
+		System.out.print("X" + getPosition().getX());
+		System.out.println(", Y" + getPosition().getY());
 	}
 
 

@@ -2,6 +2,7 @@ package pos;
 
 public class Force {
 
+	
 	private double[] direction = {0d,0d};
 	
 	
@@ -28,5 +29,6 @@ public class Force {
 	public void setY(double d) {
 		direction[1] = d;
 	}
+
 
 }

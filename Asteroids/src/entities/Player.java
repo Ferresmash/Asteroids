@@ -8,7 +8,7 @@ import java.awt.Rectangle;
 import pos.Force;
 import pos.Position;
 
-public class Player {
+public class Player implements Entity{
 	
 	private double speed = 0.1d;
 	private Position position = new Position(300,300);
@@ -37,8 +37,8 @@ public class Player {
 	}
 	
 	public void setPos(Position pos) {
-		setPosX(pos.getX());
-		setPosY(pos.getY());
+		setPosX((int) pos.getX());
+		setPosY((int) pos.getY());
 	}
 	
 	public void setPosX(int x) {
@@ -52,7 +52,7 @@ public class Player {
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 	    g2d.setColor(Color.WHITE);
-	    Rectangle rect2 = new Rectangle(position.getX()-10, position.getY()-20, 20, 40);
+	    Rectangle rect2 = new Rectangle((int)position.getX()-10, (int)position.getY()-20, 20, 40);
 
 	    g2d.rotate(angle, position.getX(), position.getY());
 	    g2d.draw(rect2);

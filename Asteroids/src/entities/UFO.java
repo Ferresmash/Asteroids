@@ -9,12 +9,6 @@ import pos.Position;
 
 public class UFO extends Enemy {
 	
-	private int[] baseX = {50, 100, 150};
-    private int[] baseY = {100, 150, 100};
-    private int[] cockpitX = {75, 100, 125};
-    private int[] cockpitY = {50, 75, 50};
-    private int[] baseLineX = {50, 150};
-    private int[] baseLineY = {100, 100};
 	
 	public UFO() {
 		this(new Position(600, 300), new Force());
@@ -24,12 +18,10 @@ public class UFO extends Enemy {
 		setPosition(spawnPos);
 	}
 	
-
-
 	@Override
 	public void draw(Graphics g) {
-		int startx = getPosition().getX();
-		int starty = getPosition().getY();
+		int startx = (int) getPosition().getX();
+		int starty = (int) getPosition().getY();
 		
 		g.setColor(Color.green);
 		
@@ -57,12 +49,6 @@ public class UFO extends Enemy {
         g.drawPolygon(lowBase);
 
         g.setColor(Color.white);
-//        Polygon base = new Polygon(baseX, baseY, baseX.length);
-//        Polygon cockpit = new Polygon(cockpitX, cockpitY, cockpitX.length);
-//        Polygon baseLine = new Polygon(baseLineX, baseLineY, baseLineX.length);
-//        g.drawPolygon(base);
-//        g.drawPolygon(cockpit);
-//        g.drawPolyline(baseLineX, baseLineY, baseLineX.length);
 
 	}
 
