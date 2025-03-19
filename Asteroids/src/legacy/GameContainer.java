@@ -33,12 +33,18 @@ public class GameContainer extends JPanel {
 	
 	private void spawnAsteroid() {
 		System.out.println("Spawned Asteroid");
-		enemyHandler.spawnAsteroid(800, 600);
+		enemyHandler.spawnAsteroid(1920, 1080);
 	}
 	
-	private void spawnUfo() {
-		System.out.println("Spawned Asteroid");
-		enemyHandler.spawnUFO(WIDTH, HEIGHT);
+	public void spawnUfo() {
+		System.out.println("Spawned UFO");
+		enemyHandler.spawnUFO(1920, 1080);
+	}
+	
+	public void setScreenSize(int width, int heigth) {
+		for (Enemy enemy : enemyHandler.getEnemies()) {
+			enemy.setScreenSize(width,heigth);
+		}
 	}
 
 	public void paintComponent(Graphics g) {

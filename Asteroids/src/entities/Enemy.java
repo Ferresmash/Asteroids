@@ -1,5 +1,4 @@
 package entities;
-
 import pos.Force;
 import pos.Position;
 
@@ -8,6 +7,8 @@ public abstract class Enemy implements Entity {
 	private double size;
 	private Position position;
 	private Force force;
+	private int screenWidth;
+	private int screenHeight;
 
 	public double getSize() {
 		return size;
@@ -41,17 +42,22 @@ public abstract class Enemy implements Entity {
 
 	public void keepInside() {
 		if(getPosition().getX() < -20) {
-			getPosition().setX(820);
+			getPosition().setX(screenWidth);
         }
-        if(getPosition().getX() > 820) {
+        if(getPosition().getX() > screenWidth) {
         	getPosition().setX(-20);
         }
         if(getPosition().getY() < -20) {
-        	getPosition().setY(620);
+        	getPosition().setY(screenHeight);
         }
-        if(getPosition().getY() > 620) {
+        if(getPosition().getY() > screenHeight) {
         	getPosition().setY(-20);
         }
+	}
+
+	public void setScreenSize(int width, int heigth) {
+		this.screenHeight = heigth;
+		this.screenWidth = width;
 	}
 
 }

@@ -14,8 +14,10 @@ public class UFO extends Enemy {
 		this(new Position(600, 300), new Force());
 	}
 	public UFO(Position spawnPos, Force spawnForce) {
+		setSize(100);
 		setForce(spawnForce);
 		setPosition(spawnPos);
+		
 	}
 	
 	@Override
@@ -50,6 +52,9 @@ public class UFO extends Enemy {
 
         g.setColor(Color.white);
 
+		
+		System.out.print("X" + getPosition().getX());
+		System.out.println(", Y" + getPosition().getY());
 	}
 
 }

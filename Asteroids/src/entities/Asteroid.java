@@ -42,8 +42,8 @@ public class Asteroid extends Enemy {
 	public void setPoints() {
 		Random rand = new Random();
 		for(int i = 0; i < nbrOfCorners; i++) {
-			xPoints[i] = (int) ((Math.cos((2 * Math.PI) / nbrOfCorners * i) * getSize()) + Math.random()*(getSize())-(getSize()/2));
-			yPoints[i] = (int) ((Math.sin((2 * Math.PI) / nbrOfCorners * i) * getSize()) + Math.random()*(getSize())-(getSize()/2));
+			xPoints[i] = (int) ((Math.cos((2 * Math.PI) / nbrOfCorners * i) * getSize()) + rand.nextDouble(getSize())-(getSize()/2));
+			yPoints[i] = (int) ((Math.sin((2 * Math.PI) / nbrOfCorners * i) * getSize()) + rand.nextDouble(getSize())-(getSize()/2));
 			//System.out.println((Math.cos((2 * Math.PI) / nbrOfCorners * i) * getSize()));
 		}
 		
@@ -64,9 +64,7 @@ public class Asteroid extends Enemy {
 		
 		Polygon shape = new Polygon(newXPoints, newYPoints, nbrOfCorners);
 		g.drawPolygon(shape);
-		
-		System.out.print("X" + getPosition().getX());
-		System.out.println(", Y" + getPosition().getY());
+
 	}
 
 
