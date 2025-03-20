@@ -1,9 +1,12 @@
-package entities;
+package legacy;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import entities.Asteroid;
+import entities.Enemy;
+import entities.UFO;
 import pos.Force;
 import pos.Position;
 

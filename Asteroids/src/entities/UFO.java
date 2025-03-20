@@ -1,11 +1,9 @@
 package entities;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Polygon;
 
 import pos.Force;
 import pos.Position;
+import view.RenderVisitor;
 
 public class UFO extends Enemy {
 	
@@ -21,40 +19,10 @@ public class UFO extends Enemy {
 	}
 	
 	@Override
-	public void draw(Graphics g) {
-		int startx = (int) getPosition().getX();
-		int starty = (int) getPosition().getY();
-		
-		g.setColor(Color.green);
-		
-        Polygon topBase = new Polygon();
-        topBase.addPoint(startx + 2*4, starty+ 2*2);
-        topBase.addPoint(startx + 5*4, starty+ 7*2);
-        topBase.addPoint(startx + -5*4, starty+ 7*2);
-        topBase.addPoint(startx + -2*4, starty+ 2*2);
-        
-        Polygon lowBase = new Polygon();
-        lowBase.addPoint(startx + 2*4, starty+ 10*2);
-        lowBase.addPoint(startx + 5*4, starty+ 5*2);
-        lowBase.addPoint(startx + -5*4, starty+ 5*2);
-        lowBase.addPoint(startx + -2*4, starty+ 10*2);
-        
-        // Cockpit (top trapezoid)
-        Polygon cockpit = new Polygon();
-        cockpit.addPoint(startx + 3, starty+ -3);
-        cockpit.addPoint(startx + 8, starty+ 5);
-        cockpit.addPoint(startx + -8, starty+ 5);
-        cockpit.addPoint(startx + -3, starty+ -3);
-        
-        g.drawPolygon(topBase);
-        g.drawPolygon(cockpit);
-        g.drawPolygon(lowBase);
+	public void accept(RenderVisitor visitor) {
+		visitor.visit(this);		
 
-        g.setColor(Color.white);
-
-		
-		//System.out.print("X" + getPosition().getX());
-		//System.out.println(", Y" + getPosition().getY());
 	}
+
 
 }
