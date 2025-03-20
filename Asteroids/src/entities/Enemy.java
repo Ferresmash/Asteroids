@@ -1,4 +1,7 @@
 package entities;
+import java.awt.Rectangle;
+import java.awt.Shape;
+
 import pos.Force;
 import pos.Position;
 
@@ -53,6 +56,10 @@ public abstract class Enemy implements Entity {
         if(getPosition().getY() > screenHeight) {
         	getPosition().setY(-20);
         }
+	}
+	
+	public Shape getHitbox() {
+		return new Rectangle((int) (getPosition().getX()-size/2), (int) (getPosition().getY()-size/2),(int)size, (int)size);
 	}
 
 	public void setScreenSize(int width, int heigth) {

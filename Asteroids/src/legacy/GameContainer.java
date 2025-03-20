@@ -1,6 +1,7 @@
 package legacy;
 
 import java.awt.Graphics;
+import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ public class GameContainer extends JPanel {
     		//System.out.println(SpaceKeyPressed);
     		
     	}
+    	checkCollision();
 	}
 	
 	private void spawnAsteroid() {
@@ -74,6 +76,18 @@ public class GameContainer extends JPanel {
 	public void spawnUfo() {
 		//System.out.println("Spawned UFO");
 		enemyHandler.spawnUFO(screenWidth, screenHeight);
+	}
+	
+	public void checkCollision() {
+		
+		for (Enemy enemy : enemyHandler.getEnemies()) {
+			Shape polygon = enemy.getHitbox();
+			for (Bullet b : bullets) {
+				if(polygon.contains(b.getX(), b.getY())) {
+					System.out.println("asteroid hit!");
+				}
+			}
+		}
 	}
 	
 	public void setScreenSize(int width, int heigth) {

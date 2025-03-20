@@ -3,6 +3,7 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.awt.Shape;
 import java.util.Random;
 import asteroidState.AsteroidState;
 import asteroidState.LargeState;
@@ -48,6 +49,11 @@ public class Asteroid extends Enemy {
 		}
 		
 		//System.out.print(yPoints[5]);
+	}
+	
+	@Override
+	public Shape getHitbox() {
+		return new Polygon(xPoints, yPoints, nbrOfCorners);
 	}
 	
 	@Override
