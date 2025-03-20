@@ -86,7 +86,7 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 	@Override
 	public void visit(Bullet bullet) {
 		g.setColor(Color.white);
-		g.fillOval(bullet.getX(), bullet.getY(), 5, 5);
+		g.fillOval((int) bullet.getX(), (int) bullet.getY(), 5, 5);
 	}
 
 }

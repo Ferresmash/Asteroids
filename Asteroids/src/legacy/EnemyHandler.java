@@ -47,6 +47,11 @@ public class EnemyHandler {
 		}
 		return spawnPos;
 	}
+	
+	public void remove(Enemy enemy) {
+		enemies.remove(enemy);
+	}
+
 
 	private Force getRandomSpawnForce() {
 		Force force = new Force();
