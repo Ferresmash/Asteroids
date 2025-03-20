@@ -57,6 +57,7 @@ public class Controller {
 	        DKeyPressed = true;
 	    }
 	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
+	    	SpaceKeyPressed = true;
 			System.out.println("pressed");
 	    }		
 	}

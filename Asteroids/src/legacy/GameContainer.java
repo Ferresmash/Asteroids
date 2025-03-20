@@ -38,6 +38,9 @@ public class GameContainer extends JPanel {
 		for (Enemy enemy : entityHandler.getEnemyHandler().getEnemies()) {
 			enemy.move();
 		}
+		for (Bullet bullet : entityHandler.getBullets()) {
+			bullet.move();
+		}
 
 		if (WKeyPressed) {
 			entityHandler.getPlayer().accelerate();
@@ -52,6 +55,7 @@ public class GameContainer extends JPanel {
 			entityHandler.getPlayer().angle -= 0.15;
 		}
 		if (SpaceKeyPressed) {
+			System.out.print("spawned bullet");
 			spawnBullet();
 		}
 		checkCollision();
@@ -68,6 +72,7 @@ public class GameContainer extends JPanel {
 	}
 	
 	public void spawnBullet() {
+		
 		entityHandler.addBullet();
 	}
 

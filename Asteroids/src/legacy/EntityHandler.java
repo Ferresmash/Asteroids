@@ -8,6 +8,7 @@ import entities.Bullet;
 import entities.Drawable;
 import entities.Enemy;
 import entities.Player;
+import pos.Position;
 
 public class EntityHandler {
 
@@ -60,7 +61,7 @@ public class EntityHandler {
 	}
 
 	public void addBullet() {
-		bullets.add(new Bullet(player.getPos(), -player.getAngle()));
+		bullets.add(new Bullet(new Position(player.getX(), player.getY()), -player.getAngle()));
 	}
 
 	public void checkCollision() {
