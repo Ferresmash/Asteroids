@@ -1,6 +1,10 @@
-package legacy;
+package view;
 
 import javax.swing.*;
+
+import controller.Controller;
+import entities.Drawable;
+import legacy.GameContainer;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,26 +13,23 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
-public class Game extends JPanel implements ActionListener, KeyListener {
+public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	
 
 	private static final long serialVersionUID = 1L;
 	public int screenWidth = getWidth();
     public int screenHeight = getHeight();
     private Timer timer;
-    private Timer UfoTimer;
-    private GameContainer gameContainer;
+    private Controller controller;
 
-    public Game() {
+    public GamePanel(Controller controller) {
+    	this.controller = controller;
         setPreferredSize(new Dimension(1000, 700));
         setBackground(Color.BLACK);
         this.addKeyListener(this);
         this.setFocusable(true);
         timer = new Timer(16, this); // ~60 FPS (1000ms / 60 ≈ 16ms)
         timer.start();
-        gameContainer = new GameContainer(1000,700);
-        UfoTimer = new Timer(1000, e -> gameContainer.spawnUfo());
-        UfoTimer.start();
     }
 
     @Override
@@ -39,32 +40,27 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         
         screenWidth = getWidth();
         screenHeight = getHeight();
-        
-        gameContainer.setScreenSize(screenWidth, screenHeight);
+        controller.setScreenSize(screenWidth, screenHeight);
+        GraphicsRenderVisitor renderer = new GraphicsRenderVisitor(g);
+
+        for (Drawable entity : controller.getEntities()) {
+			entity.accept(renderer);
+		}
         
         // Draw example moving object
         g2d.setColor(Color.WHITE);
 
-        gameContainer.paintComponent(g);
+        //gameContainer.paintComponent(g);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-    	gameContainer.updateContainer();
+    	controller.updateContainer();
         repaint();
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Asteroids");
-        Game gamePanel = new Game();
-        frame.add(gamePanel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-    }
+ 
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -74,13 +70,12 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {	
-		gameContainer.keyPress(e);
+		controller.keyPress(e);
 	    
 	}
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		gameContainer.keyReleased(e);
-
+		controller.keyReleased(e);
 	}
 }

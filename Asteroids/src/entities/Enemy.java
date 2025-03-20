@@ -2,7 +2,7 @@ package entities;
 import pos.Force;
 import pos.Position;
 
-public abstract class Enemy implements Entity {
+public abstract class Enemy implements Drawable{
 
 	private double size;
 	private Position position;

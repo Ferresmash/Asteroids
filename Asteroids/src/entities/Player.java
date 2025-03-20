@@ -1,15 +1,10 @@
 package entities;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-
 import pos.Force;
 import pos.Position;
+import view.RenderVisitor;
 
-public class Player implements Entity{
+public class Player implements Drawable{
 	
 	private double speed = 1d;
 	private Position position = new Position(300,300);
@@ -83,25 +78,30 @@ public class Player implements Entity{
 		position.setY(y);
 	}
 	
-	public void draw(Graphics g) {
-		Graphics2D g2d = (Graphics2D)g;
-		//g.drawLine(getX(), getY(), (int) (getX()+100*Math.cos(angle)), (int) (getY()-100*Math.sin(angle)));
-	    g2d.setColor(Color.WHITE);
-
-//	    Rectangle rect2 = new Rectangle(getX()-20, getY()-10, 40, 20);
-	    int[] xPoints = {getX()-20,getX()-20,getX()+20};
-	    int[] yPoints = {getY()-10,getY()+10,getY()};
-	    Polygon rocket = new Polygon(xPoints,yPoints,3);
-	    
-	    g2d.rotate(-angle, getX(), getY());
-	    //g2d.draw(rect2);
-	    g2d.draw(rocket);
-	    g2d.fill(rocket);
-	}
+//	public void draw(Graphics g) {
+//		Graphics2D g2d = (Graphics2D)g;
+//		//g.drawLine(getX(), getY(), (int) (getX()+100*Math.cos(angle)), (int) (getY()-100*Math.sin(angle)));
+//	    g2d.setColor(Color.WHITE);
+//
+////	    Rectangle rect2 = new Rectangle(getX()-20, getY()-10, 40, 20);
+//	    int[] xPoints = {getX()-20,getX()-20,getX()+20};
+//	    int[] yPoints = {getY()-10,getY()+10,getY()};
+//	    Polygon rocket = new Polygon(xPoints,yPoints,3);
+//	    
+//	    g2d.rotate(-angle, getX(), getY());
+//	    //g2d.draw(rect2);
+//	    g2d.draw(rocket);
+//	    g2d.fill(rocket);
+//	}
 
 	public void setScreenSize(int width, int heigth) {
 		screenWidth = width;
 		screenHeight = heigth;
+	}
+	
+	@Override
+	public void accept(RenderVisitor visitor) {
+		visitor.visit(this);		
 	}
 
 }

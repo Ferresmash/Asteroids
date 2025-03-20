@@ -3,8 +3,9 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics;
 import pos.Position;
+import view.RenderVisitor;
 
-public class Bullet implements Entity{
+public class Bullet implements Drawable{
 	
 	private double speed = 15.0d;
 	private Position position = new Position(0,0);
@@ -41,10 +42,10 @@ public class Bullet implements Entity{
 		position.setY(y);
 	}
 
+
 	@Override
-	public void draw(Graphics g) {
-		g.setColor(Color.white);
-	    g.fillOval(getX(), getY(), 5, 5);
+	public void accept(RenderVisitor visitor) {
+		visitor.visit(this);
 	}
 
 }
