@@ -22,6 +22,7 @@ public class EntityHandler {
 	}
 
 	public List<Drawable> getEntities() {
+		
 		List<Drawable> allEntities = new ArrayList<Drawable>();
 		for (Drawable drawable : enemyHandler.getEnemies()) {
 			allEntities.add(drawable);
@@ -34,6 +35,7 @@ public class EntityHandler {
 		}
 		allEntities.add(player);
 		return allEntities;
+		
 	}
 	
 	public EnemyHandler getEnemyHandler() {

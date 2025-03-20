@@ -58,7 +58,7 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 		int[] newXPoints = new int[asteroid.getNbrOfCorners()];
 		int[] newYPoints = new int[asteroid.getNbrOfCorners()];
 
-		g.setColor(Color.white);
+		g.setColor(new Color(137, 96, 0));
 
 		for (int i = 0; i < asteroid.getNbrOfCorners(); i++) {
 			newXPoints[i] = asteroid.getxPoints()[i] + (int) asteroid.getPosition().getX();
@@ -66,7 +66,7 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 		}
 
 		Polygon shape = new Polygon(newXPoints, newYPoints, asteroid.getNbrOfCorners());
-		g.drawPolygon(shape);
+		g.fillPolygon(shape);
 	}
 
 	@Override

@@ -1,9 +1,8 @@
 package entities;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import pos.Position;
 import view.RenderVisitor;
+
 
 public class Bullet implements GameObject, Drawable{
 	
@@ -42,10 +41,10 @@ public class Bullet implements GameObject, Drawable{
 		position.setY(y);
 	}
 
+
 	@Override
 	public void accept(RenderVisitor visitor) {
-		// TODO Auto-generated method stub
-		
+		visitor.visit(this);
 	}
 
 	@Override
