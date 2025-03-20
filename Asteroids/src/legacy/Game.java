@@ -2,27 +2,16 @@ package legacy;
 
 import javax.swing.*;
 
-
-import entities.Asteroid;
-import entities.Bullet;
-import entities.Player;
-import entities.UFO;
-import pos.Position;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Game extends JPanel implements ActionListener, KeyListener {
 	
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public int screenWidth = getWidth();
     public int screenHeight = getHeight();
@@ -62,32 +51,9 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Example animation logic
-    	
 
-//    	if(WKeyPressed) {
-//    		player.accelerate();
-//    	}
-//    	player.move();
-//    	
-//    	if(AKeyPressed) {
-//    		System.out.println(AKeyPressed);
-//    		player.angle-=0.05;
-//    	}
-//    	if(DKeyPressed) {
-//    		player.angle+=0.05;
-//    	}
-//    	if(SpaceKeyPressed) {
-//    		System.out.println(SpaceKeyPressed);
-//    	}
-//    	
-//    	Position pos = a.getPosition();
-//        pos.setX(pos.getX()+1);
-//        a.setPosition(pos);
-        
     	gameContainer.updateContainer();
-
-        repaint(); // Triggers paintComponent
+        repaint();
     }
 
     public static void main(String[] args) {
