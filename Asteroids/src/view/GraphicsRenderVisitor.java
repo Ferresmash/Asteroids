@@ -93,13 +93,18 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 		int[] xPoints = { player.getX() - 20, player.getX() - 20, player.getX() + 20 };
 		int[] yPoints = { player.getY() - 10, player.getY() + 10, player.getY() };
 		Polygon rocket = new Polygon(xPoints, yPoints, 3);
+		int[] xPointsWings = { player.getX() - 20, player.getX() - 20, player.getX() + 20 };
+		int[] yPointsWings = { player.getY() - 15, player.getY() + 15, player.getY() };
+		Polygon wings = new Polygon(xPointsWings, yPointsWings, 3);
 		int[] xPointsWindow = {  player.getX() - 8,player.getX() - 8, player.getX() + 8 };
 		int[] yPointsWindow = { player.getY() + 4, player.getY() - 4, player.getY() };
 		Polygon window = new Polygon(xPointsWindow, yPointsWindow, 3);
 		g2d.rotate(-player.angle, player.getX(), player.getY());
+		g2d.setColor(new Color(100,100,100));
+		g2d.fill(wings);
 		g2d.setColor(Color.lightGray);
 		g2d.fill(rocket);
-		g2d.setColor(new Color(0,222,255));
+		g2d.setColor(new Color(75,75,75));
 		g2d.fill(window);
 		if(player.isAccelerating()) {
 			int[] xPointsFlame = { player.getX() - 20, player.getX() - 20, player.getX() -38 };
