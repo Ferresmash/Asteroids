@@ -3,7 +3,8 @@ package entities;
 import pos.Position;
 import view.RenderVisitor;
 
-public class Bullet implements Drawable{
+
+public class Bullet implements GameObject, Drawable{
 	
 	private double speed = 15.0d;
 	private Position position = new Position(0,0);
@@ -44,6 +45,12 @@ public class Bullet implements Drawable{
 	@Override
 	public void accept(RenderVisitor visitor) {
 		visitor.visit(this);
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

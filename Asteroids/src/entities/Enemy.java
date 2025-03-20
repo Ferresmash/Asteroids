@@ -5,7 +5,7 @@ import java.awt.Shape;
 import pos.Force;
 import pos.Position;
 
-public abstract class Enemy implements Drawable{
+public abstract class Enemy implements GameObject, Drawable{
 
 	private double size;
 	private Position position;

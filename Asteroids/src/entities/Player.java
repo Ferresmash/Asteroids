@@ -4,7 +4,7 @@ import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
 
-public class Player implements Drawable{
+public class Player implements GameObject, Drawable{
 	
 	private double speed = 1d;
 	private Position position = new Position(300,300);
@@ -98,6 +98,12 @@ public class Player implements Drawable{
 
 	public void setAngle(double angle) {
 		this.angle = angle;
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

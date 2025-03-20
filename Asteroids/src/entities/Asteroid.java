@@ -11,7 +11,7 @@ import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
 
-public class Asteroid extends Enemy implements Drawable {
+public class Asteroid extends Enemy implements GameObject, Drawable {
 
 	private AsteroidState asteroidState;
 	int nbrOfCorners;
@@ -88,6 +88,12 @@ public class Asteroid extends Enemy implements Drawable {
 
 	public void setyPoints(int[] yPoints) {
 		this.yPoints = yPoints;
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

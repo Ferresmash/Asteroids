@@ -71,7 +71,8 @@ public class EntityHandler {
 			Shape polygon = enemy.getHitbox();
 			for (Bullet b : getBullets()) {
 				if (polygon.contains(b.getX(), b.getY())) {
-					System.out.println("asteroid hit!");
+					//enemy.destroy();
+					//getEnemyHandler().remove(enemy);
 				}
 			}
 		}		

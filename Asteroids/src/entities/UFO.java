@@ -5,7 +5,7 @@ import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
 
-public class UFO extends Enemy {
+public class UFO extends Enemy implements GameObject {
 	
 	
 	public UFO() {
@@ -22,6 +22,11 @@ public class UFO extends Enemy {
 	public void accept(RenderVisitor visitor) {
 		visitor.visit(this);		
 
+	}
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
 	}
 
 
