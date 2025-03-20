@@ -53,8 +53,8 @@ public class UFO extends Enemy {
         g.setColor(Color.white);
 
 		
-		System.out.print("X" + getPosition().getX());
-		System.out.println(", Y" + getPosition().getY());
+		//System.out.print("X" + getPosition().getX());
+		//System.out.println(", Y" + getPosition().getY());
 	}
 
 }

@@ -108,7 +108,7 @@ public class Game extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {	
-		gameContainer.keyPress(e);
+		gameContainer.keyPressed(e);
 	    
 	}
 	

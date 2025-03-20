@@ -96,7 +96,7 @@ public class Player implements Entity{
 	    g2d.rotate(-angle, getX(), getY());
 	    //g2d.draw(rect2);
 	    g2d.draw(rocket);
-	    g2d.fill(rocket);
+	    //g2d.fill(rocket);
 	}
 
 	public void setScreenSize(int width, int heigth) {

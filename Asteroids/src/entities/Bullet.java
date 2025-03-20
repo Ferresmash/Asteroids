@@ -25,7 +25,7 @@ public class Bullet implements Entity{
 		position.setY(pos.getY());
 	}
 	
-	public int getX() {
+	public double getX() {
 		return position.getX();
 	}
 	
@@ -33,7 +33,7 @@ public class Bullet implements Entity{
 		position.setX(x);
 	}
 	
-	public int getY() {
+	public double getY() {
 		return position.getY();
 	}
 	
@@ -44,7 +44,7 @@ public class Bullet implements Entity{
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.white);
-	    g.fillOval(getX(), getY(), 5, 5);
+	    g.fillOval((int) getX(), (int) getY(), 5, 5);
 	}
 
 }
