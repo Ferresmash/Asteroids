@@ -7,6 +7,7 @@ import java.awt.Shape;
 import java.util.Random;
 import asteroidState.AsteroidState;
 import asteroidState.LargeState;
+import legacy.EntityHandler;
 import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
@@ -91,9 +92,8 @@ public class Asteroid extends Enemy implements GameObject, Drawable {
 	}
 
 	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
+	public void destroy(EntityHandler entityHandler) {
+		entityHandler.getEnemyHandler().addEnemy(asteroidState.getAsteroid());
 	}
 
 }

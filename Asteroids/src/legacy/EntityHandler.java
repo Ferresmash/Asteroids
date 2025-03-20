@@ -4,6 +4,8 @@ import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
 import entities.Bullet;
 import entities.Drawable;
 import entities.Enemy;
@@ -67,14 +69,31 @@ public class EntityHandler {
 	}
 
 	public void checkCollision() {
-		for (Enemy enemy : getEnemyHandler().getEnemies()) {
-			Shape polygon = enemy.getHitbox();
+		List<Enemy> enemies = getEnemyHandler().getEnemies();
+		List<Enemy> toBeRemoved = new ArrayList<Enemy>();
+		int length = enemies.size();
+		for (int i = length-1; i > 0; i--) {
+			Shape polygon = enemies.get(i).getHitbox();
 			for (Bullet b : getBullets()) {
+				boolean hit = false;
 				if (polygon.contains(b.getX(), b.getY())) {
-					//enemy.destroy();
-					//getEnemyHandler().remove(enemy);
+					System.out.println(enemies.size());
+					enemies.get(i).destroy(this);
+					if(!toBeRemoved.contains(enemies.get(i))) {
+						toBeRemoved.add(enemies.get(i));
+					}
+					hit = true;
+					System.out.println(enemies.size());
 				}
+				if(hit) break;
 			}
-		}		
+		}
+		
+		SwingUtilities.invokeLater(() -> {
+			for(Enemy enemy : toBeRemoved) {
+				getEnemyHandler().remove(enemy);
+			}
+		});
+		
 	}
 }

@@ -55,6 +55,7 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 
 	@Override
 	public void visit(Asteroid asteroid) {
+
 		int[] newXPoints = new int[asteroid.getNbrOfCorners()];
 		int[] newYPoints = new int[asteroid.getNbrOfCorners()];
 

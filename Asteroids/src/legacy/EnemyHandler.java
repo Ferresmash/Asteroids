@@ -22,6 +22,10 @@ public class EnemyHandler {
 	public void setEnemies(List<Enemy> enemies) {
 		this.enemies = enemies;
 	}
+	
+	public void addEnemy(Enemy enemy) {
+		enemies.add(enemy);
+	}
 
 	public void spawnAsteroid(int screenWidth, int screenHeight) {
 		System.out.println("width: " + screenWidth);

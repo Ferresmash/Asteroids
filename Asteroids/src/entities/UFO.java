@@ -1,6 +1,7 @@
 package entities;
 
 
+import legacy.EntityHandler;
 import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
@@ -24,7 +25,7 @@ public class UFO extends Enemy implements GameObject {
 
 	}
 	@Override
-	public void destroy() {
+	public void destroy(EntityHandler entityHandler) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,5 +1,6 @@
 package entities;
 
+import legacy.EntityHandler;
 import pos.Position;
 import view.RenderVisitor;
 
@@ -48,7 +49,7 @@ public class Bullet implements GameObject, Drawable{
 	}
 
 	@Override
-	public void destroy() {
+	public void destroy(EntityHandler entityHandler) {
 		// TODO Auto-generated method stub
 		
 	}
