@@ -9,6 +9,9 @@ public class Player implements GameObject, Drawable{
 	private double speed = 1d;
 	private Position position = new Position(300,300);
 	public double angle = Math.PI/2;
+	private boolean isAccelerating = false;
+
+
 
 
 	private Force force = new Force();
@@ -20,6 +23,7 @@ public class Player implements GameObject, Drawable{
 	}
 	
 	public void accelerate() {
+		setAccelerating(true);
 		if(speed < 0.1)
 			speed += 0.0002;
 		double[] direction = {speed*Math.cos(angle), speed*Math.sin(angle)};
@@ -104,6 +108,13 @@ public class Player implements GameObject, Drawable{
 	public void destroy() {
 		// TODO Auto-generated method stub
 		
+	}
+	public boolean isAccelerating() {
+		return isAccelerating;
+	}
+
+	public void setAccelerating(boolean isAccelerating) {
+		this.isAccelerating = isAccelerating;
 	}
 
 }

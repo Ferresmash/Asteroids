@@ -10,6 +10,14 @@ public class Bullet implements GameObject, Drawable{
 	private Position position = new Position(0,0);
 	private double angle = 0d;
 	
+	public double getAngle() {
+		return angle;
+	}
+
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+
 	public Bullet(Position position, double angle) {
 		this.position = position;
 		this.angle = angle;

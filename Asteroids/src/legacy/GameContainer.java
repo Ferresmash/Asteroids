@@ -44,6 +44,8 @@ public class GameContainer extends JPanel {
 
 		if (WKeyPressed) {
 			entityHandler.getPlayer().accelerate();
+		}else {
+			entityHandler.getPlayer().setAccelerating(false);
 		}
 		entityHandler.getPlayer().move();
 

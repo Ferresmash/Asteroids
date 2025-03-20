@@ -24,7 +24,7 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 		int startx = (int) ufo.getPosition().getX();
 		int starty = (int) ufo.getPosition().getY();
 
-		g.setColor(Color.green);
+		
 
 		Polygon topBase = new Polygon();
 		topBase.addPoint(startx + 2 * 4, starty + 2 * 2);
@@ -44,10 +44,15 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 		cockpit.addPoint(startx + 8, starty + 5);
 		cockpit.addPoint(startx + -8, starty + 5);
 		cockpit.addPoint(startx + -3, starty + -3);
-
-		g.drawPolygon(topBase);
-		g.drawPolygon(cockpit);
-		g.drawPolygon(lowBase);
+		g.setColor(new Color(0,100,0));
+		g.fillPolygon(cockpit);
+		g.setColor(new Color(0,100,0));
+		g.fillPolygon(lowBase);
+		g.setColor(new Color(0,200,0));
+		g.fillPolygon(topBase);
+		
+		
+		
 
 		g.setColor(Color.white);
 
@@ -64,29 +69,65 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 			newXPoints[i] = asteroid.getxPoints()[i] + (int) asteroid.getPosition().getX();
 			newYPoints[i] = asteroid.getyPoints()[i] + (int) asteroid.getPosition().getY();
 		}
-
 		Polygon shape = new Polygon(newXPoints, newYPoints, asteroid.getNbrOfCorners());
+
+		for (int i = 0; i < asteroid.getNbrOfCorners(); i++) {
+			newXPoints[i] = asteroid.getxPoints()[i] + (int) asteroid.getPosition().getX();
+			newYPoints[i] = asteroid.getyPoints()[i] + (int) asteroid.getPosition().getY()+5;
+		}
+
+		Polygon shade = new Polygon(newXPoints, newYPoints, asteroid.getNbrOfCorners());
+		
+		g.setColor(new Color(92, 65, 0));
+		g.fillPolygon(shade);
+		g.setColor(new Color(137, 96, 0));
 		g.fillPolygon(shape);
+		
 	}
 
 	@Override
 	public void visit(Player player) {
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Color.WHITE);
+		
 
 		int[] xPoints = { player.getX() - 20, player.getX() - 20, player.getX() + 20 };
 		int[] yPoints = { player.getY() - 10, player.getY() + 10, player.getY() };
 		Polygon rocket = new Polygon(xPoints, yPoints, 3);
-
+		int[] xPointsWindow = {  player.getX() - 8,player.getX() - 8, player.getX() + 8 };
+		int[] yPointsWindow = { player.getY() + 4, player.getY() - 4, player.getY() };
+		Polygon window = new Polygon(xPointsWindow, yPointsWindow, 3);
 		g2d.rotate(-player.angle, player.getX(), player.getY());
-		// g2d.draw(rect2);
-		g2d.draw(rocket);
+		g2d.setColor(Color.lightGray);
+		g2d.fill(rocket);
+		g2d.setColor(new Color(0,222,255));
+		g2d.fill(window);
+		if(player.isAccelerating()) {
+			int[] xPointsFlame = { player.getX() - 20, player.getX() - 20, player.getX() -38 };
+			int[] yPointsFlame = { player.getY() - 8, player.getY() + 8, player.getY() };
+
+			Polygon flame = new Polygon(xPointsFlame, yPointsFlame, 3);
+			g2d.setColor(Color.red);
+			g2d.fill(flame);
+			int[] xPointsSmallFlame = { player.getX() - 20, player.getX() - 20, player.getX() -34 };
+			int[] yPointsSmallFlame = { player.getY() - 4, player.getY() + 4, player.getY() };
+
+			Polygon smallFlame = new Polygon(xPointsSmallFlame, yPointsSmallFlame, 3);
+			g2d.setColor(Color.yellow);
+			g2d.fill(smallFlame);
+		}
 	}
 
 	@Override
 	public void visit(Bullet bullet) {
-		g.setColor(Color.white);
-		g.fillOval((int) bullet.getX(), (int) bullet.getY(), 5, 5);
+		Graphics2D g2d = (Graphics2D) g;
+
+		g2d.rotate(bullet.getAngle(), bullet.getX(), bullet.getY());
+
+		g2d.setColor(Color.yellow);
+		g2d.fillRect((int) bullet.getX(), (int) bullet.getY(), 10, 2);
+		
+		g2d.rotate(-bullet.getAngle(), bullet.getX(), bullet.getY());
+
 	}
 
 }
