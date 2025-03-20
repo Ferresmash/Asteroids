@@ -26,7 +26,7 @@ public class Bullet implements Entity{
 	}
 	
 	public int getX() {
-		return position.getX();
+		return (int)position.getX();
 	}
 	
 	public void setPosX(int x) {
@@ -34,7 +34,7 @@ public class Bullet implements Entity{
 	}
 	
 	public int getY() {
-		return position.getY();
+		return (int)position.getY();
 	}
 	
 	public void setPosY(int y) {
