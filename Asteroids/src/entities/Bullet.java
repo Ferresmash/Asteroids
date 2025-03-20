@@ -26,16 +26,16 @@ public class Bullet implements GameObject, Drawable{
 		position.setY(pos.getY());
 	}
 	
-	public double getX() {
-		return position.getX();
+	public int getX() {
+		return (int) position.getX();
 	}
 	
 	public void setPosX(int x) {
 		position.setX(x);
 	}
 	
-	public double getY() {
-		return position.getY();
+	public int getY() {
+		return (int) position.getY();
 	}
 	
 	public void setPosY(int y) {
