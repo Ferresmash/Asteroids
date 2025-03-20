@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Graphics;
+
 import entities.Asteroid;
 import entities.Bullet;
 import entities.Player;
