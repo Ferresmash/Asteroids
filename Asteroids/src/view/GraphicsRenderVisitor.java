@@ -53,6 +53,7 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 		
 		
 		
+		
 
 		g.setColor(Color.white);
 
@@ -137,7 +138,7 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 		g2d.rotate(-bullet.getForce().getAngle(), x, y);
 
 		g2d.setColor(Color.yellow);
-		g2d.fillRect((int) x, (int) y, 10, 2);
+		g2d.fillRect((int) x-5, (int) y-2, 10, 4);
 		
 		g2d.rotate(bullet.getForce().getAngle(), x, y);
 	}
