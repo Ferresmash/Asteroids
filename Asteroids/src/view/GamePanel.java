@@ -1,19 +1,12 @@
 package view;
 
 import javax.swing.*;
-
-import controller.Controller;
 import entities.Drawable;
-import entities.GameObject;
-import legacy.GameContainer;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 
 public class GamePanel extends JPanel{
@@ -23,6 +16,10 @@ public class GamePanel extends JPanel{
 	public int screenWidth = getWidth();
     public int screenHeight = getHeight();
     private List<Drawable> gameObjects = new ArrayList<>();
+    private int score;
+    private int lives;
+    private Image heartImage;
+
 
     public GamePanel() {
         setPreferredSize(new Dimension(1000, 700));
@@ -33,9 +30,19 @@ public class GamePanel extends JPanel{
     public void render(List<Drawable> gameObjects) {
     	this.gameObjects = gameObjects;
     	repaint();
+        score = 0;
+        lives = 5;
+        gethearts();
+
     }
 
-    @Override
+    private void gethearts() {
+            heartImage = new ImageIcon(getClass().getResource("/img/heart.png"))
+                .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	}
+
+
+	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Clears background
         Graphics2D g2d = (Graphics2D) g;
@@ -50,9 +57,16 @@ public class GamePanel extends JPanel{
         		gameObject.accept(renderer);
 		}
         
-        // Draw example moving object
-        g2d.setColor(Color.WHITE);
 
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(new Font("Arial", Font.BOLD, 20));
+        g2d.drawString("Score: " + score, 20, 30);
+        
+        int heartX = screenWidth - (lives * 35);
+        int heartY = 10;
+        for (int i = 0; i < lives; i++) {
+            g2d.drawImage(heartImage, heartX + (i * 35), heartY, this);
+        }
         //gameContainer.paintComponent(g);
 
     }

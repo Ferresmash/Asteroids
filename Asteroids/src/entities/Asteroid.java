@@ -1,18 +1,15 @@
 package entities;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.util.Random;
 import asteroidState.AsteroidState;
 import asteroidState.LargeState;
-import legacy.EntityHandler;
 import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
 
-public class Asteroid extends Enemy implements GameObject, Drawable {
+public class Asteroid extends Enemy implements Drawable {
 
 	private AsteroidState asteroidState;
 	int nbrOfCorners;
@@ -28,12 +25,8 @@ public class Asteroid extends Enemy implements GameObject, Drawable {
 		yPoints = new int[nbrOfCorners];
 		setSize(100);
 		setPosition(new Position(100, 100));
-		setForce(new Force());
+		setForce(new Force(0,0));
 		setPoints();
-	}
-
-	public Asteroid() {
-		this(new LargeState());
 	}
 
 	public Asteroid(Position startPos, Force startForce) {
@@ -99,7 +92,7 @@ public class Asteroid extends Enemy implements GameObject, Drawable {
 	}
 
 	@Override
-	public void destroy(EntityHandler entityHandler) {
+	public void destroy() {
 		//asteroidState.getAsteroid(entityHandler, this);
 
 	}

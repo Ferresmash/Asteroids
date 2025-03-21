@@ -10,6 +10,8 @@ import entities.Bullet;
 import entities.Drawable;
 import entities.Enemy;
 import entities.Player;
+import entities.UFO;
+import pos.Force;
 import pos.Position;
 
 public class EntityHandler {
@@ -65,10 +67,15 @@ public class EntityHandler {
 	}
 
 	public void addBullet() {
-		bullets.add(new Bullet(new Position(player.getX(), player.getY()), -player.getAngle()));
+		bullets.add(new Bullet(new Position(player.getPosition().getX(), player.getPosition().getY()), new Force(Math.cos(-player.getAngle()) * 10,Math.sin(player.getAngle()) * 10)));
 	}
+	
+//	public void addEnemyBullet(UFO ufo) {
+//		bullets.add(new Bullet(new Position(ufo.getPosition().getX(), ufo.getPosition().getY()), -player.getAngle()));
+//	}
 
 	public void checkCollision() {
+
 		List<Enemy> enemies = getEnemyHandler().getEnemies();
 		List<Enemy> toBeRemoved = new ArrayList<Enemy>();
 		int length = enemies.size();
@@ -76,9 +83,9 @@ public class EntityHandler {
 			Shape polygon = enemies.get(i).getHitbox();
 			for (Bullet b : getBullets()) {
 				boolean hit = false;
-				if (polygon.contains(b.getX(), b.getY())) {
+				if (polygon.contains(b.getPosition().getX(), b.getPosition().getY())) {
 					//System.out.println(enemies.size());
-					enemies.get(i).destroy(this);
+					enemies.get(i).destroy();
 					if(!toBeRemoved.contains(enemies.get(i))) {
 						toBeRemoved.add(enemies.get(i));
 					}

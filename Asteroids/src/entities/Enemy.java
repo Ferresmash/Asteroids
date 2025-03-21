@@ -5,11 +5,10 @@ import java.awt.Shape;
 import pos.Force;
 import pos.Position;
 
-public abstract class Enemy implements GameObject, Drawable{
+public abstract class Enemy extends GameObject{
 
 	private double size;
-	private Position position;
-	private Force force;
+
 	private int screenWidth;
 	private int screenHeight;
 
@@ -19,22 +18,6 @@ public abstract class Enemy implements GameObject, Drawable{
 
 	public void setSize(double size) {
 		this.size = size;
-	}
-
-	public Position getPosition() {
-		return position;
-	}
-
-	public void setPosition(Position position) {
-		this.position = position;
-	}
-
-	public Force getForce() {
-		return force;
-	}
-
-	public void setForce(Force force) {
-		this.force = force;
 	}
 
 	public void move() {

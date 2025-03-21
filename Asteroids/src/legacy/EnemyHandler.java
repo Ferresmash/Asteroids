@@ -58,12 +58,10 @@ public class EnemyHandler {
 
 
 	private Force getRandomSpawnForce() {
-		Force force = new Force();
-		double speed = 5;
-		double angle = rand.nextDouble(2 * Math.PI);
-		double[] vector = { Math.cos(angle) * speed, Math.sin(angle) * speed };
-		force.setDirection(vector);
-		return force;
+	    double speed = 5;
+	    double angle = rand.nextDouble(2) * Math.PI;
+	    Force force = new Force(Math.cos(angle) * speed,Math.sin(angle) * speed);
+	    return force;
 	}
 
 }
