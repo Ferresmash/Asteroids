@@ -1,7 +1,5 @@
 package entities;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.util.Random;
@@ -11,7 +9,7 @@ import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
 
-public class Asteroid extends Enemy implements GameObject, Drawable {
+public class Asteroid extends Enemy implements Drawable {
 
 	private AsteroidState asteroidState;
 	int nbrOfCorners;
@@ -25,13 +23,6 @@ public class Asteroid extends Enemy implements GameObject, Drawable {
 		this.nbrOfCorners = (int) (6 + (Math.random() * 4));
 		xPoints = new int[nbrOfCorners];
 		yPoints = new int[nbrOfCorners];
-	}
-
-	public Asteroid() {
-		this(new LargeState());
-		setSize(100);
-		setPosition(new Position(100, 100));
-		setForce(new Force());
 	}
 
 	public Asteroid(Position startPos, Force startForce) {

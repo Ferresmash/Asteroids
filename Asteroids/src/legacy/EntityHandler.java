@@ -8,6 +8,8 @@ import entities.Bullet;
 import entities.Drawable;
 import entities.Enemy;
 import entities.Player;
+import entities.UFO;
+import pos.Force;
 import pos.Position;
 
 public class EntityHandler {
@@ -63,14 +65,18 @@ public class EntityHandler {
 	}
 
 	public void addBullet() {
-		bullets.add(new Bullet(new Position(player.getX(), player.getY()), -player.getAngle()));
+		bullets.add(new Bullet(new Position(player.getPosition().getX(), player.getPosition().getY()), new Force(Math.cos(-player.getAngle()) * 10,Math.sin(player.getAngle()) * 10)));
 	}
+	
+//	public void addEnemyBullet(UFO ufo) {
+//		bullets.add(new Bullet(new Position(ufo.getPosition().getX(), ufo.getPosition().getY()), -player.getAngle()));
+//	}
 
 	public void checkCollision() {
 		for (Enemy enemy : getEnemyHandler().getEnemies()) {
 			Shape polygon = enemy.getHitbox();
-			for (Bullet b : getBullets()) {
-				if (polygon.contains(b.getX(), b.getY())) {
+			for (Bullet bullet : getBullets()) {
+				if (polygon.contains(bullet.getPosition().getX(), bullet.getPosition().getY())) {
 					//enemy.destroy();
 					//getEnemyHandler().remove(enemy);
 				}

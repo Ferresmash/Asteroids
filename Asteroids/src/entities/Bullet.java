@@ -1,54 +1,20 @@
 package entities;
 
+import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
 
 
-public class Bullet implements GameObject, Drawable{
-	
-	private double speed = 15.0d;
-	private Position position = new Position(0,0);
-	private double angle = 0d;
-	
-	public double getAngle() {
-		return angle;
-	}
+public class Bullet extends GameObject{
 
-	public void setAngle(double angle) {
-		this.angle = angle;
-	}
-
-	public Bullet(Position position, double angle) {
-		this.position = position;
-		this.angle = angle;
+	public Bullet(Position position, Force force) {
+		setPosition(position);
+		setForce(force);
 	}
 	
 	public void move() {
-		setPosX((int) (position.getX() + speed*Math.cos(angle)));
-		setPosY((int) (position.getY() + speed*Math.sin(angle)));
+		super.setPosition(getPosition().getX() + getForce().getX(), getPosition().getY() - getForce().getY());
 	}
-	
-	public void setPos(Position pos) {
-		position.setX(pos.getX());
-		position.setY(pos.getY());
-	}
-	
-	public int getX() {
-		return (int)position.getX();
-	}
-	
-	public void setPosX(int x) {
-		position.setX(x);
-	}
-	
-	public int getY() {
-		return (int)position.getY();
-	}
-	
-	public void setPosY(int y) {
-		position.setY(y);
-	}
-
 
 	@Override
 	public void accept(RenderVisitor visitor) {

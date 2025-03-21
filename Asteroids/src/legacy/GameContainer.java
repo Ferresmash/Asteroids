@@ -1,11 +1,8 @@
 package legacy;
 
-import java.awt.Shape;
 import java.util.List;
-
 import entities.Bullet;
 import entities.Enemy;
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import entities.Drawable;
@@ -51,10 +48,10 @@ public class GameContainer extends JPanel {
 
 		if (AKeyPressed) {
 			System.out.println(AKeyPressed);
-			entityHandler.getPlayer().angle += 0.15;
+			entityHandler.getPlayer().rotate(0.15);
 		}
 		if (DKeyPressed) {
-			entityHandler.getPlayer().angle -= 0.15;
+			entityHandler.getPlayer().rotate(-0.15);
 		}
 		if (SpaceKeyPressed) {
 			System.out.print("spawned bullet");

@@ -5,12 +5,12 @@ import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
 
-public class UFO extends Enemy implements GameObject {
+public class UFO extends Enemy {
+	
+//	Timer shootTimer = new Timer();
+//	Timer changeDirection = new Timer();
 	
 	
-	public UFO() {
-		this(new Position(600, 300), new Force());
-	}
 	public UFO(Position spawnPos, Force spawnForce) {
 		setSize(100);
 		setForce(spawnForce);
