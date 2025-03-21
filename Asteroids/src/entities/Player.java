@@ -7,7 +7,7 @@ import view.RenderVisitor;
 
 public class Player implements GameObject, Drawable{
 	
-	private double speed = 1d;
+	private double speed = 0.1d;
 	private Position position = new Position(300,300);
 	public double angle = Math.PI/2;
 
@@ -21,8 +21,6 @@ public class Player implements GameObject, Drawable{
 	}
 	
 	public void accelerate() {
-		if(speed < 0.1)
-			speed += 0.0002;
 		double[] direction = {speed*Math.cos(angle), speed*Math.sin(angle)};
 		force.add(direction);
 	}
@@ -36,8 +34,8 @@ public class Player implements GameObject, Drawable{
 		setY((int) (position.getY() - force.getY()));
 		
 		
-		force.setX(force.getX()*0.95);
-		force.setY(force.getY()*0.95);
+		//force.setX(force.getX()*0.95);
+		//force.setY(force.getY()*0.95);
 		keepInside();
 	}
 	

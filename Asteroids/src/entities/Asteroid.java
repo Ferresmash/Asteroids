@@ -100,7 +100,7 @@ public class Asteroid extends Enemy implements GameObject, Drawable {
 
 	@Override
 	public void destroy(EntityHandler entityHandler) {
-		asteroidState.getAsteroid(entityHandler, this);
+		//asteroidState.getAsteroid(entityHandler, this);
 
 	}
 

@@ -14,7 +14,6 @@ public class MainFrame extends JFrame {
 		GameContainer gameContainer = new GameContainer(1000, 700);
 		
 		setTitle("Asteroids");
-		
 		GamePanel gamePanel = new GamePanel();
 		MenuPanel menuPanel = new MenuPanel();
 		View view = new View(gamePanel, menuPanel);
