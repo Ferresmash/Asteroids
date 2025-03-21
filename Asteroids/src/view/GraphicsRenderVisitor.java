@@ -120,6 +120,8 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 			g2d.setColor(Color.yellow);
 			g2d.fill(smallFlame);
 		}
+		g2d.rotate(player.angle, player.getX(), player.getY());
+
 	}
 
 	@Override

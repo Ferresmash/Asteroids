@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
@@ -21,6 +23,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public int screenHeight = getHeight();
     private Timer timer;
     private Controller controller;
+    private int score;
+    private int lives;
+    private Image heartImage;
+
 
     public GamePanel(Controller controller) {
     	this.controller = controller;
@@ -28,11 +34,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         setBackground(Color.BLACK);
         this.addKeyListener(this);
         this.setFocusable(true);
+        score = 0;
+        lives = 5;
         timer = new Timer(16, this); // ~60 FPS (1000ms / 60 ≈ 16ms)
         timer.start();
+        gethearts();
     }
 
-    @Override
+    private void gethearts() {
+            heartImage = new ImageIcon(getClass().getResource("/img/heart.png"))
+                .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+	}
+
+
+	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Clears background
         Graphics2D g2d = (Graphics2D) g;
@@ -47,9 +62,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			entity.accept(renderer);
 		}
         
-        // Draw example moving object
-        g2d.setColor(Color.WHITE);
 
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(new Font("Arial", Font.BOLD, 20));
+        g2d.drawString("Score: " + score, 20, 30);
+        
+        int heartX = screenWidth - (lives * 35);
+        int heartY = 10;
+        for (int i = 0; i < lives; i++) {
+            g2d.drawImage(heartImage, heartX + (i * 35), heartY, this);
+        }
         //gameContainer.paintComponent(g);
 
     }
