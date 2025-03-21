@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import controller.Controller;
 import entities.Drawable;
+import entities.GameObject;
 import legacy.GameContainer;
 
 import java.awt.*;
@@ -11,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GamePanel extends JPanel{
@@ -19,11 +22,17 @@ public class GamePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	public int screenWidth = getWidth();
     public int screenHeight = getHeight();
+    private List<Drawable> gameObjects = new ArrayList<>();
 
     public GamePanel() {
         setPreferredSize(new Dimension(1000, 700));
         setBackground(Color.BLACK);
         
+    }
+    
+    public void render(List<Drawable> gameObjects) {
+    	this.gameObjects = gameObjects;
+    	repaint();
     }
 
     @Override
@@ -34,11 +43,11 @@ public class GamePanel extends JPanel{
         
         screenWidth = getWidth();
         screenHeight = getHeight();
-        controller.setScreenSize(screenWidth, screenHeight);
         GraphicsRenderVisitor renderer = new GraphicsRenderVisitor(g);
 
-        for (Drawable entity : controller.getEntities()) {
-			entity.accept(renderer);
+        for (Drawable gameObject : gameObjects) {
+        	if(gameObject != null)
+        		gameObject.accept(renderer);
 		}
         
         // Draw example moving object

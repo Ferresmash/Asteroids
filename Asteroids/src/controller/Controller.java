@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
 
-import javax.swing.JFrame;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,7 +13,7 @@ import entities.Drawable;
 import legacy.GameContainer;
 import view.View;
 
-public class Controller implements ActionListener, KeyListener  {
+public class Controller implements ActionListener, KeyListener {
 
 	private GameContainer gameContainer;
 	private View view;
@@ -24,10 +23,12 @@ public class Controller implements ActionListener, KeyListener  {
     boolean SpaceKeyPressed = false;
     private Timer timer = new Timer();
     private boolean isRunning = false;
+    private boolean readyToShoot = true;
 	
 	public Controller (View view, GameContainer gameContainer) {
 		this.gameContainer = gameContainer;
 		this.view = view;
+		start();
 		
 	}
 	
@@ -42,6 +43,12 @@ public class Controller implements ActionListener, KeyListener  {
 		gameContainer.setScreenSize(screenWidth, screenHeight);
 	}
 	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public void keyReleased(KeyEvent e) {
 	    int keyCode = e.getKeyCode();
 	    if (keyCode == KeyEvent.VK_W) {
@@ -54,11 +61,11 @@ public class Controller implements ActionListener, KeyListener  {
 	        DKeyPressed = false;
 	    }
 	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
-	        SpaceKeyPressed = false;
+	    	readyToShoot = true;
 	    }		
 	}
 
-	public void keyPress(KeyEvent e) {
+	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
 	    if (keyCode == KeyEvent.VK_W) {
 	        WKeyPressed = true;
@@ -70,8 +77,11 @@ public class Controller implements ActionListener, KeyListener  {
 	        DKeyPressed = true;
 	    }
 	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
-	    	SpaceKeyPressed = true;
-			System.out.println("pressed");
+	    	if(readyToShoot) {
+	    		gameContainer.spawnBullet();
+	    		readyToShoot = false;
+	    	}
+	    		
 	    }		
 	}
 	
@@ -111,19 +121,11 @@ public class Controller implements ActionListener, KeyListener  {
     }
 	
 	public void gameloop() {
-		System.out.println("looped");
+		setScreenSize(1000,700);
+		updateContainer();
+		view.render(getEntities());
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 }

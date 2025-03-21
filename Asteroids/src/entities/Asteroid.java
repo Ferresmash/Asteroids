@@ -26,13 +26,14 @@ public class Asteroid extends Enemy implements GameObject, Drawable {
 		this.nbrOfCorners = (int) (6 + (Math.random() * 4));
 		xPoints = new int[nbrOfCorners];
 		yPoints = new int[nbrOfCorners];
+		setSize(100);
+		setPosition(new Position(100, 100));
+		setForce(new Force());
+		setPoints();
 	}
 
 	public Asteroid() {
 		this(new LargeState());
-		setSize(100);
-		setPosition(new Position(100, 100));
-		setForce(new Force());
 	}
 
 	public Asteroid(Position startPos, Force startForce) {
@@ -62,7 +63,13 @@ public class Asteroid extends Enemy implements GameObject, Drawable {
 
 	@Override
 	public Shape getHitbox() {
-		return new Polygon(xPoints, yPoints, nbrOfCorners);
+		int[] newXPoints = new int[nbrOfCorners];
+		int[] newYPoints = new int[nbrOfCorners];
+		for (int i = 0; i < nbrOfCorners; i++) {
+			newXPoints[i] = xPoints[i]+(int)getPosition().getX();
+			newYPoints[i] = yPoints[i]+(int)getPosition().getY();
+		}
+		return new Polygon(newXPoints, newYPoints, nbrOfCorners);
 	}
 	
 
@@ -93,7 +100,8 @@ public class Asteroid extends Enemy implements GameObject, Drawable {
 
 	@Override
 	public void destroy(EntityHandler entityHandler) {
-		entityHandler.getEnemyHandler().addEnemy(asteroidState.getAsteroid());
+		asteroidState.getAsteroid(entityHandler, this);
+
 	}
 
 }

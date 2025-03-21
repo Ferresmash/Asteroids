@@ -1,13 +1,16 @@
 package asteroidState;
 
 import entities.Asteroid;
+import legacy.EntityHandler;
 
 public class MediumState implements AsteroidState {
 
 	@Override
-	public Asteroid getAsteroid() {
-		Asteroid a = new Asteroid(new SmallState());	
-		a.setSize(Math.random() * 50);
+	public Asteroid getAsteroid(EntityHandler entityHandler, Asteroid parent) {
+		Asteroid a = new Asteroid(new MediumState());
+		entityHandler.getEnemyHandler().addEnemy(a);
+		entityHandler.getEnemyHandler().addEnemy(a);
+		System.out.println("create new smaller asteroid");
 		return a;
 	}
 }

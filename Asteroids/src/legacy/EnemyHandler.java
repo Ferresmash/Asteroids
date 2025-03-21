@@ -28,8 +28,8 @@ public class EnemyHandler {
 	}
 
 	public void spawnAsteroid(int screenWidth, int screenHeight) {
-		System.out.println("width: " + screenWidth);
-		System.out.println("heigth: " + screenHeight);
+		//System.out.println("width: " + screenWidth);
+		//System.out.println("heigth: " + screenHeight);
 		enemies.add(new Asteroid(getRandomSpawnPosition(screenWidth, screenHeight), getRandomSpawnForce()));
 	}
 

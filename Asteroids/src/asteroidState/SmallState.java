@@ -1,6 +1,7 @@
 package asteroidState;
 
 import entities.Asteroid;
+import legacy.EntityHandler;
 
 public class SmallState implements AsteroidState {
 	
@@ -9,7 +10,7 @@ public class SmallState implements AsteroidState {
 	}
 
 	@Override
-	public Asteroid getAsteroid() {
+	public Asteroid getAsteroid(EntityHandler entityHandler, Asteroid parent) {
 		return null;
 	}
 

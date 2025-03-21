@@ -31,18 +31,21 @@ public class GameContainer extends JPanel {
 
 	public void updateContainer(boolean WKeyPressed, boolean AKeyPressed, boolean DKeyPressed,
 			boolean SpaceKeyPressed) {
+		
 		if (entityHandler.getEnemyHandler().getEnemies().size() < 5) {
 			spawnAsteroid();
 		}
 
 		for (Enemy enemy : entityHandler.getEnemyHandler().getEnemies()) {
-			enemy.move();
+			if(enemy != null)
+				enemy.move();
 		}
 		for (Bullet bullet : entityHandler.getBullets()) {
 			bullet.move();
 		}
 
 		if (WKeyPressed) {
+			System.out.println("accelerating");
 			entityHandler.getPlayer().accelerate();
 		}
 		entityHandler.getPlayer().move();
@@ -62,12 +65,12 @@ public class GameContainer extends JPanel {
 	}
 
 	private void spawnAsteroid() {
-		System.out.println("Spawned Asteroid");
+		//System.out.println("Spawned Asteroid");
 		entityHandler.getEnemyHandler().spawnAsteroid(screenWidth, screenHeight);
 	}
 
 	public void spawnUfo() {
-		System.out.println("Spawned UFO");
+		//System.out.println("Spawned UFO");
 		entityHandler.getEnemyHandler().spawnUFO(screenWidth, screenHeight);
 	}
 	
@@ -82,7 +85,8 @@ public class GameContainer extends JPanel {
 
 	public void setScreenSize(int width, int heigth) {
 		for (Enemy enemy : entityHandler.getEnemyHandler().getEnemies()) {
-			enemy.setScreenSize(width, heigth);
+			if(enemy != null)
+				enemy.setScreenSize(width, heigth);
 		}
 		entityHandler.getPlayer().setScreenSize(width, heigth);
 		screenHeight = heigth;
