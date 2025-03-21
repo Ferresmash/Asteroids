@@ -12,7 +12,7 @@ public class Player extends GameObject {
 	private int screenWidth = 1000;
 	private int screenHeight = 700;
 	private double angle = 0;
-	private double speed = 1;
+	private double speed = 0.3;
 
 	public Player() {
 		setPosition(new Position(300, 300));
@@ -31,7 +31,7 @@ public class Player extends GameObject {
 	public void move() {
 
 		setPosition(getPosition().getX() + getForce().getX(), getPosition().getY() - getForce().getY());
-		setForce(getForce().getX() * 0.95, getForce().getY() * 0.95);
+		setForce(getForce().getX() * 0.96, getForce().getY() * 0.96);
 
 		keepInside();
 	}
