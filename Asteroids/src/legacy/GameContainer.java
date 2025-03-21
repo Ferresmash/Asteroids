@@ -51,10 +51,10 @@ public class GameContainer extends JPanel {
 
 		if (AKeyPressed) {
 			System.out.println(AKeyPressed);
-			entityHandler.getPlayer().rotate(0.15);
+			entityHandler.getPlayer().rotate(0.1);
 		}
 		if (DKeyPressed) {
-			entityHandler.getPlayer().rotate(-0.15);
+			entityHandler.getPlayer().rotate(-0.1);
 		}
 		if (SpaceKeyPressed) {
 			System.out.print("spawned bullet");

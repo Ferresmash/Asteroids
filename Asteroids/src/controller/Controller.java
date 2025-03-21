@@ -91,21 +91,34 @@ public class Controller implements ActionListener, KeyListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/* Game Loop*/
-		
-		// Update model
-		
-		// Rerender view
+
 	}
 	
 	public void start() {
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                gameloop();
-            }
-        }, 0, 16);  // Runs every 16 ms
-    }
+	    isRunning = true;
+	    Thread gameThread = new Thread(() -> {
+	        final long FRAME_TIME = 16_000_000; // 16ms in nanoseconds
+	        long lastUpdateTime = System.nanoTime();
+	        
+	        while (isRunning) {
+	            long currentTime = System.nanoTime();
+	            long elapsed = currentTime - lastUpdateTime;
+	            
+	            if (elapsed >= FRAME_TIME) {
+	                gameloop();
+	                lastUpdateTime = currentTime;
+	                
+	                // Sleep to reduce CPU usage
+	                try {
+	                    Thread.sleep(1); // Small sleep to prevent CPU hogging
+	                } catch (InterruptedException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        }
+	    });
+	    gameThread.start();
+	}
 	
 	public void pause() {
         if (timer != null) {
