@@ -1,21 +1,34 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
+
+import javax.swing.JFrame;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import entities.Drawable;
 import legacy.GameContainer;
+import view.View;
 
-public class Controller {
+public class Controller implements ActionListener, KeyListener  {
 
 	private GameContainer gameContainer;
+	private View view;
     boolean WKeyPressed = false;
     boolean AKeyPressed = false;
     boolean DKeyPressed = false;
     boolean SpaceKeyPressed = false;
+    private Timer timer = new Timer();
+    private boolean isRunning = false;
 	
-	public Controller (GameContainer gameContainer) {
+	public Controller (View view, GameContainer gameContainer) {
 		this.gameContainer = gameContainer;
+		this.view = view;
+		
 	}
 	
 	public void updateContainer() {
@@ -64,6 +77,53 @@ public class Controller {
 	
 	public List<Drawable> getEntities(){
 		return gameContainer.getEntities();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		/* Game Loop*/
+		
+		// Update model
+		
+		// Rerender view
+	}
+	
+	public void start() {
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                gameloop();
+            }
+        }, 0, 16);  // Runs every 16 ms
+    }
+	
+	public void pause() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        isRunning = false;
+    }
+
+    public void stop() {
+        pause();
+        //model.reset();  // Reset game state if needed
+    }
+	
+	public void gameloop() {
+		System.out.println("looped");
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

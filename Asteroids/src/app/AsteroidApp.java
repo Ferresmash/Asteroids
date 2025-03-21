@@ -12,7 +12,7 @@ public class AsteroidApp extends JFrame {
 
 	public static void main(String[] args) {
 		GameContainer gameContainer = new GameContainer(1000, 700);
-		Controller controller = new Controller(gameContainer);
+		
 		JFrame frame = new JFrame("Asteroids");
 		GamePanel gamePanel = new GamePanel(controller);
 		frame.add(gamePanel);
@@ -20,5 +20,7 @@ public class AsteroidApp extends JFrame {
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		
+		Controller controller = new Controller(frame, gameContainer);
 	}
 }

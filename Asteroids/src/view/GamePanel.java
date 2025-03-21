@@ -13,23 +13,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener {
+public class GamePanel extends JPanel{
 	
 
 	private static final long serialVersionUID = 1L;
 	public int screenWidth = getWidth();
     public int screenHeight = getHeight();
-    private Timer timer;
-    private Controller controller;
 
-    public GamePanel(Controller controller) {
-    	this.controller = controller;
+    public GamePanel() {
         setPreferredSize(new Dimension(1000, 700));
         setBackground(Color.BLACK);
-        this.addKeyListener(this);
-        this.setFocusable(true);
-        timer = new Timer(16, this); // ~60 FPS (1000ms / 60 ≈ 16ms)
-        timer.start();
+        
     }
 
     @Override
@@ -53,29 +47,4 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         //gameContainer.paintComponent(g);
 
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    	controller.updateContainer();
-        repaint();
-    }
-
- 
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {	
-		controller.keyPress(e);
-	    
-	}
-	
-	@Override
-	public void keyReleased(KeyEvent e) {
-		controller.keyReleased(e);
-	}
 }
