@@ -38,7 +38,7 @@ public abstract class GameObject implements Drawable {
 	}
 	
 	public Shape getHitbox() {
-		return new Rectangle((int)getPosition().getX(),(int)getPosition().getY(),1,1);
+		return new Rectangle((int)getPosition().getX(),(int)getPosition().getY(),2,2);
 	}
 	
 	public void getHit(List<GameObject> gameObjects) { //in asteroid add itself to the list

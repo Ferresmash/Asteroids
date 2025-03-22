@@ -6,10 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
-import java.util.Timer;
 import entities.Drawable;
-import entities.GameObject;
 import legacy.GameContainer;
+import legacy.GameManager;
 import view.View;
 
 public class Controller implements ActionListener, KeyListener {
@@ -20,7 +19,6 @@ public class Controller implements ActionListener, KeyListener {
     boolean AKeyPressed = false;
     boolean DKeyPressed = false;
     boolean SpaceKeyPressed = false;
-    private Timer timer = new Timer();
     private boolean isRunning = false;
     private boolean readyToShoot = true;
 	
@@ -46,13 +44,13 @@ public class Controller implements ActionListener, KeyListener {
 	
 	public void keyReleased(KeyEvent e) {
 	    int keyCode = e.getKeyCode();
-	    if (keyCode == KeyEvent.VK_W) {
+	    if (keyCode == KeyEvent.VK_UP) {
 	        WKeyPressed = false;
 	    }
-	    if (keyCode == KeyEvent.VK_A) {
+	    if (keyCode == KeyEvent.VK_LEFT) {
 	        AKeyPressed = false;
 	    }
-	    if (keyCode == KeyEvent.VK_D) {
+	    if (keyCode == KeyEvent.VK_RIGHT) {
 	        DKeyPressed = false;
 	    }
 	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
@@ -62,13 +60,13 @@ public class Controller implements ActionListener, KeyListener {
 
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-	    if (keyCode == KeyEvent.VK_W) {
+	    if (keyCode == KeyEvent.VK_UP) {
 	        WKeyPressed = true;
 	    }
-	    if (keyCode == KeyEvent.VK_A) {
+	    if (keyCode == KeyEvent.VK_LEFT) {
 	        AKeyPressed = true;
 	    }
-	    if (keyCode == KeyEvent.VK_D) {
+	    if (keyCode == KeyEvent.VK_RIGHT) {
 	        DKeyPressed = true;
 	    }
 	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
@@ -124,11 +122,11 @@ public class Controller implements ActionListener, KeyListener {
 	}
 	
 	public void pause() {
-
         isRunning = false;
     }
 
 	public void reset() {
+		GameManager.getInstance().reset();
 		gameContainer.reset();
 		view.switchPanel();
 	}
@@ -142,6 +140,9 @@ public class Controller implements ActionListener, KeyListener {
 		updateContainer();
 		//gameContainer.shootFromUfos();
 		view.render(getEntities());
+		if(GameManager.getInstance().isGameOver()) {
+			reset();			
+		}
 	}
 
 	

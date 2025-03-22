@@ -14,11 +14,11 @@ public class MediumState implements AsteroidState {
 		Position pos = new Position(parent.getPosition().getX(), parent.getPosition().getY());
 		Force force = new Force(parent.getForce().getX(), parent.getForce().getY());
 		Asteroid a = new Asteroid(new Position(parent.getPosition().getX(), parent.getPosition().getY()), new Force(parent.getForce().getX(), parent.getForce().getY()), parent.getSize()/1.5);
-		a.getForce().setAngle(Math.random()*Math.PI*2);
+		a.getForce().setAngle(parent.getForce().getAngle()+0.5);
 		a.setState(new SmallState());
 		gameObjects.add(a);
 		a = new Asteroid(new Position(parent.getPosition().getX(), parent.getPosition().getY()), new Force(parent.getForce().getX(), parent.getForce().getY()), parent.getSize()/1.5);
-		a.getForce().setAngle(Math.random()*Math.PI*2);
+		a.getForce().setAngle(parent.getForce().getAngle()-0.5);
 		a.setState(new SmallState());
 		gameObjects.add(a);
 		System.out.println("create new smaller asteroid");
