@@ -93,7 +93,7 @@ public class EnemyHandler {
 	}
 
 	private Force getRandomSpawnForce() {
-		double speed = 5;
+		double speed = GameManager.getInstance().getLevel();
 		double angle = rand.nextDouble(2) * Math.PI;
 		Force force = new Force(Math.cos(angle) * speed, Math.sin(angle) * speed);
 		return force;

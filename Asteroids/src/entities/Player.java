@@ -1,5 +1,6 @@
 package entities;
 
+import legacy.GameManager;
 import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
@@ -9,7 +10,6 @@ public class Player extends GameObject {
 
 
 	private boolean isAccelerating = false;
-	private int lifes = 5;
 	private double speed = 0.3;
 
 	public Player() {
@@ -35,6 +35,9 @@ public class Player extends GameObject {
 
 
 	public void getHit() {
+		GameManager.getInstance().decreaseLives();
+		System.out.println(GameManager.getInstance().getLives());
+		setPosition(300, 300);
 		//lose life
 		//get destroyed
 		//respawn if life left
@@ -47,15 +50,5 @@ public class Player extends GameObject {
 	public void setAccelerating(boolean isAccelerating) {
 		this.isAccelerating = isAccelerating;
 	}
-
-	public int getLifes() {
-		return lifes;
-	}
-
-	public void setLifes(int lifes) {
-		this.lifes = lifes;
-	}
-
-
 
 }
