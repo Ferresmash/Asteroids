@@ -44,13 +44,13 @@ public class Controller implements ActionListener, KeyListener {
 	
 	public void keyReleased(KeyEvent e) {
 	    int keyCode = e.getKeyCode();
-	    if (keyCode == KeyEvent.VK_UP) {
+	    if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
 	        WKeyPressed = false;
 	    }
-	    if (keyCode == KeyEvent.VK_LEFT) {
+	    if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
 	        AKeyPressed = false;
 	    }
-	    if (keyCode == KeyEvent.VK_RIGHT) {
+	    if (keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
 	        DKeyPressed = false;
 	    }
 	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
@@ -60,13 +60,13 @@ public class Controller implements ActionListener, KeyListener {
 
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-	    if (keyCode == KeyEvent.VK_UP) {
+	    if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
 	        WKeyPressed = true;
 	    }
-	    if (keyCode == KeyEvent.VK_LEFT) {
+	    if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
 	        AKeyPressed = true;
 	    }
-	    if (keyCode == KeyEvent.VK_RIGHT) {
+	    if (keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
 	        DKeyPressed = true;
 	    }
 	    if (keyCode == KeyEvent.VK_SPACE) { // Use KeyEvent.VK_SPACE for spacebar
