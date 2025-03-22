@@ -37,6 +37,14 @@ public class Asteroid extends Enemy implements Drawable {
 		setPosition(startPos);
 		setPoints();
 	}
+	
+	public Asteroid(Position startPos, Force startForce, double size) {
+		this(new LargeState());
+		setSize(size);
+		setForce(startForce);
+		setPosition(startPos);
+		setPoints();
+	}
 
 	public void setPoints() {
 		Random rand = new Random();
@@ -94,7 +102,12 @@ public class Asteroid extends Enemy implements Drawable {
 
 	@Override
 	public void getHit(List<GameObject> allAsteroids) {
-		//use state to 
+		asteroidState.getAsteroid(allAsteroids, this);
+		allAsteroids.remove(this);
+	}
+	
+	public void setState(AsteroidState asteroidState) {
+		this.asteroidState = asteroidState;
 	}
 
 }

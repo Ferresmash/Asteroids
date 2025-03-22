@@ -78,16 +78,17 @@ public class EnemyHandler {
 
 	private Position getRandomSpawnPosition(int screenWidth, int screenHeight) {
 		int spawnSide = (int) (rand.nextInt(4));
-		Position spawnPos = new Position(rand.nextInt(screenWidth), rand.nextInt(screenHeight));
+		Position spawnPos = new Position(rand.nextInt(screenWidth+200)-100, rand.nextInt(screenHeight+200)-100);
 		if (spawnSide == 0) {
-			spawnPos.setX(0);
+			spawnPos.setX(-100);
 		} else if (spawnSide == 1) {
-			spawnPos.setY(0);
+			spawnPos.setY(-100);
 		} else if (spawnSide == 2) {
-			spawnPos.setX(screenWidth);
+			spawnPos.setX(screenWidth+100);
 		} else if (spawnSide == 3) {
-			spawnPos.setY(screenHeight);
+			spawnPos.setY(screenHeight+100);
 		}
+		System.out.println(spawnPos.getX()+", "+spawnPos.getY());
 		return spawnPos;
 	}
 

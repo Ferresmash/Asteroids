@@ -1,10 +1,12 @@
 package asteroidState;
 
+import java.util.List;
+
 import entities.Asteroid;
-import legacy.EntityHandler;
+import entities.GameObject;
 
 public interface AsteroidState {
 
-	public Asteroid getAsteroid(EntityHandler entityHandler, Asteroid parent);
+	public void getAsteroid(List<GameObject> gameObjects, Asteroid parent);
 	
 }
