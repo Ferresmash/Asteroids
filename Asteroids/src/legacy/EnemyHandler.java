@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 import entities.Asteroid;
-import entities.Enemy;
 import entities.GameObject;
 import entities.UFO;
 import pos.Force;

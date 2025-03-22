@@ -24,11 +24,6 @@ public class UFO extends Enemy {
 		return new Ellipse2D.Double((int)getPosition().getX()-20,(int)getPosition().getY()-10,40,40);
 	}
 	
-	@Override
-	public void getHit(List<GameObject> gameObjects) { //in asteroid add itself to the list
-		GameManager.getInstance().increaseScore(1000);
-		gameObjects.remove(this);
-	};
 	
 	@Override
 	public void accept(RenderVisitor visitor) {
