@@ -1,39 +1,35 @@
 package view;
 
 import java.awt.Dimension;
-
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
-
 import controller.Controller;
 import entities.Drawable;
-import entities.GameObject;
+import legacy.HighScoreManager;
 
 public class View extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static final int WIDTH = 1000;
-	private static final int HEIGHT = 700;
+
 
 	MenuPanel menuPanel;
 	GamePanel gamePanel;
 
-	public View() {
+	public View(int width, int height) {
 		// Use JLayeredPane as the content pane
 		JLayeredPane layeredPane = new JLayeredPane();
 		setContentPane(layeredPane);
-		layeredPane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-
+		layeredPane.setPreferredSize(new Dimension(width, height));
 
 		// Initialize and add game panel
 		gamePanel = new GamePanel();
-		gamePanel.setBounds(0, 0, WIDTH, HEIGHT);
+		gamePanel.setBounds(0, 0, width, height);
 		layeredPane.add(gamePanel, JLayeredPane.DEFAULT_LAYER);
 
 		// Initialize and add menu panel
 		menuPanel = new MenuPanel();
-		menuPanel.setBounds(0, 0, WIDTH, HEIGHT);
+		menuPanel.setBounds(0, 0, width, height);
 		layeredPane.add(menuPanel, JLayeredPane.PALETTE_LAYER);
 
 		// Configure JFrame
@@ -55,5 +51,9 @@ public class View extends JFrame {
 
 	public void switchPanel() {
 		menuPanel.setVisible(!menuPanel.isVisible());
+	}
+	
+	public void updateHighScore() {
+		menuPanel.updateHighScore();
 	}
 }

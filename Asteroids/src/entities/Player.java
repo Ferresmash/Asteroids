@@ -14,6 +14,8 @@ public class Player extends GameObject {
 
 	private boolean isAccelerating = false;
 	private double speed = 0.1;
+	private final Position START_POINT = new Position(500,500);
+	private final double FRICTION = 0.99;
 
 	public Player() {
 		setPosition(new Position(300, 300));
@@ -28,7 +30,7 @@ public class Player extends GameObject {
 
 	public void move() {
 		setPosition(getPosition().getX() + getForce().getX(), getPosition().getY() - getForce().getY());
-		setForce(getForce().getX() * 0.99, getForce().getY() * 0.99);
+		setForce(getForce().getX() * FRICTION, getForce().getY() * FRICTION);
 	}
 
 	@Override
@@ -45,11 +47,7 @@ public class Player extends GameObject {
 	public void getHit() {
 		GameManager.getInstance().decreaseLives();
 		System.out.println(GameManager.getInstance().getLives());
-		setPosition(300, 300);
-		
-		//lose life
-		//get destroyed
-		//respawn if life left
+		setPosition(START_POINT);
 	}
 
 	public boolean isAccelerating() {

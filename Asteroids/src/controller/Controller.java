@@ -1,8 +1,5 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
@@ -11,7 +8,7 @@ import legacy.GameContainer;
 import legacy.GameManager;
 import view.View;
 
-public class Controller implements ActionListener, KeyListener {
+public class Controller implements KeyListener {
 
 	private GameContainer gameContainer;
 	private View view;
@@ -39,7 +36,7 @@ public class Controller implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		//not needed
 	}
 	
 	public void keyReleased(KeyEvent e) {
@@ -90,10 +87,7 @@ public class Controller implements ActionListener, KeyListener {
 		return gameContainer.getEntities();
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
 
-	}
 	
 	public void start() {
 	    isRunning = true;
@@ -131,17 +125,13 @@ public class Controller implements ActionListener, KeyListener {
 		view.switchPanel();
 	}
 	
-    public void stop() {
-        pause();
-        //model.reset();  // Reset game state if needed
-    }
-	
 	public void gameloop() {
 		updateContainer();
 		//gameContainer.shootFromUfos();
 		view.render(getEntities());
 		if(GameManager.getInstance().isGameOver()) {
-			reset();			
+			reset();
+			view.updateHighScore();
 		}
 	}
 

@@ -28,6 +28,10 @@ public class GameManager {
     }
     public void decreaseLives() {
         lives -= 1;
+        if(lives == 0) {
+        	System.out.println("Added HighScore: " + score);
+        	HighScoreManager.getInstance().addHighScore(score);
+        }
     }
 
     public int getScore() {
