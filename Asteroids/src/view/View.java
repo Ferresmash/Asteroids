@@ -8,6 +8,7 @@ import javax.swing.JLayeredPane;
 
 import controller.Controller;
 import entities.Drawable;
+import entities.GameObject;
 
 
 public class View extends JFrame {
@@ -44,7 +45,7 @@ public class View extends JFrame {
     }
     
     // Other methods remain the same
-    public void render(List<Drawable> gameObjects) {
+    public void render(List<GameObject> gameObjects) {
         gamePanel.render(gameObjects);
     }
     

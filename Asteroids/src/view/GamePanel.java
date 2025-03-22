@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import entities.Drawable;
+import entities.GameObject;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ public class GamePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	public int screenWidth = getWidth();
     public int screenHeight = getHeight();
-    private List<Drawable> gameObjects = new ArrayList<>();
+    private List<GameObject> gameObjects = new ArrayList<>();
     private int score;
     private int lives;
     private Image heartImage;
@@ -26,7 +28,7 @@ public class GamePanel extends JPanel{
         setBackground(Color.BLACK);
     }
     
-    public void render(List<Drawable> gameObjects) {
+    public void render(List<GameObject> gameObjects) {
     	this.gameObjects = gameObjects;
     	repaint();
         score = 0;

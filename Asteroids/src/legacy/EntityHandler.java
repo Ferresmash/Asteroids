@@ -46,16 +46,9 @@ public class EntityHandler {
 	public List<GameObject> getGameObjects() {
 		
 		List<GameObject> gameObjects = new ArrayList<GameObject>();
-		for (GameObject drawable : enemyHandler.getEnemies()) {
-			gameObjects.add(drawable);
-		}
-
-		for (GameObject drawable : bullets) {
-			gameObjects.add(drawable);
-		}
-		for (GameObject drawable : enemyBullets) {
-			gameObjects.add(drawable);
-		}
+		gameObjects.addAll(enemyHandler.getEnemies());
+		gameObjects.addAll(bullets);
+		gameObjects.addAll(enemyBullets);
 		gameObjects.add(player);
 		return gameObjects;
 		

@@ -35,40 +35,15 @@ public class EnemyHandler {
 
 	public List<GameObject> getEnemies() {
 		List<GameObject> enemies = new ArrayList<GameObject>();
-		for (GameObject ufo : ufos) {
-			enemies.add(ufo);
-		}
-		for (GameObject asteroid : asteroids) {
-			enemies.add(asteroid);
-		}
+		enemies.addAll(ufos);
+		enemies.addAll(asteroids);
 		return enemies;
 	}
 
 
 	private static final Random rand = new Random();
 
-//	public List<Enemy> getEnemies() {
-//		List<Enemy> enemies = new ArrayList<Enemy>();
-//		for (Asteroid asteroid : asteroids) {
-//			enemies.add(asteroid);
-//		}
-//		for (UFO ufo : ufos) {
-//			enemies.add(ufo);
-//		}
-//		return enemies;
-//	}
-
-//	public void setEnemies(List<Enemy> enemies) {
-//		this.enemies = enemies;
-//	}
-
-//	public void addEnemy(Enemy enemy) {
-//		enemies.add(enemy);
-//	}
-
 	public void spawnAsteroid(int screenWidth, int screenHeight) {
-		// System.out.println("width: " + screenWidth);
-		// System.out.println("heigth: " + screenHeight);
 		asteroids.add(new Asteroid(getRandomSpawnPosition(screenWidth, screenHeight), getRandomSpawnForce()));
 	}
 

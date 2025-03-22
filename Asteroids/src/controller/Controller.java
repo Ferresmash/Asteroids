@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.util.List;
 import java.util.Timer;
 import entities.Drawable;
+import entities.GameObject;
 import legacy.GameContainer;
 import view.View;
 
@@ -87,8 +88,8 @@ public class Controller implements ActionListener, KeyListener {
 	    }
 	}
 	
-	public List<Drawable> getEntities(){
-		return gameContainer.getEntities();
+	public List<GameObject> getGameObjects(){
+		return gameContainer.getGameObjects();
 	}
 
 	@Override
@@ -142,7 +143,9 @@ public class Controller implements ActionListener, KeyListener {
 	
 	public void gameloop() {
 		updateContainer();
-		view.render(getEntities());
+		gameContainer.spawnUfo();
+		//gameContainer.shootFromUfos();
+		view.render(getGameObjects());
 	}
 
 	
