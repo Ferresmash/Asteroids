@@ -37,10 +37,6 @@ public class Controller implements ActionListener, KeyListener {
 	    SpaceKeyPressed);
 	}
 	
-	public void setScreenSize(int screenWidth, int screenHeight) {
-		gameContainer.setScreenSize(screenWidth, screenHeight);
-	}
-	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -80,7 +76,15 @@ public class Controller implements ActionListener, KeyListener {
 	    		readyToShoot = false;
 	    	}
 	    		
-	    }		
+	    }	
+	    if (keyCode == KeyEvent.VK_ESCAPE) {
+	    	if(isRunning) {
+	    		pause();
+	    	} else {
+	    		start();
+	    	}
+	    		
+	    }
 	}
 	
 	public List<Drawable> getEntities(){
@@ -137,7 +141,6 @@ public class Controller implements ActionListener, KeyListener {
     }
 	
 	public void gameloop() {
-		setScreenSize(1000,700);
 		updateContainer();
 		view.render(getEntities());
 	}

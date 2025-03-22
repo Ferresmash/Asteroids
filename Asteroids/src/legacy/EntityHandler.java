@@ -23,7 +23,6 @@ public class EntityHandler {
 	Player player = new Player();
 	
 	public EntityHandler() {
-		
 	}
 
 	public List<Drawable> getEntities() {
@@ -41,6 +40,24 @@ public class EntityHandler {
 		}
 		allEntities.add(player);
 		return allEntities;
+		
+	}
+	
+	public List<GameObject> getGameObjects() {
+		
+		List<GameObject> gameObjects = new ArrayList<GameObject>();
+		for (GameObject drawable : enemyHandler.getEnemies()) {
+			gameObjects.add(drawable);
+		}
+
+		for (GameObject drawable : bullets) {
+			gameObjects.add(drawable);
+		}
+		for (GameObject drawable : enemyBullets) {
+			gameObjects.add(drawable);
+		}
+		gameObjects.add(player);
+		return gameObjects;
 		
 	}
 	
@@ -72,9 +89,12 @@ public class EntityHandler {
 		bullets.add(new Bullet(new Position(player.getPosition().getX(), player.getPosition().getY()), new Force(Math.cos(-player.getAngle()) * 20,Math.sin(player.getAngle()) * 20)));
 	}
 	
-//	public void addEnemyBullet(UFO ufo) {
-//		bullets.add(new Bullet(new Position(ufo.getPosition().getX(), ufo.getPosition().getY()), -player.getAngle()));
-//	}
+	public void addEnemyBullet(GameObject ufo) {
+		double speed = 10;
+		double angle = Math.atan2(player.getPosition().getX()-ufo.getPosition().getX(), player.getPosition().getY()-ufo.getPosition().getY())-Math.PI/2;
+		Force force = new Force(Math.cos(angle) * speed, Math.sin(angle) * speed);
+		enemyBullets.add(new Bullet(new Position(ufo.getPosition().getX(), ufo.getPosition().getY()), force));
+	}
 	
 
 	
@@ -85,7 +105,7 @@ public class EntityHandler {
 	    checkCollision(bullets, enemyHandler.getAsteroids());
 	    
 	    // Check collisions between enemy bullets and the player
-	    checkCollision(enemyBullets, player);
+	    //checkCollision(enemyBullets, player);
 	    
 	    // Check collisions between enemies and the player
 	    checkCollision(enemyHandler.getUfos(), player);
@@ -106,8 +126,6 @@ public class EntityHandler {
 	            	System.out.println("Destroy");
 	                collider.getHit(colliders);
 	                collided.getHit(collidedObjects);
-//	                colliders.remove(i);
-//	                collidedObjects.remove(j);
 	                break;  // Move to the next collider after a collision
 	            }
 	        }
@@ -121,7 +139,6 @@ public class EntityHandler {
 	        	System.out.println("Destroy");
 	            collider.getHit(colliders);
 	            target.getHit();
-	            colliders.remove(i);
 	        }
 	    }
 	}

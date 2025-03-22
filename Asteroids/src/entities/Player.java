@@ -9,8 +9,6 @@ public class Player extends GameObject {
 
 
 	private boolean isAccelerating = false;
-	private int screenWidth = 1000;
-	private int screenHeight = 700;
 	private int lifes = 5;
 	private double speed = 0.3;
 
@@ -26,31 +24,8 @@ public class Player extends GameObject {
 	}
 
 	public void move() {
-
 		setPosition(getPosition().getX() + getForce().getX(), getPosition().getY() - getForce().getY());
-		setForce(getForce().getX() * 0.96, getForce().getY() * 0.96);
-
-		keepInside();
-	}
-
-	public void keepInside() {
-		if (getPosition().getX() < -20) {
-			getPosition().setX(screenWidth);
-		}
-		if (getPosition().getX() > screenWidth) {
-			getPosition().setX(-20);
-		}
-		if (getPosition().getY() < -20) {
-			getPosition().setY(screenHeight);
-		}
-		if (getPosition().getY() > screenHeight) {
-			getPosition().setY(-20);
-		}
-	}
-
-	public void setScreenSize(int width, int heigth) {
-		screenWidth = width;
-		screenHeight = heigth;
+		setForce(getForce().getX() * 0.97, getForce().getY() * 0.97);
 	}
 
 	@Override

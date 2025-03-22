@@ -12,11 +12,6 @@ public abstract class GameObject implements Drawable {
 	private Position position;
 	private Force force;
 	private double angle = 0;
-
-	private int screenWidth;
-	private int screenHeight;
-	
-	
 	
 	public Position getPosition() {
 		return position;
@@ -69,27 +64,7 @@ public abstract class GameObject implements Drawable {
 	public void rotate(double angle) {
 		this.angle += angle;
 	}
-	
-	public void setScreenSize(int width, int heigth) {
-		this.setScreenHeight(heigth);
-		this.setScreenWidth(width);
-	}
 
-	public int getScreenHeight() {
-		return screenHeight;
-	}
-
-	public void setScreenHeight(int screenHeight) {
-		this.screenHeight = screenHeight;
-	}
-
-	public int getScreenWidth() {
-		return screenWidth;
-	}
-
-	public void setScreenWidth(int screenWidth) {
-		this.screenWidth = screenWidth;
-	}
 
 
 }

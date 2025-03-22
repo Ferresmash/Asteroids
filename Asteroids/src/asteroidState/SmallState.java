@@ -1,7 +1,9 @@
 package asteroidState;
 
+import java.util.List;
+
 import entities.Asteroid;
-import legacy.EntityHandler;
+import entities.GameObject;
 
 public class SmallState implements AsteroidState {
 	
@@ -10,8 +12,8 @@ public class SmallState implements AsteroidState {
 	}
 
 	@Override
-	public Asteroid getAsteroid(EntityHandler entityHandler, Asteroid parent) {
-		return null;
+	public void getAsteroid(List<GameObject> gameObjects, Asteroid parent) {
+
 	}
 
 }
