@@ -14,8 +14,10 @@ public class GameContainer extends JPanel {
 
 	private int screenWidth = 1000;
 	private int screenHeight = 700;
-	private Timer UfoTimer;
-	private Timer UfoShootingTimer;
+    private long lastUfoSpawnTime = 0;
+    private final long ufoSpawnInterval = 10000; // 10 seconds in milliseconds
+    private long lastUfoShootTime = 0;
+    private final long ufoShootInterval = 5000; // 1 second in milliseconds
 
 
 	public GameContainer(int width, int height) {
@@ -25,14 +27,12 @@ public class GameContainer extends JPanel {
 		entityHandler.getPlayer().setPosition(width/2, height/2);
 		spawnAsteroid();
 		spawnAsteroid();
-//		UfoTimer = new Timer(10000, e -> spawnUfo());
-//		UfoTimer.start();
-//		UfoShootingTimer = new Timer(10, e -> shootFromUfos());
-//		UfoShootingTimer.start();
 	}
 
 	public void updateContainer(boolean WKeyPressed, boolean AKeyPressed, boolean DKeyPressed,
 			boolean SpaceKeyPressed) {
+		
+		long currentTime = System.currentTimeMillis();
 		
 		if (entityHandler.getEnemyHandler().getAsteroids().size() == 0) {
 			GameManager.getInstance().increaseLevel();
@@ -75,6 +75,16 @@ public class GameContainer extends JPanel {
 		for(GameObject gameObject : entityHandler.getGameObjects()) {
 			keepOnScreen(gameObject);
 		}
+        if (currentTime - lastUfoSpawnTime >= ufoSpawnInterval) {
+            spawnUfo();
+            lastUfoSpawnTime = currentTime;
+        }
+
+        // Shoot from UFOs at intervals
+        if (currentTime - lastUfoShootTime >= ufoShootInterval/(GameManager.getInstance().getLevel()+1)) {
+            shootFromUfos();
+            lastUfoShootTime = currentTime;
+        }
 		removeIfOffScreen(entityHandler.getBullets());
 		removeIfOffScreen(entityHandler.getEnemyBullets());
 		checkCollision();
@@ -103,6 +113,7 @@ public class GameContainer extends JPanel {
 	public void shootFromUfos() {
 		for(GameObject ufo : entityHandler.getEnemyHandler().getUfos()) {
 			spawnEnemyBullet(ufo);
+			ufo.getForce().setAngle(Math.random()*Math.PI*2);
 		}
 	}
 	

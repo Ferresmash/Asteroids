@@ -1,5 +1,8 @@
 package entities;
 
+import java.awt.Rectangle;
+import java.awt.Shape;
+
 import legacy.GameManager;
 import pos.Force;
 import pos.Position;
@@ -32,12 +35,18 @@ public class Player extends GameObject {
 	public void accept(RenderVisitor visitor) {
 		visitor.visit(this);
 	}
+	
+	
+	public Shape getHitbox() {
+		return new Rectangle((int)getPosition().getX(),(int)getPosition().getY(),5,5);
+	}
 
 
 	public void getHit() {
 		GameManager.getInstance().decreaseLives();
 		System.out.println(GameManager.getInstance().getLives());
 		setPosition(300, 300);
+		
 		//lose life
 		//get destroyed
 		//respawn if life left

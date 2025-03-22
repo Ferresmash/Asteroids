@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Timer;
 import entities.Drawable;
 import legacy.GameContainer;
+import legacy.GameManager;
 import view.View;
 
 public class Controller implements ActionListener, KeyListener {
@@ -19,7 +20,6 @@ public class Controller implements ActionListener, KeyListener {
     boolean AKeyPressed = false;
     boolean DKeyPressed = false;
     boolean SpaceKeyPressed = false;
-    private Timer timer = new Timer();
     private boolean isRunning = false;
     private boolean readyToShoot = true;
 	
@@ -123,14 +123,11 @@ public class Controller implements ActionListener, KeyListener {
 	}
 	
 	public void pause() {
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
         isRunning = false;
     }
 
 	public void reset() {
+		GameManager.getInstance().reset();
 		gameContainer.reset();
 		view.switchPanel();
 	}
@@ -143,6 +140,9 @@ public class Controller implements ActionListener, KeyListener {
 	public void gameloop() {
 		updateContainer();
 		view.render(getEntities());
+		if(GameManager.getInstance().isGameOver()) {
+			reset();			
+		}
 	}
 
 	

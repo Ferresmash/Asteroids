@@ -39,6 +39,9 @@ public class GameManager {
     public int getLevel() {
     	return level;
     }
+    public boolean isGameOver() {
+    	return (lives == 0);
+    }
 
     public void reset() {
         score = 0;
