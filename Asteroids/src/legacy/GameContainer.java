@@ -95,4 +95,8 @@ public class GameContainer extends JPanel {
 	public List<Drawable> getEntities() {
 		return entityHandler.getEntities();
 	}
+
+	public void reset() {
+		entityHandler = new EntityHandler();
+	}
 }

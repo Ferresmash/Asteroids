@@ -24,7 +24,6 @@ public class GamePanel extends JPanel{
     public GamePanel() {
         setPreferredSize(new Dimension(1000, 700));
         setBackground(Color.BLACK);
-        
     }
     
     public void render(List<Drawable> gameObjects) {
@@ -33,7 +32,6 @@ public class GamePanel extends JPanel{
         score = 0;
         lives = 5;
         gethearts();
-
     }
 
     private void gethearts() {

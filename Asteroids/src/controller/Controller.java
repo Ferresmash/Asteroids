@@ -1,14 +1,12 @@
 package controller;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
-
 import java.util.Timer;
-import java.util.TimerTask;
-
 import entities.Drawable;
 import legacy.GameContainer;
 import view.View;
@@ -28,8 +26,8 @@ public class Controller implements ActionListener, KeyListener {
 	public Controller (View view, GameContainer gameContainer) {
 		this.gameContainer = gameContainer;
 		this.view = view;
+		view.setController(this);
 		start();
-		
 	}
 	
 	public void updateContainer() {
@@ -128,6 +126,11 @@ public class Controller implements ActionListener, KeyListener {
         isRunning = false;
     }
 
+	public void reset() {
+		gameContainer.reset();
+		view.switchPanel();
+	}
+	
     public void stop() {
         pause();
         //model.reset();  // Reset game state if needed
