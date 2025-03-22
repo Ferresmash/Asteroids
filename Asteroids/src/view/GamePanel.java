@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.*;
 import entities.Drawable;
-import entities.GameObject;
+import legacy.GameManager;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,10 +17,13 @@ public class GamePanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	public int screenWidth = getWidth();
     public int screenHeight = getHeight();
-    private List<GameObject> gameObjects = new ArrayList<>();
+    private List<Drawable> gameObjects = new ArrayList<>();
     private int score;
     private int lives;
+    private int level;
     private Image heartImage;
+    private GameManager manager = GameManager.getInstance();
+
 
 
     public GamePanel() {
@@ -28,11 +31,9 @@ public class GamePanel extends JPanel{
         setBackground(Color.BLACK);
     }
     
-    public void render(List<GameObject> gameObjects) {
+    public void render(List<Drawable> gameObjects) {
     	this.gameObjects = gameObjects;
     	repaint();
-        score = 0;
-        lives = 5;
         gethearts();
     }
 
@@ -60,14 +61,16 @@ public class GamePanel extends JPanel{
 
         g2d.setColor(Color.WHITE);
         g2d.setFont(new Font("Arial", Font.BOLD, 20));
-        g2d.drawString("Score: " + score, 20, 30);
+        g2d.drawString("Score: " + score + " Level: " + level, 20, 30);
         
         int heartX = screenWidth - (lives * 35);
         int heartY = 10;
         for (int i = 0; i < lives; i++) {
             g2d.drawImage(heartImage, heartX + (i * 35), heartY, this);
         }
+        lives = manager.getLives();
+        score = manager.getScore();
+        level = manager.getLevel();
         //gameContainer.paintComponent(g);
-
     }
 }

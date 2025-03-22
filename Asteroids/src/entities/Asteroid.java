@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import asteroidState.AsteroidState;
 import asteroidState.LargeState;
+import legacy.GameManager;
 import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
@@ -102,6 +103,7 @@ public class Asteroid extends Enemy implements Drawable {
 
 	@Override
 	public void getHit(List<GameObject> allAsteroids) {
+		GameManager.getInstance().increaseScore(100);
 		asteroidState.getAsteroid(allAsteroids, this);
 		allAsteroids.remove(this);
 	}

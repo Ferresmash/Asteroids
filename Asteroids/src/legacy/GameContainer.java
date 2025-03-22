@@ -1,11 +1,7 @@
 package legacy;
 
 import java.util.List;
-import entities.Bullet;
-import entities.Enemy;
 import entities.GameObject;
-import entities.UFO;
-
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -24,22 +20,31 @@ public class GameContainer extends JPanel {
 	boolean readyToShoot = false;
 	boolean readyToSpawn = false;
 
+
 	public GameContainer(int width, int height) {
 		super();
 		this.screenWidth = width;
 		this.screenHeight = height;
 		entityHandler.getPlayer().setPosition(width/2, height/2);
-		UfoTimer = new Timer(1000, e ->  readyToSpawn = true);
-		//UfoTimer.start();
-		UfoShootingTimer = new Timer(1000, e -> readyToShoot = true);
-		//UfoShootingTimer.start();
-		
+
+		spawnAsteroid();
+		spawnAsteroid();
+//		UfoTimer = new Timer(10000, e -> spawnUfo());
+//		UfoTimer.start();
+//		UfoShootingTimer = new Timer(10, e -> shootFromUfos());
+//		UfoShootingTimer.start();
+
 	}
 
 	public void updateContainer(boolean WKeyPressed, boolean AKeyPressed, boolean DKeyPressed,
 			boolean SpaceKeyPressed) {
-		if (entityHandler.getEnemyHandler().getAsteroids().size() < 5) {
-			spawnAsteroid();
+
+		if (entityHandler.getEnemyHandler().getAsteroids().size() == 0) {
+			GameManager.getInstance().increaseLevel();
+			for(int i = 0; i < GameManager.getInstance().getLevel(); i++) {
+				spawnAsteroid();
+			}		
+
 		}
 		
 		for (GameObject gameObject : entityHandler.getGameObjects()) {
@@ -145,11 +150,12 @@ public class GameContainer extends JPanel {
 			gameObject.getPosition().setY(-margin);
 	}
 
-	public List<GameObject> getGameObjects() {
-		return entityHandler.getGameObjects();
+	public List<Drawable> getEntities() {
+		return entityHandler.getEntities();
 	}
 
 	public void reset() {
 		entityHandler = new EntityHandler();
 	}
+	
 }

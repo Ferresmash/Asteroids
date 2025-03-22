@@ -88,8 +88,8 @@ public class Controller implements ActionListener, KeyListener {
 	    }
 	}
 	
-	public List<GameObject> getGameObjects(){
-		return gameContainer.getGameObjects();
+	public List<Drawable> getEntities(){
+		return gameContainer.getEntities();
 	}
 
 	@Override
@@ -124,10 +124,7 @@ public class Controller implements ActionListener, KeyListener {
 	}
 	
 	public void pause() {
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
+
         isRunning = false;
     }
 
@@ -143,9 +140,8 @@ public class Controller implements ActionListener, KeyListener {
 	
 	public void gameloop() {
 		updateContainer();
-		gameContainer.spawnUfo();
 		//gameContainer.shootFromUfos();
-		view.render(getGameObjects());
+		view.render(getEntities());
 	}
 
 	
