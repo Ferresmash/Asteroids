@@ -9,6 +9,7 @@ import javax.swing.SwingUtilities;
 import entities.Bullet;
 import entities.Drawable;
 import entities.Enemy;
+import entities.GameObject;
 import entities.Player;
 import entities.UFO;
 import pos.Force;
@@ -16,8 +17,8 @@ import pos.Position;
 
 public class EntityHandler {
 
-	List<Bullet> bullets = new ArrayList<Bullet>();
-	List<Bullet> enemyBullets = new ArrayList<Bullet>();
+	List<GameObject> bullets = new ArrayList<GameObject>();
+	List<GameObject> enemyBullets = new ArrayList<GameObject>();
 	EnemyHandler enemyHandler = new EnemyHandler();
 	Player player = new Player();
 	
@@ -31,6 +32,7 @@ public class EntityHandler {
 		for (Drawable drawable : enemyHandler.getEnemies()) {
 			allEntities.add(drawable);
 		}
+
 		for (Drawable drawable : bullets) {
 			allEntities.add(drawable);
 		}
@@ -50,19 +52,19 @@ public class EntityHandler {
 		return player;
 	}
 	
-	public List<Bullet> getBullets() {
+	public List<GameObject> getBullets() {
 		return bullets;
 	}
 
-	public void setBullets(List<Bullet> bullets) {
+	public void setBullets(List<GameObject> bullets) {
 		this.bullets = bullets;
 	}
 
-	public List<Bullet> getEnemyBullets() {
+	public List<GameObject> getEnemyBullets() {
 		return enemyBullets;
 	}
 
-	public void setEnemyBullets(List<Bullet> enemyBullets) {
+	public void setEnemyBullets(List<GameObject> enemyBullets) {
 		this.enemyBullets = enemyBullets;
 	}
 
@@ -73,36 +75,54 @@ public class EntityHandler {
 //	public void addEnemyBullet(UFO ufo) {
 //		bullets.add(new Bullet(new Position(ufo.getPosition().getX(), ufo.getPosition().getY()), -player.getAngle()));
 //	}
+	
 
-	public void checkCollision() {
+	
+	public void checkAllCollisions() {
+	    // Check collisions between player bullets and enemies (asteroids and UFOs)
+	    checkCollision(bullets, enemyHandler.getUfos());
+	    
+	    checkCollision(bullets, enemyHandler.getAsteroids());
+	    
+	    // Check collisions between enemy bullets and the player
+	    checkCollision(enemyBullets, player);
+	    
+	    // Check collisions between enemies and the player
+	    checkCollision(enemyHandler.getUfos(), player);
+	    
+	 // Check collisions between enemies and the player
+	    checkCollision(enemyHandler.getAsteroids(), player);
+	}
 
-		List<Enemy> enemies = getEnemyHandler().getEnemies();
-		List<Enemy> toBeRemoved = new ArrayList<Enemy>();
-		int length = enemies.size();
-		for (int i = length-1; i >= 0; i--) {
-			Shape polygon = enemies.get(i).getHitbox();
-			for (Bullet b : getBullets()) {
-				boolean hit = false;
-				if (polygon.contains(b.getPosition().getX(), b.getPosition().getY())) {
-					//System.out.println(enemies.size());
-					enemies.get(i).destroy();
-					if(!toBeRemoved.contains(enemies.get(i))) {
-						toBeRemoved.add(enemies.get(i));
-					}
-					getBullets().remove(b);
-					hit = true;
-					//System.out.println(enemies.size());
-				}
-				if(hit) 
-					break;
-			}
-		}
-		
-		
-		for(Enemy enemy : toBeRemoved) {
-			getEnemyHandler().remove(enemy);
-		}
 
-		
+	
+	public void checkCollision(List<GameObject> colliders, List<GameObject> collidedObjects) {
+	    for (int i = colliders.size() - 1; i >= 0; i--) {
+	        GameObject collider = colliders.get(i);
+	        for (int j = collidedObjects.size() - 1; j >= 0; j--) {
+	            GameObject collided = collidedObjects.get(j);
+	            if (collider.getHitbox().intersects(collided.getHitbox().getBounds2D())) {
+	                // Handle collision: destroy both or apply game logic
+	            	System.out.println("Destroy");
+	                collider.getHit(colliders);
+	                collided.getHit(collidedObjects);
+//	                colliders.remove(i);
+//	                collidedObjects.remove(j);
+	                break;  // Move to the next collider after a collision
+	            }
+	        }
+	    }
+	}
+	public void checkCollision(List<GameObject> colliders, GameObject target) {
+	    for (int i = colliders.size() - 1; i >= 0; i--) {
+	        GameObject collider = colliders.get(i);
+	        if (collider.getHitbox().intersects(target.getHitbox().getBounds2D())) {
+	            // Collision detected; handle accordingly
+	        	System.out.println("Destroy");
+	            collider.getHit(colliders);
+	            target.getHit();
+	            colliders.remove(i);
+	        }
+	    }
 	}
 }

@@ -2,6 +2,7 @@ package entities;
 
 import java.awt.Polygon;
 import java.awt.Shape;
+import java.util.List;
 import java.util.Random;
 import asteroidState.AsteroidState;
 import asteroidState.LargeState;
@@ -92,9 +93,8 @@ public class Asteroid extends Enemy implements Drawable {
 	}
 
 	@Override
-	public void destroy() {
-		//asteroidState.getAsteroid(entityHandler, this);
-
+	public void getHit(List<GameObject> allAsteroids) {
+		//use state to 
 	}
 
 }

@@ -9,8 +9,6 @@ public abstract class Enemy extends GameObject{
 
 	private double size;
 
-	private int screenWidth;
-	private int screenHeight;
 
 	public double getSize() {
 		return size;
@@ -28,26 +26,25 @@ public abstract class Enemy extends GameObject{
 
 	public void keepInside() {
 		if(getPosition().getX() < -20) {
-			getPosition().setX(screenWidth);
+			getPosition().setX(getScreenWidth());
         }
-        if(getPosition().getX() > screenWidth) {
+        if(getPosition().getX() > getScreenWidth()) {
         	getPosition().setX(-20);
         }
         if(getPosition().getY() < -20) {
-        	getPosition().setY(screenHeight);
+        	getPosition().setY(getScreenHeight());
         }
-        if(getPosition().getY() > screenHeight) {
+        if(getPosition().getY() > getScreenHeight()) {
         	getPosition().setY(-20);
         }
 	}
 	
+	@Override
 	public Shape getHitbox() {
+		System.out.println("enemy hitbox");
 		return new Rectangle((int) (getPosition().getX()-size/2), (int) (getPosition().getY()-size/2),(int)size, (int)size);
 	}
 
-	public void setScreenSize(int width, int heigth) {
-		this.screenHeight = heigth;
-		this.screenWidth = width;
-	}
+
 
 }

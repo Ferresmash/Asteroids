@@ -1,5 +1,9 @@
 package entities;
 
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.util.List;
+
 import pos.Force;
 import pos.Position;
 
@@ -7,6 +11,12 @@ public abstract class GameObject implements Drawable {
 
 	private Position position;
 	private Force force;
+	private double angle = 0;
+
+	private int screenWidth;
+	private int screenHeight;
+	
+	
 	
 	public Position getPosition() {
 		return position;
@@ -32,13 +42,54 @@ public abstract class GameObject implements Drawable {
 		this.force = new Force(x,y);
 	}
 	
-	public void rotate(double angle) {
-		force.setAngle(force.getAngle()+angle);
+	public Shape getHitbox() {
+		return new Rectangle((int)getPosition().getX(),(int)getPosition().getY(),1,1);
 	}
 	
-	public void destroy() {
-		
+	public void getHit(List<GameObject> gameObjects) { //in asteroid add itself to the list
+		gameObjects.remove(this);
 	};
+	
+	public void getHit() {
+		
+	}
+	
+	public void move() {
+		System.out.println("Implement move for specific gameobject");
+	}
+	
+	public double getAngle() {
+		return angle;
+	}
+
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+	
+	public void rotate(double angle) {
+		this.angle += angle;
+	}
+	
+	public void setScreenSize(int width, int heigth) {
+		this.setScreenHeight(heigth);
+		this.setScreenWidth(width);
+	}
+
+	public int getScreenHeight() {
+		return screenHeight;
+	}
+
+	public void setScreenHeight(int screenHeight) {
+		this.screenHeight = screenHeight;
+	}
+
+	public int getScreenWidth() {
+		return screenWidth;
+	}
+
+	public void setScreenWidth(int screenWidth) {
+		this.screenWidth = screenWidth;
+	}
 
 
 }

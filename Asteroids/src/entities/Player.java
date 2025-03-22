@@ -11,7 +11,7 @@ public class Player extends GameObject {
 	private boolean isAccelerating = false;
 	private int screenWidth = 1000;
 	private int screenHeight = 700;
-	private double angle = 0;
+
 	private double speed = 0.3;
 
 	public Player() {
@@ -20,12 +20,9 @@ public class Player extends GameObject {
 	}
 	
 	public void accelerate() {
-
 		setAccelerating(true);
 		double[] direction = { speed * Math.cos(getAngle()), speed * Math.sin(getAngle()) };
 		getForce().add(direction);
-
-
 	}
 
 	public void move() {
@@ -61,9 +58,11 @@ public class Player extends GameObject {
 		visitor.visit(this);
 	}
 
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
+
+	public void getHit() {
+		//lose life
+		//get destroyed
+		//respawn if life left
 	}
 
 	public boolean isAccelerating() {
@@ -74,16 +73,6 @@ public class Player extends GameObject {
 		this.isAccelerating = isAccelerating;
 	}
 
-	public double getAngle() {
-		return angle;
-	}
 
-	public void setAngle(double angle) {
-		this.angle = angle;
-	}
-	
-	public void rotate(double angle) {
-		this.angle += angle;
-	}
 
 }

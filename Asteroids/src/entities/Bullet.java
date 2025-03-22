@@ -23,10 +23,5 @@ public class Bullet extends GameObject{
 		visitor.visit(this);
 	}
 
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
