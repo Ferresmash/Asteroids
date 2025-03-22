@@ -1,6 +1,7 @@
 package entities;
 
 
+
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
@@ -22,6 +23,13 @@ public class UFO extends Enemy {
 	}
 	
 	@Override
+	public Shape getHitbox() {
+		return new Ellipse2D.Double((int)getPosition().getX()-20,(int)getPosition().getY()-10,40,40);
+		
+	}
+	
+	
+	@Override
 	public void accept(RenderVisitor visitor) {
 		visitor.visit(this);		
 
@@ -31,9 +39,5 @@ public class UFO extends Enemy {
 //		// TODO Auto-generated method stub
 //		
 //	}
-	@Override
-    public Shape getHitbox() {
-        return new Ellipse2D.Double((int)getPosition().getX()-20,(int)getPosition().getY()-10,40,40);
-    }
 
 }

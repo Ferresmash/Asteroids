@@ -69,7 +69,7 @@ public class EntityHandler {
 	}
 
 	public void addBullet() {
-		bullets.add(new Bullet(new Position(player.getPosition().getX(), player.getPosition().getY()), new Force(Math.cos(-player.getAngle()) * 10,Math.sin(player.getAngle()) * 10)));
+		bullets.add(new Bullet(new Position(player.getPosition().getX(), player.getPosition().getY()), new Force(Math.cos(-player.getAngle()) * 20,Math.sin(player.getAngle()) * 20)));
 	}
 	
 //	public void addEnemyBullet(UFO ufo) {
