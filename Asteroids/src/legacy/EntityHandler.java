@@ -1,17 +1,15 @@
 package legacy;
 
-import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.SwingUtilities;
 
 import entities.Bullet;
 import entities.Drawable;
-import entities.Enemy;
+
 import entities.GameObject;
 import entities.Player;
-import entities.UFO;
+
 import pos.Force;
 import pos.Position;
 
