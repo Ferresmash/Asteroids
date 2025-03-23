@@ -57,11 +57,11 @@ public class GameContainer extends JPanel {
 		}
 
 		if (AKeyPressed) {
-			entityHandler.getPlayer().rotate(0.1);
+			entityHandler.getPlayer().rotateRight();
 		}
 
 		if (DKeyPressed) {
-			entityHandler.getPlayer().rotate(-0.1);
+			entityHandler.getPlayer().rotateLeft();
 		}
 
 		if (SpaceKeyPressed) {
@@ -97,24 +97,15 @@ public class GameContainer extends JPanel {
 	}
 
 	public void spawnUfo() {
-		// System.out.println("Spawned UFO");
-		SwingUtilities.invokeLater(() -> {
 			entityHandler.getEnemyHandler().spawnUFO(screenWidth, screenHeight);
-		});
 	}
 
 	public void spawnBullet() {
-		SwingUtilities.invokeLater(() -> {
 			entityHandler.addBullet();
-		});
-
 	}
 
 	public void spawnEnemyBullet(GameObject ufo) {
-		SwingUtilities.invokeLater(() -> {
 			entityHandler.addEnemyBullet(ufo);
-		});
-
 	}
 
 	public void shootFromUfos() {

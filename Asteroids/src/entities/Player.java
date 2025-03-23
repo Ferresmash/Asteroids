@@ -60,5 +60,13 @@ public class Player extends GameObject {
 	public void setAccelerating(boolean isAccelerating) {
 		this.isAccelerating = isAccelerating;
 	}
+	
+	public void rotateRight() {
+		rotate(rotationSpeed);
+	}
+	
+	public void rotateLeft() {
+		rotate(-rotationSpeed);
+	}
 
 }
