@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import controller.Controller;
-import legacy.HighScoreManager;
+import singleton.HighScoreManager;
 
 public class MenuPanel extends JPanel {
 

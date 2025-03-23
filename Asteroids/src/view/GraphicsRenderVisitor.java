@@ -5,11 +5,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 
-import entities.Asteroid;
-import entities.Bullet;
-import entities.Player;
-import entities.UFO;
-import legacy.GameManager;
+import gameObjects.Asteroid;
+import gameObjects.Bullet;
+import gameObjects.Player;
+import gameObjects.UFO;
+import singleton.GameManager;
 
 public class GraphicsRenderVisitor implements RenderVisitor {
 

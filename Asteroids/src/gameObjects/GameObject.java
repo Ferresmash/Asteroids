@@ -1,4 +1,4 @@
-package entities;
+package gameObjects;
 
 import java.awt.Rectangle;
 import java.awt.Shape;

@@ -1,11 +1,12 @@
-package legacy;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import entities.Drawable;
-import entities.GameObject;
-import entities.GameObjectFactory;
-import entities.Player;
+
+import factory.GameObjectFactory;
+import gameObjects.Drawable;
+import gameObjects.GameObject;
+import gameObjects.Player;
 import pos.Force;
 import pos.Position;
 

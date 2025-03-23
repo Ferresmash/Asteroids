@@ -1,12 +1,14 @@
-package legacy;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import entities.GameObject;
-import entities.GameObjectFactory;
+
+import factory.GameObjectFactory;
+import gameObjects.GameObject;
 import pos.Force;
 import pos.Position;
+import singleton.GameManager;
 
 public class EnemyHandler {
 

@@ -3,7 +3,7 @@ package app;
 import javax.swing.WindowConstants;
 
 import controller.Controller;
-import legacy.GameContainer;
+import model.GameContainer;
 import view.View;
 
 public class AsteroidApp {

@@ -1,10 +1,14 @@
-package entities;
+package factory;
 
 import asteroidState.AsteroidState;
+import gameObjects.Asteroid;
+import gameObjects.Bullet;
+import gameObjects.GameObject;
+import gameObjects.UFO;
 import pos.Force;
 import pos.Position;
 
-public class GameObjectFactory {
+public class GameObjectFactory implements EntityFactory {
 
 	public GameObject createAsteroid(AsteroidState asteroidState, Position startPos, Force startForce) {
 		return new Asteroid(asteroidState, startPos, startForce);

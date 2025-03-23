@@ -1,15 +1,14 @@
-package legacy;
+package model;
 
 import java.util.List;
-import entities.GameObject;
+
 import pos.Force;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import entities.Drawable;
+import singleton.GameManager;
+import gameObjects.Drawable;
+import gameObjects.GameObject;
 
-public class GameContainer extends JPanel {
+public class GameContainer {
 
-	private static final long serialVersionUID = 1L;
 
 	private EntityHandler entityHandler;
 

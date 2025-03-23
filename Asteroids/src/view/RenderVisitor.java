@@ -1,9 +1,9 @@
 package view;
 
-import entities.Asteroid;
-import entities.Bullet;
-import entities.Player;
-import entities.UFO;
+import gameObjects.Asteroid;
+import gameObjects.Bullet;
+import gameObjects.Player;
+import gameObjects.UFO;
 
 public interface RenderVisitor {
 
