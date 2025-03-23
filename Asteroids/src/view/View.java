@@ -11,9 +11,8 @@ public class View extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-
-	MenuPanel menuPanel;
-	GamePanel gamePanel;
+	private MenuPanel menuPanel;
+	private GamePanel gamePanel;
 
 	public View(int width, int height) {
 		JLayeredPane layeredPane = new JLayeredPane();

@@ -23,7 +23,13 @@ public class MenuPanel extends JPanel {
 	private JLabel highScoreLabel;
 
 	public void updateHighScore() {
-		highScoreLabel.setText("High Score: " + HighScoreManager.getInstance().getHighScore());
+	    int lastScore = HighScoreManager.getInstance().getLastScore();
+	    System.out.println("lastScore at updateHighScore: " + lastScore);
+	    highScoreLabel.setText("<html>High Score: " 
+	        + HighScoreManager.getInstance().getHighScore()
+	        + "<br>Your Score: " + lastScore + "</html>");
+	    revalidate();
+	    repaint();
 	}
 
 	public MenuPanel() {
@@ -33,15 +39,12 @@ public class MenuPanel extends JPanel {
 
 		setLayout(new GridLayout(3, 3));
 
-
 		JLabel titleLabel = new JLabel("ASTEROIDS", SwingConstants.CENTER);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
 		titleLabel.setForeground(Color.WHITE);
 		JPanel titlePanel = emptyPanel();
 		titlePanel.setLayout(new GridLayout(1, 1));
 		titlePanel.add(titleLabel);
-
-
 
 		JButton startButton = new JButton("Start Game");
 		startButton.setBackground(translucent);
@@ -53,10 +56,10 @@ public class MenuPanel extends JPanel {
 				controller.reset();
 			}
 		});
-		
+
 		JPanel highscorePanel = emptyPanel();
-		highScoreLabel = new JLabel("High Score: " + HighScoreManager.getInstance().getHighScore(),
-				SwingConstants.CENTER);
+		highScoreLabel = new JLabel("High Score: " + HighScoreManager.getInstance().getHighScore()
+				+ " \r\n Your Score: " + HighScoreManager.getInstance().getLastScore(), SwingConstants.CENTER);
 		highScoreLabel.setFont(new Font("Arial", Font.BOLD, 18));
 		highScoreLabel.setForeground(Color.WHITE);
 		highscorePanel.add(highScoreLabel);

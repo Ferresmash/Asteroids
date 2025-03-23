@@ -11,6 +11,7 @@ public class HighScoreManager {
 
 	private static HighScoreManager instance;
 	private int highScore;
+	private int lastScore;
 	private final String HIGHSCORE_PATH = "src/resources/highscores.txt";
 
 	private HighScoreManager() {
@@ -25,8 +26,9 @@ public class HighScoreManager {
 	}
 
 	public void addHighScore(int newScore) {
-		System.out.println("newScore: " + newScore);
-		System.out.println("highScore: " + highScore);
+		lastScore = newScore;
+		System.out.println("addHighScore: lastScore: " + lastScore);
+
 		if (newScore > highScore) {
 			this.highScore = newScore;
 			saveHighScore();
@@ -67,5 +69,10 @@ public class HighScoreManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public int getLastScore() {
+		System.out.println("getLastScore: lastScore: " + lastScore);
+		return lastScore;
 	}
 }

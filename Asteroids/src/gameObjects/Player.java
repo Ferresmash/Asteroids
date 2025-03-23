@@ -50,7 +50,6 @@ public class Player extends GameObject {
 
 	public void getHit() {
 		GameManager.getInstance().decreaseLives();
-		System.out.println(GameManager.getInstance().getLives());
 		setPosition(START_POINT);
 	}
 
