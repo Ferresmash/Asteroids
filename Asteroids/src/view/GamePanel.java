@@ -1,8 +1,9 @@
 package view;
 
 import javax.swing.*;
-import entities.Drawable;
-import legacy.GameManager;
+
+import gameObjects.Drawable;
+import singleton.GameManager;
 
 import java.awt.*;
 import java.util.ArrayList;

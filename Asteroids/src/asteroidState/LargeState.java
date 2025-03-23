@@ -2,8 +2,8 @@ package asteroidState;
 
 import java.util.List;
 
-import entities.Asteroid;
-import entities.GameObject;
+import gameObjects.Asteroid;
+import gameObjects.GameObject;
 
 public class LargeState implements AsteroidState {
 	

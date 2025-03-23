@@ -1,4 +1,4 @@
-package entities;
+package gameObjects;
 
 import java.awt.Polygon;
 import java.awt.Shape;
@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Random;
 import asteroidState.AsteroidState;
 import asteroidState.LargeState;
-import legacy.GameManager;
 import pos.Force;
 import pos.Position;
+import singleton.GameManager;
 import view.RenderVisitor;
 
 public class Asteroid extends GameObject implements Drawable {

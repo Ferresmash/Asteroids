@@ -1,11 +1,12 @@
-package legacy;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import entities.Drawable;
-import entities.GameObject;
-import entities.GameObjectFactory;
-import entities.Player;
+
+import factory.GameObjectFactory;
+import gameObjects.Drawable;
+import gameObjects.GameObject;
+import gameObjects.Player;
 import pos.Force;
 import pos.Position;
 
@@ -29,6 +30,7 @@ public class EntityHandler {
 		allEntities.addAll(enemyBullets);
 		allEntities.add(player);
 		return allEntities;
+
 	}
 
 	public List<GameObject> getGameObjects() {
@@ -38,6 +40,7 @@ public class EntityHandler {
 		gameObjects.addAll(enemyBullets);
 		gameObjects.add(player);
 		return gameObjects;
+
 	}
 
 	public EnemyHandler getEnemyHandler() {
@@ -66,18 +69,19 @@ public class EntityHandler {
 
 	public void addBullet() {
 		bullets.add(
-				gameObjectFactory.createBullet(player.getPosition(),
+				gameObjectFactory.createBullet(new Position(player.getPosition().getX(), player.getPosition().getY()),
 						new Force(Math.cos(-player.getAngle()) * 20, Math.sin(player.getAngle()) * 20)));
 	}
 
-	public void addEnemyBullet(GameObject Enemy) {
+	public void addEnemyBullet(GameObject ufo) {
 		double speed = 5;
-		double angle = Math.atan2(player.getX() - Enemy.getX(), player.getY() - Enemy.getY()) - Math.PI / 2;
+		double angle = Math.atan2(player.getPosition().getX() - ufo.getPosition().getX(),
+				player.getPosition().getY() - ufo.getPosition().getY()) - Math.PI / 2;
 		Force force = new Force(Math.cos(angle) * speed, Math.sin(angle) * speed);
-		enemyBullets.add(gameObjectFactory.createBullet(new Position(Enemy.getX(), Enemy.getY()), force));
+		enemyBullets.add(gameObjectFactory
+				.createBullet(new Position(ufo.getPosition().getX(), ufo.getPosition().getY()), force));
 	}
-	
-	// Collisions between different types
+
 	public void checkAllCollisions() {
 		checkCollision(bullets, enemyHandler.getUfos());
 		checkCollision(bullets, enemyHandler.getAsteroids());
@@ -85,8 +89,7 @@ public class EntityHandler {
 		checkCollision(enemyHandler.getUfos(), player);
 		checkCollision(enemyHandler.getAsteroids(), player);
 	}
-	
-	// List and List
+
 	public void checkCollision(List<GameObject> colliders, List<GameObject> collidedObjects) {
 		for (int i = colliders.size() - 1; i >= 0; i--) {
 			GameObject collider = colliders.get(i);
@@ -100,7 +103,7 @@ public class EntityHandler {
 			}
 		}
 	}
-	// List and object
+
 	public void checkCollision(List<GameObject> colliders, GameObject target) {
 		for (int i = colliders.size() - 1; i >= 0; i--) {
 			GameObject collider = colliders.get(i);

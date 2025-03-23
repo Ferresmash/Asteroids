@@ -1,11 +1,11 @@
-package entities;
+package gameObjects;
 
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-import legacy.GameManager;
 import pos.Force;
 import pos.Position;
+import singleton.GameManager;
 import view.RenderVisitor;
 
 

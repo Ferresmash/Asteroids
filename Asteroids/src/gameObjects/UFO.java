@@ -1,4 +1,4 @@
-package entities;
+package gameObjects;
 
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;

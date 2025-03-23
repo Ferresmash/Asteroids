@@ -3,7 +3,7 @@ package app;
 import javax.swing.WindowConstants;
 
 import controller.Controller;
-import legacy.Model;
+import model.Model;
 import view.View;
 
 public class AsteroidApp {
@@ -13,9 +13,9 @@ public class AsteroidApp {
 
 	public static void main(String[] args) {
 		
-		Model gameContainer = new Model(WIDTH, HEIGHT);
+		Model model = new Model(WIDTH, HEIGHT);
 		View view = new View(WIDTH, HEIGHT);
-		Controller controller = new Controller(view, gameContainer);
+		Controller controller = new Controller(view, model);
 		view.addKeyListener(controller);
 		view.setFocusable(true);
 		view.requestFocusInWindow();

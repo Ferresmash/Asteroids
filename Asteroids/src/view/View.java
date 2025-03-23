@@ -5,7 +5,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import controller.Controller;
-import entities.Drawable;
+import gameObjects.Drawable;
 
 public class View extends JFrame {
 

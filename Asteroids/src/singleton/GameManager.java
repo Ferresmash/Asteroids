@@ -1,4 +1,4 @@
-package legacy;
+package singleton;
 
 public class GameManager {
 	

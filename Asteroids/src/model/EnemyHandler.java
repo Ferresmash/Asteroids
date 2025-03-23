@@ -1,19 +1,20 @@
-package legacy;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import entities.GameObject;
-import entities.GameObjectFactory;
+
+import factory.GameObjectFactory;
+import gameObjects.GameObject;
 import pos.Force;
 import pos.Position;
+import singleton.GameManager;
 
 public class EnemyHandler {
 
 	private GameObjectFactory gameObjectFactory;
 	private List<GameObject> asteroids = new ArrayList<GameObject>();
 	private List<GameObject> ufos = new ArrayList<GameObject>();
-	private final Random rand = new Random();
 	
 	public EnemyHandler() {
 		this.gameObjectFactory = new GameObjectFactory();
@@ -22,9 +23,18 @@ public class EnemyHandler {
 	public List<GameObject> getAsteroids() {
 		return asteroids;
 	}
+	
+
+	public void setAsteroids(List<GameObject> asteroids) {
+		this.asteroids = asteroids;
+	}
 
 	public List<GameObject> getUfos() {
 		return ufos;
+	}
+
+	public void setUfos(List<GameObject> ufos) {
+		this.ufos = ufos;
 	}
 
 	public List<GameObject> getEnemies() {
@@ -33,6 +43,9 @@ public class EnemyHandler {
 		enemies.addAll(asteroids);
 		return enemies;
 	}
+
+
+	private static final Random rand = new Random();
 
 	public void spawnAsteroid(int screenWidth, int screenHeight) {
 		asteroids.add(gameObjectFactory.createAsteroid(getRandomSpawnPosition(screenWidth, screenHeight), getRandomSpawnForce()));

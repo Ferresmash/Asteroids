@@ -6,9 +6,9 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import entities.Drawable;
-import legacy.Model;
-import legacy.GameManager;
+import gameObjects.Drawable;
+import model.Model;
+import singleton.GameManager;
 import view.View;
 
 public class Controller implements KeyListener {
