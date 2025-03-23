@@ -14,6 +14,7 @@ public class Bullet extends GameObject{
 		setForce(force);
 	}
 	
+	@Override
 	public void move() {
 		super.setPosition(getPosition().getX() + getForce().getX(), getPosition().getY() - getForce().getY());
 	}

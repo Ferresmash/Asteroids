@@ -8,7 +8,7 @@ import entities.GameObject;
 
 public class SmallState implements AsteroidState {
 	
-	private final int SIZE = 15;
+	private final int SIZE = 20;
 	
 	public List<GameObject> splitAsteroid(Asteroid parent) {
 		return new ArrayList<>();

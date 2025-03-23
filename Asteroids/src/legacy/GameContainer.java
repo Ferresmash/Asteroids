@@ -2,6 +2,8 @@ package legacy;
 
 import java.util.List;
 import entities.GameObject;
+import pos.Force;
+
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -114,7 +116,9 @@ public class GameContainer extends JPanel {
 	public void shootFromUfos() {
 		for (GameObject ufo : entityHandler.getEnemyHandler().getUfos()) {
 			spawnEnemyBullet(ufo);
-			ufo.getForce().setAngle(Math.random() * Math.PI * 2);
+			Force force = ufo.getForce();
+			force.setAngle(Math.random() * Math.PI * 2);
+			ufo.setForce(force);
 		}
 	}
 

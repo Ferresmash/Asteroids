@@ -13,7 +13,7 @@ import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
 
-public class Asteroid extends Enemy implements Drawable {
+public class Asteroid extends GameObject implements Drawable {
 
 	private AsteroidState asteroidState;
 	int nbrOfCorners;
@@ -44,10 +44,10 @@ public class Asteroid extends Enemy implements Drawable {
 		yPoints = new int[nbrOfCorners];
 
 		for (int i = 0; i < nbrOfCorners; i++) {
-			xPoints[i] = (int) ((Math.cos((2 * Math.PI) / nbrOfCorners * i) * getSize()) + rand.nextDouble(getSize())
-					- (getSize() / 2));
-			yPoints[i] = (int) ((Math.sin((2 * Math.PI) / nbrOfCorners * i) * getSize()) + rand.nextDouble(getSize())
-					- (getSize() / 2));
+			xPoints[i] = (int) ((Math.cos((2 * Math.PI) / nbrOfCorners * i) * size) + rand.nextDouble(size)
+					- (size / 2));
+			yPoints[i] = (int) ((Math.sin((2 * Math.PI) / nbrOfCorners * i) * size) + rand.nextDouble(size)
+					- (size / 2));
 		}
 
 	}

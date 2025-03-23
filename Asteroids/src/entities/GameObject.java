@@ -12,6 +12,7 @@ public abstract class GameObject implements Drawable {
 	protected Position position;
 	protected Force force;
 	protected double angle = 0;
+	protected double size = 100d;
 	
 	public Position getPosition() {
 		return new Position(position.getX(),position.getY());
@@ -50,7 +51,7 @@ public abstract class GameObject implements Drawable {
 	}
 	
 	public void move() {
-		System.out.println("Implement move for specific gameobject");
+		setPosition(getPosition().getX() + getForce().getX(), getPosition().getY() + getForce().getY());
 	}
 	
 	public double getAngle() {
@@ -63,6 +64,10 @@ public abstract class GameObject implements Drawable {
 	
 	public void rotate(double angle) {
 		this.angle += angle;
+	}
+	
+	public void setSize(double size) {
+		this.size = size;
 	}
 
 
