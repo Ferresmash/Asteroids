@@ -11,9 +11,11 @@ public class HighScoreManager {
 
 	private static HighScoreManager instance;
 	private int highScore;
-	private final String HIGHSCORE_PATH = "../resources/highscores.txt";
+	private final String HIGHSCORE_PATH = "src/resources/highscores.txt";
 
 	private HighScoreManager() {
+		System.out.println("Highscore file path: " + new File(HIGHSCORE_PATH).getAbsolutePath());
+
 		loadHighScore();
 	}
 
