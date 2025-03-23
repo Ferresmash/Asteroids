@@ -4,10 +4,9 @@ import java.util.List;
 import entities.GameObject;
 import pos.Force;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import entities.Drawable;
 
-public class GameContainer extends JPanel {
+public class Model extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,12 +14,9 @@ public class GameContainer extends JPanel {
 
 	private int screenWidth;
 	private int screenHeight;
-	private long lastUfoSpawnTime = 0;
-	private final long ufoSpawnInterval = 10000;
-	private long lastUfoShootTime = 0;
-	private final long ufoShootInterval = 5000;
 
-	public GameContainer(int width, int height) {
+
+	public Model(int width, int height) {
 		super();
 		this.screenWidth = width;
 		this.screenHeight = height;
@@ -30,12 +26,24 @@ public class GameContainer extends JPanel {
 		spawnAsteroid();
 
 	}
-
-	public void updateContainer(boolean WKeyPressed, boolean AKeyPressed, boolean DKeyPressed,
-			boolean SpaceKeyPressed) {
-
-		long currentTime = System.currentTimeMillis();
-
+	
+	public void accelerate() {
+		entityHandler.getPlayer().accelerate();
+	}
+	
+	public void stopAcceleration() {
+		entityHandler.getPlayer().setAccelerating(false);
+	}
+	
+	public void turnRight() {
+		entityHandler.getPlayer().rotateRight();
+	}
+	
+	public void turnLeft() {
+		entityHandler.getPlayer().rotateLeft();
+	}
+	
+	public void checkForLevelUp() {
 		if (entityHandler.getEnemyHandler().getAsteroids().size() == 0) {
 			GameManager.getInstance().increaseLevel();
 			for (int i = 0; i < GameManager.getInstance().getLevel(); i++) {
@@ -43,30 +51,22 @@ public class GameContainer extends JPanel {
 			}
 
 		}
-
+	}
+	
+	public void moveObjects() {
 		for (GameObject gameObject : entityHandler.getGameObjects()) {
 			if (gameObject != null)
 				gameObject.move();
 		}
-
 		entityHandler.getPlayer().move();
-		if (WKeyPressed) {
-			entityHandler.getPlayer().accelerate();
-		} else {
-			entityHandler.getPlayer().setAccelerating(false);
-		}
-
-		if (AKeyPressed) {
-			entityHandler.getPlayer().rotateRight();
-		}
-
-		if (DKeyPressed) {
-			entityHandler.getPlayer().rotateLeft();
-		}
-
-		if (SpaceKeyPressed) {
-			spawnBullet();
-		}
+	}
+	
+	public void removeObjectsOffScreen() {
+		removeIfOffScreen(entityHandler.getBullets());
+		removeIfOffScreen(entityHandler.getEnemyBullets());
+	}
+	
+	public void keepObjectsOnScreen() {
 		for (GameObject gameObject : entityHandler.getEnemyHandler().getAsteroids()) {
 			keepOnScreen(gameObject, 50);
 			gameObject.rotate(0.01);
@@ -75,20 +75,6 @@ public class GameContainer extends JPanel {
 			keepOnScreen(gameObject, 20);
 		}
 		keepOnScreen(entityHandler.getPlayer(), 20);
-
-		// Spawn UFOs at intervals
-		if (currentTime - lastUfoSpawnTime >= ufoSpawnInterval) {
-			spawnUfo();
-			lastUfoSpawnTime = currentTime;
-		}
-		// Shoot from UFOs at intervals
-		if (currentTime - lastUfoShootTime >= ufoShootInterval / (GameManager.getInstance().getLevel() + 1)) {
-			shootFromUfos();
-			lastUfoShootTime = currentTime;
-		}
-		removeIfOffScreen(entityHandler.getBullets());
-		removeIfOffScreen(entityHandler.getEnemyBullets());
-		checkCollision();
 	}
 
 	private void spawnAsteroid() {
@@ -124,8 +110,8 @@ public class GameContainer extends JPanel {
 	public void removeIfOffScreen(List<GameObject> gameObjects) {
 		int margin = 200;
 		for (int i = gameObjects.size() - 1; i >= 0; i--) {
-			double x = gameObjects.get(i).getPosition().getX();
-			double y = gameObjects.get(i).getPosition().getY();
+			double x = gameObjects.get(i).getX();
+			double y = gameObjects.get(i).getY();
 			if (x < -margin || x > screenWidth + margin || y < -margin || y > screenHeight + margin) {
 				gameObjects.remove(i);
 			}
@@ -133,8 +119,8 @@ public class GameContainer extends JPanel {
 	}
 
 	public void keepOnScreen(GameObject gameObject, int margin) {
-		double x = gameObject.getPosition().getX();
-		double y = gameObject.getPosition().getY();
+		double x = gameObject.getX();
+		double y = gameObject.getY();
 		if (x < -margin)
 			gameObject.setPosition(screenWidth + margin, y);
 		else if (x > screenWidth + margin)
@@ -145,8 +131,8 @@ public class GameContainer extends JPanel {
 			gameObject.setPosition(x, -margin);
 	}
 
-	public List<Drawable> getEntities() {
-		return entityHandler.getEntities();
+	public List<Drawable> getDrawables() {
+		return entityHandler.getDrawables();
 	}
 
 	public void reset() {

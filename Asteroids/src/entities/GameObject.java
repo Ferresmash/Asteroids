@@ -17,6 +17,14 @@ public abstract class GameObject implements Drawable {
 	public Position getPosition() {
 		return new Position(position.getX(),position.getY());
 	}
+	
+	public double getX() {
+		return position.getX();
+	}
+	
+	public double getY() {
+		return position.getY();
+	}
 
 	public void setPosition(Position position) {
 		this.position = position;

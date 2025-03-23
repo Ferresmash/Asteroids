@@ -10,7 +10,7 @@ public class MediumState implements AsteroidState {
 	private final int SIZE = 33;
 	
 	public List<GameObject> splitAsteroid(Asteroid parent) {
-		return parent.splitAsteroid(getNextState());
+		return parent.createSmallerAsteroids(getNextState());
 	}
 	
 	public AsteroidState getNextState() {

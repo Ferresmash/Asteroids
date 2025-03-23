@@ -2,8 +2,8 @@ package pos;
 
 public class Position {
 	
-	private double x;
-	private double y;
+	private double x = 0;
+	private double y = 0;
 	
 	public Position(double x, double y) {
 		this.x = x;

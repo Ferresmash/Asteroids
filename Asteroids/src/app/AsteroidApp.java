@@ -3,7 +3,7 @@ package app;
 import javax.swing.WindowConstants;
 
 import controller.Controller;
-import legacy.GameContainer;
+import legacy.Model;
 import view.View;
 
 public class AsteroidApp {
@@ -13,7 +13,7 @@ public class AsteroidApp {
 
 	public static void main(String[] args) {
 		
-		GameContainer gameContainer = new GameContainer(WIDTH, HEIGHT);
+		Model gameContainer = new Model(WIDTH, HEIGHT);
 		View view = new View(WIDTH, HEIGHT);
 		Controller controller = new Controller(view, gameContainer);
 		view.addKeyListener(controller);

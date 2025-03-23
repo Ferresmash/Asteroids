@@ -63,11 +63,11 @@ public class Player extends GameObject {
 	}
 	
 	public void rotateRight() {
-		rotate(rotationSpeed);
+		rotate(-rotationSpeed);
 	}
 	
 	public void rotateLeft() {
-		rotate(-rotationSpeed);
+		rotate(rotationSpeed);
 	}
 
 }

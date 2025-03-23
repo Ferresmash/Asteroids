@@ -96,17 +96,14 @@ public class Asteroid extends GameObject implements Drawable {
 		allAsteroids.remove(this);
 	}
 
-	public List<GameObject> splitAsteroid(AsteroidState state) {
+	public List<GameObject> createSmallerAsteroids(AsteroidState state) {
 		List<GameObject> newAsteroids = new ArrayList<GameObject>();
-		Force force = new Force(getForce().getX(), getForce().getY());
+		Force force = getForce();
 		force.rotate(0.5);
-		Asteroid a = new Asteroid(state, getPosition(), force);
-		newAsteroids.add(a);
-
-		Force secondforce = new Force(getForce().getX(), getForce().getY());
-		secondforce.rotate(-0.5);
-		a = new Asteroid(state, getPosition(), secondforce);
-		newAsteroids.add(a);
+		newAsteroids.add(new Asteroid(state, getPosition(), force));
+		force = getForce();
+		force.rotate(-0.5);
+		newAsteroids.add(new Asteroid(state, getPosition(), force));
 		return newAsteroids;
 	}
 

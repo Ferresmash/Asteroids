@@ -23,8 +23,8 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 	public void visit(UFO ufo) {
 		GameManager manager = GameManager.getInstance();
 
-		int startx = (int) ufo.getPosition().getX();
-		int starty = (int) ufo.getPosition().getY();
+		int startx = (int) ufo.getX();
+		int starty = (int) ufo.getY();
 
 		Polygon topBase = new Polygon();
 		topBase.addPoint(startx + 2 * 4, starty + 2 * 2);
@@ -70,32 +70,32 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 		g2d.setColor(new Color(137, 96, 0));
 
 		for (int i = 0; i < asteroid.getNbrOfCorners(); i++) {
-			newXPoints[i] = asteroid.getxPoints()[i] + (int) asteroid.getPosition().getX();
-			newYPoints[i] = asteroid.getyPoints()[i] + (int) asteroid.getPosition().getY();
+			newXPoints[i] = asteroid.getxPoints()[i] + (int) asteroid.getX();
+			newYPoints[i] = asteroid.getyPoints()[i] + (int) asteroid.getY();
 		}
 		Polygon shape = new Polygon(newXPoints, newYPoints, asteroid.getNbrOfCorners());
 
 		for (int i = 0; i < asteroid.getNbrOfCorners(); i++) {
-			newXPoints[i] = asteroid.getxPoints()[i] + (int) asteroid.getPosition().getX();
-			newYPoints[i] = asteroid.getyPoints()[i] + (int) asteroid.getPosition().getY() + 5;
+			newXPoints[i] = asteroid.getxPoints()[i] + (int) asteroid.getX();
+			newYPoints[i] = asteroid.getyPoints()[i] + (int) asteroid.getY() + 5;
 		}
 
 		Polygon shade = new Polygon(newXPoints, newYPoints, asteroid.getNbrOfCorners());
 		
-		g2d.rotate(asteroid.getAngle(), asteroid.getPosition().getX(), asteroid.getPosition().getY());
+		g2d.rotate(asteroid.getAngle(), asteroid.getX(), asteroid.getY());
 		g2d.setColor(new Color(92, 65, 0));
 		g2d.fillPolygon(shade);
 		g2d.setColor(new Color(137, 96, 0));
 		g2d.fillPolygon(shape);
-		g2d.rotate(-asteroid.getAngle(), asteroid.getPosition().getX(), asteroid.getPosition().getY());
+		g2d.rotate(-asteroid.getAngle(), asteroid.getX(), asteroid.getY());
 	}
 
 	@Override
 	public void visit(Player player) {
 		Graphics2D g2d = (Graphics2D) g;
 
-		int xPos = (int) player.getPosition().getX();
-		int yPos = (int) player.getPosition().getY();
+		int xPos = (int) player.getX();
+		int yPos = (int) player.getY();
 
 		int[] xPoints = { xPos - 20, xPos - 20, xPos + 20 };
 		int[] yPoints = { yPos - 10, yPos + 10, yPos };
@@ -135,8 +135,8 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 	public void visit(Bullet bullet) {
 		Graphics2D g2d = (Graphics2D) g;
 
-		int x = (int) bullet.getPosition().getX();
-		int y = (int) bullet.getPosition().getY();
+		int x = (int) bullet.getX();
+		int y = (int) bullet.getY();
 
 		g2d.rotate(-bullet.getForce().getAngle(), x, y);
 

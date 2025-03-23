@@ -7,13 +7,13 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import entities.Drawable;
-import legacy.GameContainer;
+import legacy.Model;
 import legacy.GameManager;
 import view.View;
 
 public class Controller implements KeyListener {
 
-	private GameContainer gameContainer;
+	private Model model;
 	private View view;
 	boolean WKeyPressed = false;
 	boolean AKeyPressed = false;
@@ -21,16 +21,16 @@ public class Controller implements KeyListener {
 	boolean SpaceKeyPressed = false;
 	private boolean isRunning = false;
 	private boolean readyToShoot = true;
+	private long lastUfoSpawnTime = 0;
+	private final long ufoSpawnInterval = 10000;
+	private long lastUfoShootTime = 0;
+	private final long ufoShootInterval = 5000;
 
-	public Controller(View view, GameContainer gameContainer) {
-		this.gameContainer = gameContainer;
+	public Controller(View view, Model model) {
+		this.model = model;
 		this.view = view;
 		view.setController(this);
 		start();
-	}
-
-	public void updateContainer() {
-		gameContainer.updateContainer(WKeyPressed, AKeyPressed, DKeyPressed, SpaceKeyPressed);
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class Controller implements KeyListener {
 		}
 		if (keyCode == KeyEvent.VK_SPACE) {
 			if (readyToShoot) {
-				gameContainer.spawnBullet();
+				model.spawnBullet();
 				readyToShoot = false;
 			}
 		}
@@ -79,8 +79,8 @@ public class Controller implements KeyListener {
 		}
 	}
 
-	public List<Drawable> getEntities() {
-		return gameContainer.getEntities();
+	public List<Drawable> getDrawables() {
+		return model.getDrawables();
 	}
 
 	public void start() {
@@ -111,14 +111,45 @@ public class Controller implements KeyListener {
 
 	public void reset() {
 		GameManager.getInstance().reset();
-		gameContainer.reset();
+		model.reset();
 		view.switchPanel();
 	}
 
 	public void gameloop() {
-		updateContainer();
+		model.checkCollision();
+		model.keepObjectsOnScreen();
+		model.removeObjectsOffScreen();
+		model.checkForLevelUp();
+		model.moveObjects();
+		if (SpaceKeyPressed) {
+			model.spawnBullet();
+		}
+		if (WKeyPressed) {
+			model.accelerate();
+		} else {
+			model.stopAcceleration();
+		}
+		if (AKeyPressed) {
+			model.turnLeft();
+		}
+		if (DKeyPressed) {
+			model.turnRight();
+		}
+		
+		long currentTime = System.currentTimeMillis();
+		// Spawn UFOs at intervals
+		if (currentTime - lastUfoSpawnTime >= ufoSpawnInterval) {
+			model.spawnUfo();
+			lastUfoSpawnTime = currentTime;
+		}
+		// Shoot from UFOs at intervals
+		if (currentTime - lastUfoShootTime >= ufoShootInterval / (GameManager.getInstance().getLevel() + 1)) {
+			model.shootFromUfos();
+			lastUfoShootTime = currentTime;
+		}
+
 		SwingUtilities.invokeLater(() -> {
-			view.render(getEntities());
+			view.render(getDrawables());
 			if (GameManager.getInstance().isGameOver()) {
 				reset();
 				view.updateHighScore();
