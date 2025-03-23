@@ -31,7 +31,6 @@ public class GameManager {
         	HighScoreManager.getInstance().addHighScore(score);
         }
     }
-
     public int getScore() {
         return score;
     }
@@ -44,7 +43,6 @@ public class GameManager {
     public boolean isGameOver() {
     	return (lives <= 0);
     }
-
     public void reset() {
         score = 0;
     	lives = 5;
