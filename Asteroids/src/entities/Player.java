@@ -14,6 +14,7 @@ public class Player extends GameObject {
 
 	private boolean isAccelerating = false;
 	private double speed = 0.1;
+	private double rotationSpeed = 0.1;
 	private final Position START_POINT;
 	private final double FRICTION = 0.99;
 	private final int HITBOXHEIGHT = 20;
