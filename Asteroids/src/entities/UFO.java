@@ -11,10 +11,16 @@ import pos.Force;
 import pos.Position;
 import view.RenderVisitor;
 
-public class UFO extends Enemy {
+public class UFO extends GameObject {
 	
+	public UFO(Position spawnPos, Force spawnForce, double size) {
+		this(spawnPos, spawnForce);
+		setSize(size);
+	}
+	
+
+
 	public UFO(Position spawnPos, Force spawnForce) {
-		setSize(100);
 		setForce(spawnForce);
 		setPosition(spawnPos);
 	}

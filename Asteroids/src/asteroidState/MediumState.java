@@ -9,7 +9,7 @@ import pos.Position;
 
 public class MediumState implements AsteroidState {
 
-	private final int SIZE = 25;
+	private final int SIZE = 33;
 	
 	@Override
 	public void splitAsteroid(List<GameObject> gameObjects, Asteroid parent) {

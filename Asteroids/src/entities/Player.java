@@ -40,7 +40,7 @@ public class Player extends GameObject {
 	
 	
 	public Shape getHitbox() {
-		return new Rectangle((int)position.getX(),(int)position.getY(),5,5);
+		return new Rectangle((int)position.getX()-5,(int)position.getY()-5,10,10);
 	}
 
 

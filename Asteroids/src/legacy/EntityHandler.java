@@ -75,6 +75,7 @@ public class EntityHandler {
 	}
 
 	public void addEnemyBullet(GameObject ufo) {
+		
 		double speed = 5;
 		double angle = Math.atan2(player.getPosition().getX() - ufo.getPosition().getX(),
 				player.getPosition().getY() - ufo.getPosition().getY()) - Math.PI / 2;
@@ -96,6 +97,10 @@ public class EntityHandler {
 
 		// Check collisions between enemies and the player
 		checkCollision(enemyHandler.getAsteroids(), player);
+		
+		// check collision between enemy bullets and asteroids
+		//checkCollision(enemyBullets,enemyHandler.getAsteroids());
+		
 	}
 
 	public void checkCollision(List<GameObject> colliders, List<GameObject> collidedObjects) {
