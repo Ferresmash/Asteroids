@@ -2,10 +2,12 @@ package entities;
 
 import java.awt.Polygon;
 import java.awt.Shape;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import asteroidState.AsteroidState;
 import asteroidState.LargeState;
+import asteroidState.SmallState;
 import legacy.GameManager;
 import pos.Force;
 import pos.Position;
@@ -96,8 +98,22 @@ public class Asteroid extends GameObject implements Drawable {
 	@Override
 	public void getHit(List<GameObject> allAsteroids) {
 		GameManager.getInstance().increaseScore(100);
-		asteroidState.splitAsteroid(allAsteroids, this);
+		allAsteroids.addAll(asteroidState.splitAsteroid(this));
 		allAsteroids.remove(this);
+	}
+	
+	public List<GameObject> splitAsteroid(AsteroidState state) {
+		List<GameObject> newAsteroids = new ArrayList<GameObject>();
+		Force force = new Force(getForce().getX(),getForce().getY());
+		force.rotate(0.5);
+		Asteroid a = new Asteroid(state, getPosition(), force);
+		newAsteroids.add(a);
+		
+		Force secondforce = new Force(getForce().getX(), getForce().getY());
+		secondforce.rotate(-0.5);
+		a = new Asteroid(state, getPosition(), secondforce);
+		newAsteroids.add(a);
+		return newAsteroids;
 	}
 	
 	public void setState(AsteroidState asteroidState) {

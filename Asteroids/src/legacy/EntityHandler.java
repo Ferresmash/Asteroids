@@ -8,19 +8,22 @@ import entities.Bullet;
 import entities.Drawable;
 
 import entities.GameObject;
+import entities.GameObjectFactory;
 import entities.Player;
 
 import pos.Force;
 import pos.Position;
 
 public class EntityHandler {
-
+	
+	private GameObjectFactory gameObjectFactory;
 	List<GameObject> bullets = new ArrayList<GameObject>();
 	List<GameObject> enemyBullets = new ArrayList<GameObject>();
 	EnemyHandler enemyHandler = new EnemyHandler();
 	Player player = new Player();
 
 	public EntityHandler() {
+		this.gameObjectFactory = new GameObjectFactory();
 	}
 
 	public List<Drawable> getEntities() {
@@ -70,7 +73,7 @@ public class EntityHandler {
 	}
 
 	public void addBullet() {
-		bullets.add(new Bullet(new Position(player.getPosition().getX(), player.getPosition().getY()),
+		bullets.add(gameObjectFactory.createBullet(new Position(player.getPosition().getX(), player.getPosition().getY()),
 				new Force(Math.cos(-player.getAngle()) * 20, Math.sin(player.getAngle()) * 20)));
 	}
 
@@ -80,7 +83,7 @@ public class EntityHandler {
 		double angle = Math.atan2(player.getPosition().getX() - ufo.getPosition().getX(),
 				player.getPosition().getY() - ufo.getPosition().getY()) - Math.PI / 2;
 		Force force = new Force(Math.cos(angle) * speed, Math.sin(angle) * speed);
-		enemyBullets.add(new Bullet(new Position(ufo.getPosition().getX(), ufo.getPosition().getY()), force));
+		enemyBullets.add(gameObjectFactory.createBullet(new Position(ufo.getPosition().getX(), ufo.getPosition().getY()), force));
 	}
 
 	public void checkAllCollisions() {

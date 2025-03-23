@@ -6,7 +6,6 @@ import pos.Force;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 import entities.Drawable;
 
 public class GameContainer extends JPanel {
@@ -18,9 +17,9 @@ public class GameContainer extends JPanel {
 	private int screenWidth;
 	private int screenHeight;
 	private long lastUfoSpawnTime = 0;
-	private final long ufoSpawnInterval = 10000; // 10 seconds in milliseconds
+	private final long ufoSpawnInterval = 10000;
 	private long lastUfoShootTime = 0;
-	private final long ufoShootInterval = 5000; // 1 second in milliseconds
+	private final long ufoShootInterval = 5000;
 
 	public GameContainer(int width, int height) {
 		super();
@@ -69,14 +68,19 @@ public class GameContainer extends JPanel {
 		if (SpaceKeyPressed) {
 			spawnBullet();
 		}
-		for (GameObject gameObject : entityHandler.getGameObjects()) {
-			keepOnScreen(gameObject);
+		for (GameObject gameObject : entityHandler.getEnemyHandler().getAsteroids()) {
+			keepOnScreen(gameObject, 50);
 		}
+		for (GameObject gameObject : entityHandler.getEnemyHandler().getUfos()) {
+			keepOnScreen(gameObject, 20);
+		}
+		keepOnScreen(entityHandler.getPlayer(), 20);
+		
+		// Spawn UFOs at intervals
 		if (currentTime - lastUfoSpawnTime >= ufoSpawnInterval) {
 			spawnUfo();
 			lastUfoSpawnTime = currentTime;
 		}
-
 		// Shoot from UFOs at intervals
 		if (currentTime - lastUfoShootTime >= ufoShootInterval / (GameManager.getInstance().getLevel() + 1)) {
 			shootFromUfos();
@@ -127,21 +131,21 @@ public class GameContainer extends JPanel {
 	}
 
 	public void removeIfOffScreen(List<GameObject> gameObjects) {
+		int margin = 200;
 		for (int i = gameObjects.size() - 1; i >= 0; i--) {
 			// GameObject gameObject = gameObjects.get(i);
 			double x = gameObjects.get(i).getPosition().getX();
 			double y = gameObjects.get(i).getPosition().getY();
-			if (x < 0 || x > screenWidth || y < 0 || y > screenHeight) {
+			if (x < -margin || x > screenWidth+margin || y < -margin || y > screenHeight+margin) {
 				gameObjects.remove(i);
 				System.out.println("remove bullet");
 			}
 		}
 	}
 
-	public void keepOnScreen(GameObject gameObject) {
+	public void keepOnScreen(GameObject gameObject, int margin) {
 		double x = gameObject.getPosition().getX();
 		double y = gameObject.getPosition().getY();
-		int margin = 40;
 		if (x < -margin)
 			gameObject.setPosition(screenWidth + margin, y);
 		else if (x > screenWidth + margin)

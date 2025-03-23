@@ -6,14 +6,20 @@ import java.util.Random;
 
 import entities.Asteroid;
 import entities.GameObject;
+import entities.GameObjectFactory;
 import entities.UFO;
 import pos.Force;
 import pos.Position;
 
 public class EnemyHandler {
 
+	private GameObjectFactory gameObjectFactory;
 	private List<GameObject> asteroids = new ArrayList<GameObject>();
 	private List<GameObject> ufos = new ArrayList<GameObject>();
+	
+	public EnemyHandler() {
+		this.gameObjectFactory = new GameObjectFactory();
+	}
 	
 	public List<GameObject> getAsteroids() {
 		return asteroids;
@@ -43,11 +49,11 @@ public class EnemyHandler {
 	private static final Random rand = new Random();
 
 	public void spawnAsteroid(int screenWidth, int screenHeight) {
-		asteroids.add(new Asteroid(getRandomSpawnPosition(screenWidth, screenHeight), getRandomSpawnForce()));
+		asteroids.add(gameObjectFactory.createAsteroid(getRandomSpawnPosition(screenWidth, screenHeight), getRandomSpawnForce()));
 	}
 
 	public void spawnUFO(int screenWidth, int screenHeight) {
-		ufos.add(new UFO(getRandomSpawnPosition(screenWidth, screenHeight), getRandomSpawnForce()));
+		ufos.add(gameObjectFactory.createUfo(getRandomSpawnPosition(screenWidth, screenHeight), getRandomSpawnForce()));
 	}
 
 	private Position getRandomSpawnPosition(int screenWidth, int screenHeight) {
