@@ -24,13 +24,13 @@ public class Player extends GameObject {
 	
 	public void accelerate() {
 		setAccelerating(true);
-		double[] direction = { speed * Math.cos(getAngle()), speed * Math.sin(getAngle()) };
-		getForce().add(direction);
+		double[] direction = { speed * Math.cos(angle), speed * Math.sin(angle)};
+		force.add(direction);
 	}
 
 	public void move() {
-		setPosition(getPosition().getX() + getForce().getX(), getPosition().getY() - getForce().getY());
-		setForce(getForce().getX() * FRICTION, getForce().getY() * FRICTION);
+		setPosition(position.getX() + force.getX(), position.getY() - force.getY());
+		setForce(force.getX() * FRICTION, force.getY() * FRICTION);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class Player extends GameObject {
 	
 	
 	public Shape getHitbox() {
-		return new Rectangle((int)getPosition().getX(),(int)getPosition().getY(),5,5);
+		return new Rectangle((int)position.getX(),(int)position.getY(),5,5);
 	}
 
 

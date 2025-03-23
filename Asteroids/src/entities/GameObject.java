@@ -9,12 +9,12 @@ import pos.Position;
 
 public abstract class GameObject implements Drawable {
 
-	private Position position;
-	private Force force;
-	private double angle = 0;
+	protected Position position;
+	protected Force force;
+	protected double angle = 0;
 	
 	public Position getPosition() {
-		return position;
+		return new Position(position.getX(),position.getY());
 	}
 
 	public void setPosition(Position position) {
@@ -26,7 +26,7 @@ public abstract class GameObject implements Drawable {
 	}
 	
 	public Force getForce() {
-		return force;
+		return new Force(force.getX(),force.getY());
 	}
 
 	public void setForce(Force force) {

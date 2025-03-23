@@ -8,20 +8,26 @@ import pos.Force;
 import pos.Position;
 
 public class LargeState implements AsteroidState {
+	
+	private final int SIZE = 50;
 
 	@Override
-	public void getAsteroid(List<GameObject> gameObjects, Asteroid parent) {
-		Position pos = new Position(parent.getPosition().getX(), parent.getPosition().getY());
-		Force force = new Force(parent.getForce().getX(), parent.getForce().getY());
-		Asteroid a = new Asteroid(new Position(parent.getPosition().getX(), parent.getPosition().getY()), new Force(parent.getForce().getX(), parent.getForce().getY()), parent.getSize()/1.5);
-		a.getForce().setAngle(parent.getForce().getAngle()+0.5);
-		a.setState(new MediumState());
+	public void splitAsteroid(List<GameObject> gameObjects, Asteroid parent) {
+		
+		Force force = new Force(parent.getForce().getX(),parent.getForce().getY());
+		force.rotate(0.5);
+		Asteroid a = new Asteroid(new MediumState(),parent.getPosition(),force);
 		gameObjects.add(a);
-		a = new Asteroid(new Position(parent.getPosition().getX(), parent.getPosition().getY()), new Force(parent.getForce().getX(), parent.getForce().getY()), parent.getSize()/1.5);
-		a.getForce().setAngle(parent.getForce().getAngle()-0.5);
-		a.setState(new MediumState());
+		
+		Force secondforce = new Force(parent.getForce().getX(),parent.getForce().getY());
+		secondforce.rotate(-0.5);
+		a = new Asteroid(new MediumState(),parent.getPosition(),secondforce);
 		gameObjects.add(a);
-		System.out.println("create new smaller asteroid");
+	}
+
+	@Override
+	public double getSize() {
+		return SIZE;
 	}
 
 }

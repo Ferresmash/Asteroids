@@ -7,13 +7,20 @@ import entities.GameObject;
 
 public class SmallState implements AsteroidState {
 	
+	private final int SIZE = 15;
+	
 	public SmallState() {
 		
 	}
 
 	@Override
-	public void getAsteroid(List<GameObject> gameObjects, Asteroid parent) {
+	public void splitAsteroid(List<GameObject> gameObjects, Asteroid parent) {
 
+	}
+
+	@Override
+	public double getSize() {
+		return SIZE;
 	}
 
 }

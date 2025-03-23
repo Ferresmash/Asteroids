@@ -15,40 +15,32 @@ public class Asteroid extends Enemy implements Drawable {
 
 	private AsteroidState asteroidState;
 	int nbrOfCorners;
-
-
 	int[] xPoints;
 	int[] yPoints;
 
-	public Asteroid(AsteroidState asteroidState) {
-		this.asteroidState = asteroidState;
-		this.nbrOfCorners = (int) (6 + (Math.random() * 4));
-		xPoints = new int[nbrOfCorners];
-		yPoints = new int[nbrOfCorners];
-		setSize(100);
-		setPosition(new Position(100, 100));
-		setForce(new Force(0,0));
-		setPoints();
-	}
+
 
 	public Asteroid(Position startPos, Force startForce) {
-		this(new LargeState());
-		setSize(50);
-		setForce(startForce);
-		setPosition(startPos);
-		setPoints();
+		this(new LargeState(), startPos, startForce);
 	}
 	
-	public Asteroid(Position startPos, Force startForce, double size) {
-		this(new LargeState());
-		setSize(size);
-		setForce(startForce);
+	public Asteroid(AsteroidState asteroidState, Position startPos, Force startForce) {
+		this.asteroidState = asteroidState;
 		setPosition(startPos);
-		setPoints();
+		setForce(startForce);
+		setSize(asteroidState.getSize());
+		createRandomizedShape();
 	}
+	
 
-	public void setPoints() {
+
+
+	public void createRandomizedShape() {
 		Random rand = new Random();
+		this.nbrOfCorners = 6 + (rand.nextInt(4));
+		xPoints = new int[nbrOfCorners];
+		yPoints = new int[nbrOfCorners];
+
 		for (int i = 0; i < nbrOfCorners; i++) {
 			xPoints[i] = (int) ((Math.cos((2 * Math.PI) / nbrOfCorners * i) * getSize()) + rand.nextDouble(getSize())
 					- (getSize() / 2));
@@ -104,7 +96,7 @@ public class Asteroid extends Enemy implements Drawable {
 	@Override
 	public void getHit(List<GameObject> allAsteroids) {
 		GameManager.getInstance().increaseScore(100);
-		asteroidState.getAsteroid(allAsteroids, this);
+		asteroidState.splitAsteroid(allAsteroids, this);
 		allAsteroids.remove(this);
 	}
 	

@@ -51,8 +51,10 @@ public class Force {
         setY(speed * Math.sin(angle));
     }
     
-    public void rotate(double angle) {
-    	
+    public void rotate(double newAngle) {
+        double angle = getAngle()+newAngle;
+        setX(getSpeed() * Math.cos(angle));
+        setY(getSpeed() * Math.sin(angle));
     }
 	
 }
