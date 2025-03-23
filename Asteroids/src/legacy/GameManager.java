@@ -24,12 +24,10 @@ public class GameManager {
     }
     public void increaseLevel() {
         level += 1;
-    	System.out.println("Increased level, Now Level: " + level);
     }
     public void decreaseLives() {
         lives -= 1;
         if(lives == 0) {
-        	System.out.println("Added HighScore: " + score);
         	HighScoreManager.getInstance().addHighScore(score);
         }
     }

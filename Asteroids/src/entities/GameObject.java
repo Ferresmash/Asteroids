@@ -42,7 +42,7 @@ public abstract class GameObject implements Drawable {
 		return new Rectangle((int)getPosition().getX(),(int)getPosition().getY(),2,2);
 	}
 	
-	public void getHit(List<GameObject> gameObjects) { //in asteroid add itself to the list
+	public void getHit(List<GameObject> gameObjects) {
 		gameObjects.remove(this);
 	};
 	

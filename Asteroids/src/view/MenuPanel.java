@@ -27,31 +27,26 @@ public class MenuPanel extends JPanel {
 	}
 
 	public MenuPanel() {
-		// Set the overall panel properties
 		setPreferredSize(new Dimension(1000, 700));
 		setBackground(translucent);
 		setOpaque(false);
 
-		// Use a 3x3 grid layout with gaps between cells
 		setLayout(new GridLayout(3, 3));
 
-		// Create the title label
 
-		// Create the title label
 		JLabel titleLabel = new JLabel("ASTEROIDS", SwingConstants.CENTER);
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-		titleLabel.setForeground(Color.WHITE); // Optional: improves visibility
+		titleLabel.setForeground(Color.WHITE);
 		JPanel titlePanel = emptyPanel();
-		titlePanel.setLayout(new GridLayout(1, 1)); // Ensure label fills panel
+		titlePanel.setLayout(new GridLayout(1, 1));
 		titlePanel.add(titleLabel);
 
 
 
-		// Create the start button
 		JButton startButton = new JButton("Start Game");
 		startButton.setBackground(translucent);
 		startButton.setFont(new Font("Arial", Font.BOLD, 18));
-		startButton.setForeground(Color.WHITE); // Optional: improves visibility
+		startButton.setForeground(Color.WHITE);
 		startButton.setBorder(null);
 		startButton.addActionListener(e -> {
 			if (controller != null) {
@@ -78,7 +73,6 @@ public class MenuPanel extends JPanel {
 		setVisible(true);
 	}
 
-	// Create an "empty" panel with the translucent background
 	private JPanel emptyPanel() {
 		JPanel panel = new JPanel();
 		panel.setBackground(translucent);

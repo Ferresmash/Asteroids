@@ -3,7 +3,6 @@ package legacy;
 import java.util.List;
 import entities.GameObject;
 import pos.Force;
-
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import entities.Drawable;
@@ -12,7 +11,7 @@ public class GameContainer extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private EntityHandler entityHandler = new EntityHandler();
+	private EntityHandler entityHandler;
 
 	private int screenWidth;
 	private int screenHeight;
@@ -25,7 +24,7 @@ public class GameContainer extends JPanel {
 		super();
 		this.screenWidth = width;
 		this.screenHeight = height;
-		entityHandler.getPlayer().setPosition(width / 2, height / 2);
+		entityHandler = new EntityHandler(width, height);
 
 		spawnAsteroid();
 		spawnAsteroid();
@@ -70,12 +69,13 @@ public class GameContainer extends JPanel {
 		}
 		for (GameObject gameObject : entityHandler.getEnemyHandler().getAsteroids()) {
 			keepOnScreen(gameObject, 50);
+			gameObject.rotate(0.01);
 		}
 		for (GameObject gameObject : entityHandler.getEnemyHandler().getUfos()) {
 			keepOnScreen(gameObject, 20);
 		}
 		keepOnScreen(entityHandler.getPlayer(), 20);
-		
+
 		// Spawn UFOs at intervals
 		if (currentTime - lastUfoSpawnTime >= ufoSpawnInterval) {
 			spawnUfo();
@@ -133,12 +133,10 @@ public class GameContainer extends JPanel {
 	public void removeIfOffScreen(List<GameObject> gameObjects) {
 		int margin = 200;
 		for (int i = gameObjects.size() - 1; i >= 0; i--) {
-			// GameObject gameObject = gameObjects.get(i);
 			double x = gameObjects.get(i).getPosition().getX();
 			double y = gameObjects.get(i).getPosition().getY();
-			if (x < -margin || x > screenWidth+margin || y < -margin || y > screenHeight+margin) {
+			if (x < -margin || x > screenWidth + margin || y < -margin || y > screenHeight + margin) {
 				gameObjects.remove(i);
-				System.out.println("remove bullet");
 			}
 		}
 	}
@@ -161,7 +159,7 @@ public class GameContainer extends JPanel {
 	}
 
 	public void reset() {
-		entityHandler = new EntityHandler();
+		entityHandler = new EntityHandler(screenWidth, screenHeight);
 	}
 
 }

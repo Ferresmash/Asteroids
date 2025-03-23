@@ -21,8 +21,6 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 
 	@Override
 	public void visit(UFO ufo) {
-		// Drawing logic for UFO
-
 		GameManager manager = GameManager.getInstance();
 
 		int startx = (int) ufo.getPosition().getX();
@@ -40,7 +38,6 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 		lowBase.addPoint(startx + -5 * 4, starty + 5 * 2);
 		lowBase.addPoint(startx + -2 * 4, starty + 10 * 2);
 
-		// Cockpit (top trapezoid)
 		Polygon cockpit = new Polygon();
 		cockpit.addPoint(startx + 3, starty + -3);
 		cockpit.addPoint(startx + 8, starty + 5);
@@ -66,10 +63,11 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 	@Override
 	public void visit(Asteroid asteroid) {
 
+		Graphics2D g2d = (Graphics2D) g;
 		int[] newXPoints = new int[asteroid.getNbrOfCorners()];
 		int[] newYPoints = new int[asteroid.getNbrOfCorners()];
 
-		g.setColor(new Color(137, 96, 0));
+		g2d.setColor(new Color(137, 96, 0));
 
 		for (int i = 0; i < asteroid.getNbrOfCorners(); i++) {
 			newXPoints[i] = asteroid.getxPoints()[i] + (int) asteroid.getPosition().getX();
@@ -83,12 +81,13 @@ public class GraphicsRenderVisitor implements RenderVisitor {
 		}
 
 		Polygon shade = new Polygon(newXPoints, newYPoints, asteroid.getNbrOfCorners());
-
-		g.setColor(new Color(92, 65, 0));
-		g.fillPolygon(shade);
-		g.setColor(new Color(137, 96, 0));
-		g.fillPolygon(shape);
-
+		
+		g2d.rotate(asteroid.getAngle(), asteroid.getPosition().getX(), asteroid.getPosition().getY());
+		g2d.setColor(new Color(92, 65, 0));
+		g2d.fillPolygon(shade);
+		g2d.setColor(new Color(137, 96, 0));
+		g2d.fillPolygon(shape);
+		g2d.rotate(-asteroid.getAngle(), asteroid.getPosition().getX(), asteroid.getPosition().getY());
 	}
 
 	@Override

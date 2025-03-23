@@ -19,7 +19,6 @@ public class MediumState implements AsteroidState {
 
 	@Override
 	public double getSize() {
-		// TODO Auto-generated method stub
 		return SIZE;
 	}
 }

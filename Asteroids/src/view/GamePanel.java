@@ -29,23 +29,21 @@ public class GamePanel extends JPanel{
     public GamePanel() {
         setPreferredSize(new Dimension(1000, 700));
         setBackground(Color.BLACK);
-    }
-    
-    public void render(List<Drawable> gameObjects) {
-    	this.gameObjects = gameObjects;
-    	repaint();
-        gethearts();
+        heartImage = new ImageIcon(getClass().getResource("/img/heart.png"))
+                      .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
     }
 
-    private void gethearts() {
-            heartImage = new ImageIcon(getClass().getResource("/img/heart.png"))
-                .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-	}
+    
+    public void render(List<Drawable> gameObjects) {
+        this.gameObjects = gameObjects;
+        repaint();
+    }
+    
 
 
 	@Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); // Clears background
+        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
@@ -71,6 +69,5 @@ public class GamePanel extends JPanel{
         lives = manager.getLives();
         score = manager.getScore();
         level = manager.getLevel();
-        //gameContainer.paintComponent(g);
     }
 }

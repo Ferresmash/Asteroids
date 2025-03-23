@@ -14,8 +14,6 @@ public class HighScoreManager {
 	private final String HIGHSCORE_PATH = "src/resources/highscores.txt";
 
 	private HighScoreManager() {
-		System.out.println("Highscore file path: " + new File(HIGHSCORE_PATH).getAbsolutePath());
-
 		loadHighScore();
 	}
 
@@ -30,7 +28,6 @@ public class HighScoreManager {
 		System.out.println("newScore: " + newScore);
 		System.out.println("highScore: " + highScore);
 		if (newScore > highScore) {
-			System.out.println("New score added: " + newScore);
 			this.highScore = newScore;
 			saveHighScore();
 		}

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Random;
 import asteroidState.AsteroidState;
 import asteroidState.LargeState;
-import asteroidState.SmallState;
 import legacy.GameManager;
 import pos.Force;
 import pos.Position;
@@ -16,16 +15,16 @@ import view.RenderVisitor;
 public class Asteroid extends GameObject implements Drawable {
 
 	private AsteroidState asteroidState;
-	int nbrOfCorners;
-	int[] xPoints;
-	int[] yPoints;
-
-
+	private int nbrOfCorners;
+	private int[] xPoints;
+	private int[] yPoints;
+	private final int leastAmountOfCorners = 6;
+	
 
 	public Asteroid(Position startPos, Force startForce) {
 		this(new LargeState(), startPos, startForce);
 	}
-	
+
 	public Asteroid(AsteroidState asteroidState, Position startPos, Force startForce) {
 		this.asteroidState = asteroidState;
 		setPosition(startPos);
@@ -33,13 +32,10 @@ public class Asteroid extends GameObject implements Drawable {
 		setSize(asteroidState.getSize());
 		createRandomizedShape();
 	}
-	
-
-
 
 	public void createRandomizedShape() {
 		Random rand = new Random();
-		this.nbrOfCorners = 6 + (rand.nextInt(4));
+		this.nbrOfCorners = leastAmountOfCorners + (rand.nextInt(4));
 		xPoints = new int[nbrOfCorners];
 		yPoints = new int[nbrOfCorners];
 
@@ -56,19 +52,17 @@ public class Asteroid extends GameObject implements Drawable {
 	public void accept(RenderVisitor visitor) {
 		visitor.visit(this);
 	}
-	
 
 	@Override
 	public Shape getHitbox() {
 		int[] newXPoints = new int[nbrOfCorners];
 		int[] newYPoints = new int[nbrOfCorners];
 		for (int i = 0; i < nbrOfCorners; i++) {
-			newXPoints[i] = xPoints[i]+(int)getPosition().getX();
-			newYPoints[i] = yPoints[i]+(int)getPosition().getY();
+			newXPoints[i] = xPoints[i] + (int) getPosition().getX();
+			newYPoints[i] = yPoints[i] + (int) getPosition().getY();
 		}
 		return new Polygon(newXPoints, newYPoints, nbrOfCorners);
 	}
-	
 
 	public int getNbrOfCorners() {
 		return nbrOfCorners;
@@ -101,21 +95,21 @@ public class Asteroid extends GameObject implements Drawable {
 		allAsteroids.addAll(asteroidState.splitAsteroid(this));
 		allAsteroids.remove(this);
 	}
-	
+
 	public List<GameObject> splitAsteroid(AsteroidState state) {
 		List<GameObject> newAsteroids = new ArrayList<GameObject>();
-		Force force = new Force(getForce().getX(),getForce().getY());
+		Force force = new Force(getForce().getX(), getForce().getY());
 		force.rotate(0.5);
 		Asteroid a = new Asteroid(state, getPosition(), force);
 		newAsteroids.add(a);
-		
+
 		Force secondforce = new Force(getForce().getX(), getForce().getY());
 		secondforce.rotate(-0.5);
 		a = new Asteroid(state, getPosition(), secondforce);
 		newAsteroids.add(a);
 		return newAsteroids;
 	}
-	
+
 	public void setState(AsteroidState asteroidState) {
 		this.asteroidState = asteroidState;
 	}

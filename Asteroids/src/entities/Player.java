@@ -14,13 +14,14 @@ public class Player extends GameObject {
 
 	private boolean isAccelerating = false;
 	private double speed = 0.1;
-	private final Position START_POINT = new Position(500,500);
+	private final Position START_POINT;
 	private final double FRICTION = 0.99;
 	private final int HITBOXHEIGHT = 20;
 	private final int HITBOXWIDTH = 10;
 
-	public Player() {
-		setPosition(new Position(300, 300));
+	public Player(Position startPos) {
+		START_POINT = startPos;
+		setPosition(START_POINT);
 		setForce(new Force(0, 0));
 	}
 	

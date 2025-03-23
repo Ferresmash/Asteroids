@@ -3,11 +3,8 @@ package legacy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import entities.Asteroid;
 import entities.GameObject;
 import entities.GameObjectFactory;
-import entities.UFO;
 import pos.Force;
 import pos.Position;
 
@@ -57,18 +54,18 @@ public class EnemyHandler {
 	}
 
 	private Position getRandomSpawnPosition(int screenWidth, int screenHeight) {
+		int margin = 100;
 		int spawnSide = (int) (rand.nextInt(4));
-		Position spawnPos = new Position(rand.nextInt(screenWidth+200)-100, rand.nextInt(screenHeight+200)-100);
+		Position spawnPos = new Position(rand.nextInt(screenWidth+margin*2)-margin, rand.nextInt(screenHeight+margin*2)-margin);
 		if (spawnSide == 0) {
-			spawnPos.setX(-100);
+			spawnPos.setX(-margin);
 		} else if (spawnSide == 1) {
-			spawnPos.setY(-100);
+			spawnPos.setY(-margin);
 		} else if (spawnSide == 2) {
-			spawnPos.setX(screenWidth+100);
+			spawnPos.setX(screenWidth+margin);
 		} else if (spawnSide == 3) {
-			spawnPos.setY(screenHeight+100);
+			spawnPos.setY(screenHeight+margin);
 		}
-		System.out.println(spawnPos.getX()+", "+spawnPos.getY());
 		return spawnPos;
 	}
 

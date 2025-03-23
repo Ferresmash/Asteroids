@@ -2,7 +2,6 @@ package asteroidState;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import entities.Asteroid;
 import entities.GameObject;
 
