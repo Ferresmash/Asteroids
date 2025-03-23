@@ -28,7 +28,7 @@ public class Controller implements KeyListener {
 	private final long ufoSpawnInterval = 10000;
 	private long lastUfoShootTime = 0;
 	private final long ufoShootInterval = 5000;
-
+	
 	private final Map<Integer, Command> pressCommands = new HashMap<>();
 	private final Map<Integer, Command> holdCommands = new HashMap<>();
 	private final Map<Integer, Command> releaseCommands = new HashMap<>();
@@ -79,10 +79,12 @@ public class Controller implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		activeCommandsMap.remove(e.getKeyCode());
-		if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
-			new StopAccelerateCommand(model).execute();
+		
+		Command command = releaseCommands.get(e.getKeyCode());
+		if(command != null) {
+			command.execute();
 		}
+		activeCommandsMap.remove(e.getKeyCode());
 	}
 
 	@Override
@@ -128,7 +130,6 @@ public class Controller implements KeyListener {
 	public void gameloop() {
 
 		for (Command c : activeCommandsMap.values()) {
-			// This will cause accelerate, turnLeft, turnRight, etc. to happen every frame
 			c.execute();
 		}
 
@@ -149,6 +150,7 @@ public class Controller implements KeyListener {
 			model.shootFromUfos();
 			lastUfoShootTime = currentTime;
 		}
+
 
 		SwingUtilities.invokeLater(() -> {
 			view.render(getDrawables());
