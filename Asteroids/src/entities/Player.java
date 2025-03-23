@@ -16,6 +16,8 @@ public class Player extends GameObject {
 	private double speed = 0.1;
 	private final Position START_POINT = new Position(500,500);
 	private final double FRICTION = 0.99;
+	private final int HITBOXHEIGHT = 20;
+	private final int HITBOXWIDTH = 10;
 
 	public Player() {
 		setPosition(new Position(300, 300));
@@ -40,7 +42,7 @@ public class Player extends GameObject {
 	
 	
 	public Shape getHitbox() {
-		return new Rectangle((int)position.getX()-5,(int)position.getY()-5,10,10);
+		return new Rectangle((int)position.getX()-(HITBOXWIDTH/2),(int)position.getY()-(HITBOXHEIGHT/2),HITBOXWIDTH,HITBOXHEIGHT);
 	}
 
 
