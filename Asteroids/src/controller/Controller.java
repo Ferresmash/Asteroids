@@ -3,13 +3,9 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import javax.swing.SwingUtilities;
-
 import command.AccelerateCommand;
 import command.Command;
 import command.FireCommand;
@@ -32,7 +28,6 @@ public class Controller implements KeyListener {
 	boolean SpaceKeyPressed = false;
 	private boolean isRunning = false;
 
-	// private boolean readyToShoot = true;
 	private long lastUfoSpawnTime = 0;
 	private final long ufoSpawnInterval = 10000;
 	private long lastUfoShootTime = 0;
@@ -41,8 +36,6 @@ public class Controller implements KeyListener {
 	private final Map<Integer, Command> pressCommands = new HashMap<>();
 	private final Map<Integer, Command> holdCommands = new HashMap<>();
 	private final Map<Integer, Command> releaseCommands = new HashMap<>();
-	// private final Set<Command> activeCommands = new HashSet<>();
-
 	private final Map<Integer, Command> activeCommandsMap = new HashMap<>();
 
 	public Controller(View view, Model model) {
@@ -151,20 +144,6 @@ public class Controller implements KeyListener {
 		model.removeObjectsOffScreen();
 		model.checkForLevelUp();
 		model.moveObjects();
-//		if (SpaceKeyPressed) {
-//			model.spawnBullet();
-//		}
-//		if (WKeyPressed) {
-//			model.accelerate();
-//		} else {
-//			model.stopAcceleration();
-//		}
-//		if (AKeyPressed) {
-//			model.turnLeft();
-//		}
-//		if (DKeyPressed) {
-//			model.turnRight();
-//		}
 
 		long currentTime = System.currentTimeMillis();
 		// Spawn UFOs at intervals
