@@ -17,8 +17,6 @@ public class UFO extends GameObject {
 		this(spawnPos, spawnForce);
 		setSize(size);
 	}
-	
-
 
 	public UFO(Position spawnPos, Force spawnForce) {
 		setForce(spawnForce);

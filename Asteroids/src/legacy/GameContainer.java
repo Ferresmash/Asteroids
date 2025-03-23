@@ -141,7 +141,7 @@ public class GameContainer extends JPanel {
 	public void keepOnScreen(GameObject gameObject) {
 		double x = gameObject.getPosition().getX();
 		double y = gameObject.getPosition().getY();
-		int margin = 50;
+		int margin = 40;
 		if (x < -margin)
 			gameObject.setPosition(screenWidth + margin, y);
 		else if (x > screenWidth + margin)
