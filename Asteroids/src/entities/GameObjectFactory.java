@@ -6,16 +6,12 @@ import pos.Position;
 
 public class GameObjectFactory {
 	
-	public GameObject createAsteroid(AsteroidState asteroidState) {
-		return new Asteroid(asteroidState);
+	public GameObject createAsteroid(AsteroidState asteroidState, Position startPos, Force startForce) {
+		return new Asteroid(asteroidState, startPos, startForce);
 	}
 	
 	public GameObject createAsteroid(Position startPos, Force startForce) {
 		return new Asteroid(startPos, startForce);
-	}
-	
-	public GameObject createAsteroid(Position startPos, Force startForce, double size) {
-		return new Asteroid(startPos, startForce, size);
 	}
 	
 	public GameObject createUfo(Position startPos, Force startForce) {
