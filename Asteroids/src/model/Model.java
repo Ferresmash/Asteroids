@@ -4,8 +4,6 @@ import java.util.List;
 import gameObjects.GameObject;
 import pos.Force;
 import singleton.GameManager;
-
-import javax.swing.JPanel;
 import gameObjects.Drawable;
 
 public class Model {

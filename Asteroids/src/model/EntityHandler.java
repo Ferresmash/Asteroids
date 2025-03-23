@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import factory.GameObjectFactory;
 import gameObjects.Drawable;
 import gameObjects.GameObject;
@@ -20,7 +19,7 @@ public class EntityHandler {
 
 	public EntityHandler(int width, int height) {
 		this.gameObjectFactory = new GameObjectFactory();
-		player = new Player(new Position(width / 2, height / 2));
+		player = gameObjectFactory.createPlayer(width, height);
 	}
 
 	public List<Drawable> getDrawables() {

@@ -2,6 +2,7 @@ package factory;
 
 import asteroidState.AsteroidState;
 import gameObjects.GameObject;
+import gameObjects.Player;
 import pos.Force;
 import pos.Position;
 
@@ -14,5 +15,7 @@ public interface EntityFactory {
 	public GameObject createUfo(Position startPos, Force startForce);
 
 	public GameObject createBullet(Position startPos, Force startForce);
+	
+	public Player createPlayer(int width, int height);
 	
 }

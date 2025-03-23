@@ -22,10 +22,6 @@ public class Controller implements KeyListener {
 
 	private Model model;
 	private View view;
-	boolean WKeyPressed = false;
-	boolean AKeyPressed = false;
-	boolean DKeyPressed = false;
-	boolean SpaceKeyPressed = false;
 	private boolean isRunning = false;
 
 	private long lastUfoSpawnTime = 0;
@@ -83,10 +79,7 @@ public class Controller implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// Remove the command from activeCommandsMap so it stops being executed
 		activeCommandsMap.remove(e.getKeyCode());
-
-		// Optionally, execute a stop command if needed:
 		if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
 			new StopAccelerateCommand(model).execute();
 		}
