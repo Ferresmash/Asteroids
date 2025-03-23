@@ -1,5 +1,6 @@
 package asteroidState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entities.Asteroid;
@@ -9,14 +10,13 @@ public class SmallState implements AsteroidState {
 	
 	private final int SIZE = 15;
 	
-	public SmallState() {
-		
+	public List<GameObject> splitAsteroid(Asteroid parent) {
+		return new ArrayList<>();
 	}
-
-	@Override
-	public void splitAsteroid(List<GameObject> gameObjects, Asteroid parent) {
-
-	}
+	
+	public AsteroidState getNextState() {
+		return null;
+	}	
 
 	@Override
 	public double getSize() {
