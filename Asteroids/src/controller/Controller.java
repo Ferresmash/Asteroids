@@ -2,10 +2,21 @@ package controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.SwingUtilities;
 
+import command.AccelerateCommand;
+import command.Command;
+import command.FireCommand;
+import command.PauseCommand;
+import command.StopAccelerateCommand;
+import command.TurnLeftCommand;
+import command.TurnRightCommand;
 import gameObjects.Drawable;
 import model.Model;
 import singleton.GameManager;
@@ -20,63 +31,76 @@ public class Controller implements KeyListener {
 	boolean DKeyPressed = false;
 	boolean SpaceKeyPressed = false;
 	private boolean isRunning = false;
-	private boolean readyToShoot = true;
+
+	// private boolean readyToShoot = true;
 	private long lastUfoSpawnTime = 0;
 	private final long ufoSpawnInterval = 10000;
 	private long lastUfoShootTime = 0;
 	private final long ufoShootInterval = 5000;
 
+	private final Map<Integer, Command> pressCommands = new HashMap<>();
+	private final Map<Integer, Command> holdCommands = new HashMap<>();
+	private final Map<Integer, Command> releaseCommands = new HashMap<>();
+	// private final Set<Command> activeCommands = new HashSet<>();
+
+	private final Map<Integer, Command> activeCommandsMap = new HashMap<>();
+
 	public Controller(View view, Model model) {
 		this.model = model;
 		this.view = view;
 		view.setController(this);
+
+		Command accelerate = new AccelerateCommand(model);
+		Command turnLeft = new TurnLeftCommand(model);
+		Command turnRight = new TurnRightCommand(model);
+		Command fire = new FireCommand(model);
+		Command pause = new PauseCommand(this);
+
+		holdCommands.put(KeyEvent.VK_W, accelerate);
+		holdCommands.put(KeyEvent.VK_UP, accelerate);
+		holdCommands.put(KeyEvent.VK_A, turnLeft);
+		holdCommands.put(KeyEvent.VK_LEFT, turnLeft);
+		holdCommands.put(KeyEvent.VK_D, turnRight);
+		holdCommands.put(KeyEvent.VK_RIGHT, turnRight);
+		pressCommands.put(KeyEvent.VK_SPACE, fire);
+		holdCommands.put(KeyEvent.VK_ESCAPE, pause);
+		releaseCommands.put(KeyEvent.VK_W, new StopAccelerateCommand(model));
+		releaseCommands.put(KeyEvent.VK_UP, new StopAccelerateCommand(model));
+
 		start();
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-	}
-
-	public void keyReleased(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
-			WKeyPressed = false;
-		}
-		if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
-			AKeyPressed = false;
-		}
-		if (keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
-			DKeyPressed = false;
-		}
-		if (keyCode == KeyEvent.VK_SPACE) {
-			readyToShoot = true;
-		}
-	}
-
 	public void keyPressed(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
-			WKeyPressed = true;
-		}
-		if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
-			AKeyPressed = true;
-		}
-		if (keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
-			DKeyPressed = true;
-		}
-		if (keyCode == KeyEvent.VK_SPACE) {
-			if (readyToShoot) {
-				model.spawnBullet();
-				readyToShoot = false;
+		Command command;
+
+		if (pressCommands.containsKey(e.getKeyCode())) {
+			command = pressCommands.get(e.getKeyCode());
+			if (command != null) {
+				command.execute();
+			}
+
+		} else if (holdCommands.containsKey(e.getKeyCode())) {
+			command = holdCommands.get(e.getKeyCode());
+			if (command != null) {
+				activeCommandsMap.put(e.getKeyCode(), command);
 			}
 		}
-		if (keyCode == KeyEvent.VK_ESCAPE) {
-			if (isRunning) {
-				pause();
-			} else {
-				start();
-			}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// Remove the command from activeCommandsMap so it stops being executed
+		activeCommandsMap.remove(e.getKeyCode());
+
+		// Optionally, execute a stop command if needed:
+		if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
+			new StopAccelerateCommand(model).execute();
 		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
 	}
 
 	public List<Drawable> getDrawables() {
@@ -116,26 +140,32 @@ public class Controller implements KeyListener {
 	}
 
 	public void gameloop() {
+
+		for (Command c : activeCommandsMap.values()) {
+			// This will cause accelerate, turnLeft, turnRight, etc. to happen every frame
+			c.execute();
+		}
+
 		model.checkCollision();
 		model.keepObjectsOnScreen();
 		model.removeObjectsOffScreen();
 		model.checkForLevelUp();
 		model.moveObjects();
-		if (SpaceKeyPressed) {
-			model.spawnBullet();
-		}
-		if (WKeyPressed) {
-			model.accelerate();
-		} else {
-			model.stopAcceleration();
-		}
-		if (AKeyPressed) {
-			model.turnLeft();
-		}
-		if (DKeyPressed) {
-			model.turnRight();
-		}
-		
+//		if (SpaceKeyPressed) {
+//			model.spawnBullet();
+//		}
+//		if (WKeyPressed) {
+//			model.accelerate();
+//		} else {
+//			model.stopAcceleration();
+//		}
+//		if (AKeyPressed) {
+//			model.turnLeft();
+//		}
+//		if (DKeyPressed) {
+//			model.turnRight();
+//		}
+
 		long currentTime = System.currentTimeMillis();
 		// Spawn UFOs at intervals
 		if (currentTime - lastUfoSpawnTime >= ufoSpawnInterval) {
@@ -155,6 +185,10 @@ public class Controller implements KeyListener {
 				view.updateHighScore();
 			}
 		});
+	}
+
+	public boolean isRunning() {
+		return isRunning;
 	}
 
 }
